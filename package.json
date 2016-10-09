@@ -1,0 +1,23 @@
+{
+  "name": "health-extension",
+  "version": "1.0.0",
+  "description": "A health extension to remind healthy habit on the computer",
+  "main": "popup.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/benjaminroy/Health-Extension.git"
+  },
+  "keywords": [
+    "Health",
+    "Extension"
+  ],
+  "author": "Benjamin Roy & Mathieu Roy",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/benjaminroy/Health-Extension/issues"
+  },
+  "homepage": "https://github.com/benjaminroy/Health-Extension#readme"
+}
