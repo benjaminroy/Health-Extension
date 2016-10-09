@@ -10,5 +10,8 @@
     "Health",
     "Extension"
   ],
-  "homepage": "https://github.com/benjaminroy/Health-Extension"
+  "homepage": "https://github.com/benjaminroy/Health-Extension",
+  "dependencies": {
+    "font-awesome": "fontawesome#^4.6.3"
+  }
 }
