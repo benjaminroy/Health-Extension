@@ -1,66 +1,67 @@
+var aSecond = 1,
+    aMinute = 60*aSecond,
+    anHour = 60*aMinute;
 
-function getCurrentTabUrl(callback) {
-  var queryInfo = {
-    active: true,
-    currentWindow: true
-  };
-
-  chrome.tabs.query(queryInfo, function(tabs) {
-    var tab = tabs[0];
-    var url = tab.url;
-    console.assert(typeof url == 'string', 'tab.url should be a string');
-    callback(url);
-  });
+function warning(message) {
+  var element = $('#warning');
+  element.innerHTML = message;
 }
 
-function getImageUrl(searchTerm, callback, errorCallback) {
-  var searchUrl = 'https://ajax.googleapis.com/ajax/services/search/images' +
-    '?v=1.0&q=' + encodeURIComponent(searchTerm);
-  var x = new XMLHttpRequest();
-  x.open('GET', searchUrl);
-  x.responseType = 'json';
-  x.onload = function() {
-    var response = x.response;
-    if (!response || !response.responseData || !response.responseData.results ||
-        response.responseData.results.length === 0) {
-      errorCallback('No response from Google Image search!');
-      return;
-    }
-    var firstResult = response.responseData.results[0];
-    var imageUrl = firstResult.tbUrl;
-    var width = parseInt(firstResult.tbWidth);
-    var height = parseInt(firstResult.tbHeight);
-    console.assert(
-        typeof imageUrl == 'string' && !isNaN(width) && !isNaN(height),
-        'Unexpected respose from the Google Image Search API!');
-    callback(imageUrl, width, height);
-  };
-  x.onerror = function() {
-    errorCallback('Network error.');
-  };
-  x.send();
-}
+var Countdown = function (id, seconds = 0) {
+	this.setTime(seconds);
+  this.count = seconds;
+  this.id = id;
+};
 
-function renderStatus(statusText) {
-  document.getElementById('status').textContent = statusText;
-}
+Countdown.prototype.setTime = function(count = this.count) {
+  var days = 0; //this.days = Math.floor(countdown_number/(3600*24));
+  this.hours = (Math.floor(count/(anHour))-24*days) % 24;
+  this.minutes = (Math.floor(count/(60))-this.hours*60) % 60;
+  this.seconds = (Math.floor(count)-this.minutes*60) % 60;
+};
 
-document.addEventListener('DOMContentLoaded', function() {
-  getCurrentTabUrl(function(url) {
-    renderStatus('Performing Google Image search for ' + url);
+Countdown.prototype.minus = function(seconds) {
+  this.count -= seconds;
+  this.setTime();
+};
 
-    getImageUrl(url, function(imageUrl, width, height) {
+Countdown.prototype.write = function() {
+  var element = $("#" + this.id + " .timer");
+  var text = this.hours + ":" + this.minutes +":" + this.seconds;
+  element.html(text);
+};
 
-      renderStatus('Search term: ' + url + '\n' +
-          'Google image search result: ' + imageUrl);
-      var imageResult = document.getElementById('image-result');
-      imageResult.width = width;
-      imageResult.height = height;
-      imageResult.src = imageUrl;
-      imageResult.hidden = false;
+Countdown.prototype.countdown = function() {
+    console.log(this);
+    this.write();
+    this.minus(aSecond);
+    setTimeout(this.countdown.bind(this), 1000);
+};
 
-    }, function(errorMessage) {
-      renderStatus('Cannot display image. ' + errorMessage);
-    });
-  });
+Countdown.prototype.countdown_init = function(event) {
+  this.countdown();
+};
+
+var count = anHour - 5*aMinute;
+var heartCountdown = new Countdown("heart", count);
+
+document.addEventListener('DOMContentLoaded', function () {
+  $("#" + heartCountdown.id + ">.start").on('click', heartCountdown.countdown_init.bind(heartCountdown));
 });
+
+
+
+
+function store(e){
+    writeItem();
+}
+
+function writeItem(){
+    localStorage[1] = countdown_number;
+}
+
+function returnItem() {
+  var stored = localStorage[1];
+  document.getElementById('item').innerHTML=countdown_number;
+}
+

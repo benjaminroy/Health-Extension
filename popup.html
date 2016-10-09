@@ -4,11 +4,21 @@
     <title>Getting Started Extension's Popup</title>
     <link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="bower_components/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="popup.css">
   </head>
   <body>
-    <i class="fa fa-heart" aria-hidden="true"></i>
+    <div id="heart">
+      <span class="fa fa-heart symbol" aria-hidden="true"></span>
+      <span class="timer"></span>
+      <span class="fa fa-play start" aria-hidden="true"></span>
+      <span class="fa fa-pause pause" aria-hidden="true" hidden="true"></span>
+    </div>
+            
+    <!-- eye -->
+    <div id="warning"></div>
     
     <script src="bower_components/jquery/dist/jquery.min.js"></script>
     <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="popup.js"></script>
   </body>
 </html>
