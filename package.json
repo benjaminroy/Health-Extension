@@ -1,7 +1,7 @@
 {
   "name": "health-extension",
   "version": "1.0.0",
-  "description": "A health extension to remind healthy habit on the computer",
+  "description": "An extension to remind healthy habits at the computer",
   "main": "popup.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
