@@ -1,8 +1,3 @@
-var aMillisecond = 1,
-    aSecond = 1000*aMillisecond,
-    aMinute = 60*aSecond,
-    anHour = 60*aMinute,
-    aDay = 24*anHour;
 
 var Countdown = function (id, count) {
   this.id = "#" + id;
