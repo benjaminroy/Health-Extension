@@ -10,7 +10,7 @@ var Countdown = function (id, count) {
   this.isPlay = true;
   this.counting = this.count[this.isPlay];
 	this.setTime(count[this.isPlay]);
-	
+
 	this.countdown(this.isPlay);
   $(this.id + ">.start").on('click', this.switch.bind(this));
 };
@@ -74,3 +74,15 @@ function returnItem() {
   document.getElementById('item').innerHTML=countdown_number;
 }
 
+
+/* Will be moved somewhere else */
+document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('settings').addEventListener('click', function() {
+        openSettingsTab();
+    });
+});
+
+function openSettingsTab() {
+    chrome.tabs.create({url: "settings/settings.html"});
+};
+/* ------------------------- */
