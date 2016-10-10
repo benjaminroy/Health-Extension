@@ -5,12 +5,14 @@
   "authors": [
     "Benjamin Roy",
     "Mathieu Roy",
-    "Nicolas Mongrain-Lacombe"
+    "Nicolas Mongrain-Lacombe",
+    "Mickael Lambert"
   ],
   "license": "ISC",
   "keywords": [
     "Health",
-    "Extension"
+    "Extension",
+    "Habits"
   ],
   "homepage": "https://github.com/benjaminroy/Health-Extension",
   "dependencies": {
