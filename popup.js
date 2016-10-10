@@ -10,7 +10,16 @@ var Countdown = function (id, count) {
   this.isPlay = true;
   this.counting = this.count[this.isPlay];
 	this.setTime(count[this.isPlay]);
-	
+  
+  //create tracker from template
+  var trackers = document.querySelector("#trackers");
+  var tracker = document.querySelector("#tracker");
+  tracker.content.querySelectorAll(".type")[0].setAttribute("id", id);
+  tracker.content.getElementById("symbol").className = "fa fa-"+id;
+  tracker.content.querySelectorAll(".timer")[0].innerHtml = (this.counting);
+  var clone = document.importNode(tracker.content, true);
+  trackers.appendChild(clone);
+  
 	this.countdown(this.isPlay);
   $(this.id + ">.start").on('click', this.switch.bind(this));
 };
@@ -52,7 +61,7 @@ var countdowns = {
   "heart": {true: 55*aMinute, false: 5*aMinute},
   "eye": {true: 20*aMinute, false: 20*aSecond}
 };
-
+  
 for (var type in countdowns) {
   new Countdown(type, countdowns[type]);
 }

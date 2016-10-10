@@ -9,28 +9,7 @@
   <body>
 
     <div class="container">
-        <div id="heart">
-            <button class="btn icon">
-                <i class="fa fa-heart symbol" aria-hidden="true"></i>
-            </button>
-            <span class="timer text-center">55:00</span>
-            <div class="pull-right">
-                <button class="btn btn-default start heartStartBtn">
-                    <i class="fa fa-pause" aria-hidden="true"></i>
-                </button>
-            </div>
-        </div>
-        <div id="eye">
-            <button class="btn icon">
-                <i class="fa fa-eye" aria-hidden="true"></i>
-            </button>
-            <span class="timer text-center">20:00</span>
-            <div class="pull-right">
-                <button class="btn btn-default start">
-                    <i class="fa fa-pause" aria-hidden="true"></i>
-                </button>
-            </div>
-        </div>
+        <div id="trackers"></div>
         <div class="options">
             <!--<a>Contact us</a>
             <span> | </span>-->
@@ -38,9 +17,19 @@
         </div>
     </div>
 
-  
-    <div id="warning"></div>
-
+    <template id="tracker">
+      <div class="type">
+        <button class="btn icon">
+          <i id="symbol" class="fa symbol" aria-hidden="true"></i>
+        </button>
+        <span class="timer text-center"></span>
+        <div class="pull-right">
+          <button class="btn btn-default start">
+            <i class="fa fa-pause" aria-hidden="true"></i>
+          </button>
+        </div>
+      </div>
+    </template>
 
     <script src="bower_components/jquery/dist/jquery.min.js"></script>
     <script src="notification/notification.js"></script>
