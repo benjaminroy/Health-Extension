@@ -1,53 +1,62 @@
-var aSecond = 1,
+var aMillisecond = 1,
+    aSecond = 1000*aMillisecond,
     aMinute = 60*aSecond,
-    anHour = 60*aMinute;
+    anHour = 60*aMinute,
+    aDay = 24*anHour;
 
-function warning(message) {
-  var element = $('#warning');
-  element.innerHTML = message;
-}
-
-var Countdown = function (id, seconds = 0) {
-	this.setTime(seconds);
-  this.count = seconds;
-  this.id = id;
+var Countdown = function (id, count) {
+  this.id = "#" + id;
+  this.count = count;
+  this.isPlay = true;
+  this.counting = this.count[this.isPlay];
+	this.setTime(count[this.isPlay]);
+	
+	this.countdown(this.isPlay);
+  $(this.id + ">.start").on('click', this.switch.bind(this));
 };
 
-Countdown.prototype.setTime = function(count = this.count) {
+Countdown.prototype.switch = function() {
+  this.isPlay = !this.isPlay;
+}
+
+Countdown.prototype.setTime = function(counting = this.counting) {
   var days = 0; //this.days = Math.floor(countdown_number/(3600*24));
-  this.hours = (Math.floor(count/(anHour))-24*days) % 24;
-  this.minutes = (Math.floor(count/(60))-this.hours*60) % 60;
-  this.seconds = (Math.floor(count)-this.minutes*60) % 60;
+  this.hours = Math.floor((counting-days*aDay)/anHour);
+  this.minutes = Math.floor((counting-this.hours*anHour)/aMinute);
+  this.seconds = Math.floor((counting-this.minutes*aMinute)/aSecond);
+  this.milliseconds = Math.floor((counting-this.seconds*aSecond)/aMillisecond);
 };
 
 Countdown.prototype.minus = function(seconds) {
-  this.count -= seconds;
+  this.counting -= seconds;
   this.setTime();
 };
 
 Countdown.prototype.write = function() {
-  var element = $("#" + this.id + " .timer");
+  var element = $(this.id + ">.timer");
   var text = this.hours + ":" + this.minutes +":" + this.seconds;
   element.html(text);
 };
 
-Countdown.prototype.countdown = function() {
-    console.log(this);
-    this.write();
-    this.minus(aSecond);
-    setTimeout(this.countdown.bind(this), 1000);
+Countdown.prototype.countdown = function(play) {
+  if(this.isPlay !== play) {
+    play = this.isPlay;
+    this.counting = this.count[this.isPlay];
+  }
+  this.write();
+  this.minus(aSecond);
+  setTimeout(this.countdown.bind(this), aSecond, play);
 };
 
-Countdown.prototype.countdown_init = function(event) {
-  this.countdown();
+var countdowns = {
+  "heart": {true: 55*aMinute, false: 5*aMinute},
+  "eye": {true: 20*aMinute, false: 20*aSecond}
 };
 
-var count = anHour - 5*aMinute;
-var heartCountdown = new Countdown("heart", count);
+for (var type in countdowns) {
+  new Countdown(type, countdowns[type]);
+}
 
-document.addEventListener('DOMContentLoaded', function () {
-  $("#" + heartCountdown.id + ">.start").on('click', heartCountdown.countdown_init.bind(heartCountdown));
-});
 
 
 
