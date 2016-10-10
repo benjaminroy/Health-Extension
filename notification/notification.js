@@ -4,15 +4,16 @@ var spawnNotification = function(title, options) {
 };
 var notifyMe = function(type) {
   console.log(type);
+  var title, options;
   if (type === "eyesBreak") {
-    var title = "Eyes Break!";
-    var options = {
+    title = "Eyes Break!";
+    options = {
       body: "Look at 20 meters for 20 seconds.",
       icon: "notification/eye.png" // To convert Font-Awesome icon to png format: http://fa2png.io/
     };
   } else {
-    var title = "Stand up Break!";
-    var options = {
+    title = "Stand up Break!";
+    options = {
       body: "Move for 5 minutes and come back.",
       icon: "notification/heart.png"
     };

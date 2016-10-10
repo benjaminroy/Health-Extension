@@ -13,5 +13,8 @@
   "permissions": [
     "https://ajax.googleapis.com/",
     "tabs"
-  ]
+  ],
+  "background": {
+    "scripts": ["background.js"]
+  }
 }
