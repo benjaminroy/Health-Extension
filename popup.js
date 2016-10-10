@@ -1,11 +1,8 @@
+$('.heartPauseIcon').toggle('hide');
+
 var aSecond = 1,
     aMinute = 60*aSecond,
     anHour = 60*aMinute;
-
-function warning(message) {
-  var element = $('#warning');
-  element.innerHTML = message;
-}
 
 var Countdown = function (id, seconds = 0) {
 	this.setTime(seconds);
@@ -64,4 +61,3 @@ function returnItem() {
   var stored = localStorage[1];
   document.getElementById('item').innerHTML=countdown_number;
 }
-

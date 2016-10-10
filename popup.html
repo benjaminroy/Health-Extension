@@ -7,17 +7,36 @@
     <link rel="stylesheet" type="text/css" href="popup.css">
   </head>
   <body>
-  
-    <div id="heart">
-      <span class="fa fa-heart symbol" aria-hidden="true"></span>
-      <span class="timer"></span>
-      <span class="fa fa-play start" aria-hidden="true"></span>
-      <span class="fa fa-pause pause" aria-hidden="true" hidden="true"></span>
+
+    <div class="container">
+        <div id="heart">
+            <button class="btn icon">
+                <i class="fa fa-heart symbol" aria-hidden="true"></i>
+            </button>
+            <span class="timer text-center">55:00</span>
+            <div class="pull-right">
+                <button class="btn btn-default start heartStartBtn">
+                    <i class="fa fa-pause" aria-hidden="true"></i>
+                </button>
+            </div>
+        </div>
+        <div id="eye">
+            <button class="btn icon">
+                <i class="fa fa-eye" aria-hidden="true"></i>
+            </button>
+            <span class="timer text-center">20:00</span>
+            <div class="pull-right">
+                <button class="btn btn-default start">
+                    <i class="fa fa-pause" aria-hidden="true"></i>
+                </button>
+            </div>
+        </div>
+        <div class="options">
+            <!--<a>Contact us</a>
+            <span> | </span>-->
+            <a>Settings</a>
+        </div>
     </div>
-  
-    <div id="warning"></div>
-    
-    <button id="notify">Notify me!</button>
 
     <script src="bower_components/jquery/dist/jquery.min.js"></script>
     <script src="notification/notification.js"></script>
