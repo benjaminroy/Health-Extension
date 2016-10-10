@@ -1,9 +1,11 @@
 {
   "name": "health-extension",
-  "description": "A health extension to remind healthy habit on the computer",
+  "description": "An extension to remind healthy habits at the computer",
   "main": "popup.js",
   "authors": [
-    "Benjamin Roy & Mathieu Roy"
+    "Benjamin Roy",
+    "Mathieu Roy",
+    "Nicolas Mongrain-Lacombe"
   ],
   "license": "ISC",
   "keywords": [
@@ -12,6 +14,8 @@
   ],
   "homepage": "https://github.com/benjaminroy/Health-Extension",
   "dependencies": {
-    "font-awesome": "fontawesome#^4.6.3"
+    "font-awesome": "fontawesome#^4.6.3",
+    "bootstrap": "^3.3.7",
+    "jquery": "^3.1.1"
   }
 }
