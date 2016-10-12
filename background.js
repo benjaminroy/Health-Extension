@@ -1,0 +1,1 @@
+redshiftBackground.init();
