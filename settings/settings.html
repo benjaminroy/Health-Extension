@@ -5,6 +5,7 @@
     <link rel="stylesheet" type="text/css" href="../bower_components/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="../bower_components/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="settings.css">
+    <link rel="icon" href="../heartbeat.png">
 </head>
 <body>
 
@@ -39,21 +40,33 @@
         </div>
         <!-- ===================== Settings ===================== -->
         <div id="options">
-
-            <h3>Stand up break</h3>
-            <div class="checkbox">
-                <label><input type="checkbox" value="" checked="checked" id="standupBreakEnable">Enable feature</label>
+            <div class="jumbotron well well-lg">
+                <h3>Stand Up Break</h3>
+                <div class="checkbox">
+                    <label><input type="checkbox" value="" checked="checked" id="standupBreakEnable">Enable feature</label>
+                </div>
+                <div class="checkbox">
+                    <label><input type="checkbox" value="" checked="checked" id="standupBreakNotif">Allow push notifications</label>
+                </div>
+                <div class="input-group">
+                    <div style="float:left;margin-right:10px;">Time of inactivity before automatically trigger a stand up break: </div>
+                    <input type="text" class="form-control input-sm text-center" style="width: 60px;" placeholder="Time" value="5:00">
+                </div>            </div>
+            <div class="jumbotron well well-lg">
+                <h3>Eyes Break</h3>
+                <div class="checkbox">
+                    <label><input type="checkbox" value="" checked="checked" id="eyesBreakEnable">Enable feature</label>
+                </div>
+                <div class="checkbox">
+                    <label><input type="checkbox" value="" checked="checked" id="eyesBreakNotif">Allow push notifications</label>
+                </div>
+                <div class="input-group">
+                    <div style="float:left;margin-right:10px;">Time of inactivity before automatically trigger an eyes break: </div>
+                    <input type="text" class="form-control input-sm text-center" style="width: 60px;" placeholder="Time" value="5:00">
+                </div>
             </div>
-            <div class="checkbox">
-                <label><input type="checkbox" value="" checked="checked" id="standupBreakNotif">Allow push notifications</label>
-            </div>
-
-            <h3>Eyes break</h3>
-            <div class="checkbox">
-                <label><input type="checkbox" value="" checked="checked" id="eyesBreakEnable">Enable feature</label>
-            </div>
-            <div class="checkbox">
-                <label><input type="checkbox" value="" checked="checked" id="eyesBreakNotif">Allow push notifications</label>
+            <div class="jumbotron well well-lg">
+                <h3>Red Shift</h3>
             </div>
         </div>
 
@@ -64,6 +77,10 @@
             <div class="input-group">
                 <span class="input-group-addon" id="basic-addon3">From</span>
                 <input type="text" class="form-control" aria-describedby="basic-addon3" placeholder="Email Address">
+            </div>
+            <div class="input-group">
+                <span class="input-group-addon">Subject</span>
+                <input type="text" class="form-control" placeholder="">
             </div>
 
             <div>You can see the source code

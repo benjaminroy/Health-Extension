@@ -26,6 +26,8 @@ $(".nav a").on("click", function(){
     showActiveContent($(this).text());
 });
 
+
+/* Manage Settings Checkboxes */
 $('input#eyesBreakEnable').change(function () {
     if ($('input#eyesBreakEnable').is(':checked')) {
         $("input#eyesBreakNotif").attr("disabled", false);
@@ -40,3 +42,9 @@ $('input#standupBreakEnable').change(function () {
         $("input#standupBreakNotif").attr("disabled", true);
     }
 });
+var isStandupBreakEnabled = function() {
+    return $('input#standupBreakEnable').is(':checked');
+}
+var isEyesBreakEnabled = function() {
+    return $('input#eyesBreakEnable').is(':checked');
+}
