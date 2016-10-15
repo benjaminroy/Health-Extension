@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 /*
 var countdowns = {
@@ -25,3 +26,6 @@ function returnItem() {
   var stored = localStorage[1];
   document.getElementById('item').innerHTML=countdown_number;
 }
+=======
+redshiftBackground.init();
+>>>>>>> 9c1a51fc36005f4745c4f678927fe84bbe5466a1

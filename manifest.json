@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
   "manifest_version": 2,
 
   "name": "Health Extension",
@@ -17,4 +18,45 @@
   "background": {
     "scripts": ["background.js"]
   }
+=======
+	"manifest_version": 2,
+	"name": "Health Extension",
+	"description": "An extension to remind healthy habits at the computer",
+	"version": "1.2",
+	"browser_action": {
+		"default_icon": "heartbeat.png",
+		"default_popup": "popup.html",
+		"default_title": "Health Extension"
+	},
+	"permissions": [
+		"tabs",
+		"geolocation",
+		"<all_urls>"
+	],
+	"background": {
+		"scripts": [
+			"lib/sun.js",
+			"common/constants.js",
+			"redshift/redshift.background.js",
+			"background.js"
+		]
+	},
+	"content_scripts": [
+		{
+			"matches": [
+				"http://*/*",
+				"https://*/*"
+			],
+			"css": [
+				"redshift/redshift.css"
+			],
+			"js": [
+				"lib/jquery-3.1.1.min.js",
+				"common/constants.js",
+				"redshift/redshift.content.js"
+			],
+			"run_at": "document_end"
+		}
+	]
+>>>>>>> 9c1a51fc36005f4745c4f678927fe84bbe5466a1
 }
