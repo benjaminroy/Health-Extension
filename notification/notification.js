@@ -2,6 +2,7 @@ var spawnNotification = function(title, options) {
   var notification = new Notification(title, options);
   setTimeout(notification.close.bind(notification), 5000);
 };
+
 var notifyMe = function(type) {
   console.log(type);
   var title, options;
@@ -9,7 +10,7 @@ var notifyMe = function(type) {
     title = "Eyes Break!";
     options = {
       body: "Look at 20 meters for 20 seconds.",
-      icon: "notification/eye.png" // To convert Font-Awesome icon to png format: http://fa2png.io/
+      icon: "notification/eye.png"
     };
   } else {
     title = "Stand up Break!";
@@ -18,18 +19,21 @@ var notifyMe = function(type) {
       icon: "notification/heart.png"
     };
   }
+  
   if (!("Notification" in window)) {
     console.log("This browser does not support desktop notification");
-  }
-  else if (Notification.permission === "granted") {
+  } else if (Notification.permission === "granted") {
     console.log("Permission granted");
     spawnNotification(title, options);
-  }
-  else if (Notification.permission !== 'denied') {
+  } else if (Notification.permission !== 'denied') {
+    console.log("Permission default");
     Notification.requestPermission().then(function (permission) {
       if (permission === "granted") {
         spawnNotification(title, options);
       }
     });
   }
-}
+};
+
+
+//chrome.notifications.getPermissionLevel

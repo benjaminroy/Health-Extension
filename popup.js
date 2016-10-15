@@ -1,5 +1,5 @@
 
-
+/*
 var countdowns = {
   "heart": {true: 55*aMinute, false: 5*aMinute},
   "eye": {true: 20*aMinute, false: 20*aSecond}
@@ -8,7 +8,7 @@ var countdowns = {
 for (var type in countdowns) {
   new Countdown(type, countdowns[type]);
 }
-
+*/
 
 
 

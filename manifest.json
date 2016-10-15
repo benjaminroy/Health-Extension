@@ -3,9 +3,12 @@
   "name": "Health Extension",
   "description": "An extension to remind healthy habits at the computer",
   "version": "1.2",
-
+  
+  "icons": { "16": "heartbeat16.png",
+             "48": "heartbeat48.png",
+            "128": "heartbeat128.png" },
+            
   "browser_action": {
-    "default_icon": "heartbeat.png",
     "default_popup": "popup.html",
     "default_title": "Health Extension"
   },
@@ -14,7 +17,8 @@
     "tabs",
     "storage",
 		"geolocation",
-		"<all_urls>"
+		"<all_urls>",
+		"notifications"
   ],
   
   "background": {
@@ -22,6 +26,8 @@
 			"lib/sun.js",
 			"common/constants.js",
 			"redshift/redshift.background.js",
+			"time.js",
+			"notification/notification.js",
 			"background.js"
 		]
   },
