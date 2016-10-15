@@ -12,6 +12,14 @@ label {
     font-size: 16px !important;
     min-height: 200px;
 }
+
+.alert-success {
+    width: 40%;
+    position: fixed;
+    left: 50%;
+    margin-left: -20%;
+    text-align: center;
+}
 .navbar .navbar-collapse {
   text-align: center;
 }

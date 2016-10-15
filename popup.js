@@ -1,6 +1,6 @@
 
 /***** HTML Methods *****/
-Time.prototype.createElement = function() {
+/*Time.prototype.createElement = function() {
   var trackers = document.querySelector("#trackers");
   var tracker = document.querySelector("#tracker");
   tracker.content.querySelectorAll(".type")[0].setAttribute("id", this.id);
@@ -15,18 +15,14 @@ Time.prototype.display = function() {
   var text = this.hours + ":" + this.minutes +":" + this.seconds;
   element.html(text);
 };
+*/
 
-
-
-document.addEventListener('DOMContentLoaded', function() {
-    document.getElementById('settings').addEventListener('click', function() {
-        openSettingsTab();
-    });
+document.getElementById('settings').addEventListener('click', function() {
+    if (chrome.runtime.openOptionsPage) {
+        // New way to open options pages, if supported (Chrome 42+).
+        chrome.runtime.openOptionsPage();
+    } else {
+        // Reasonable fallback.
+        window.open(chrome.runtime.getURL('settings/settings.html'));
+    }
 });
-
-var openSettingsTab = function() {
-    chrome.tabs.create({url: "settings/settings.html"});
-};
-
-
-

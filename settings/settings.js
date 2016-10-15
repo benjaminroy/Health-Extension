@@ -1,5 +1,6 @@
 var showActiveContent = function(activeTab) {
     console.log('Show Active Content');
+    $(".alert-success").hide();
     activeTab = activeTab.toLowerCase();
     var tabsId = ["options", "data", "documentation", "support"];
     var index = tabsId.indexOf(activeTab);
@@ -33,21 +34,70 @@ $('#submit').on('click', function() {
 })
 
 /* Manage Settings Checkboxes */
+var enableEyesBreak = function(isChecked) {
+    $('#eyesNotifEnable').attr("disabled", !isChecked);
+    $('#eyesInactivityTime').attr("disabled", !isChecked);
+}
+var enableStandupBreak = function(isChecked) {
+    $('#standupNotifEnable').attr("disabled", !isChecked);
+    $('#standupInactivityTime').attr("disabled", !isChecked);
+}
 $('#eyesBreakEnable').change(function () {
-    if ($(this).is(':checked')) {
-        $('#eyesNotifEnable').attr("disabled", false);
-        $('#eyesInactivityTime').attr("disabled", false);
-    } else {
-        $('#eyesNotifEnable').attr("disabled", true);
-        $('#eyesInactivityTime').attr("disabled", true);
-    }
+    enableEyesBreak($(this).is(':checked'));
 });
 $('#standupBreakEnable').change(function () {
-    if ($('#standupBreakEnable').is(':checked')) {
-        $("#standupNotifEnable").attr("disabled", false);
-        $("#standupInactivityTime").attr("disabled", false);
-    } else {
-        $("#standupNotifEnable").attr("disabled", true);
-        $("#standupInactivityTime").attr("disabled", true);
-    }
+    enableStandupBreak($(this).is(':checked'));
 });
+
+/* Save And Restore Settings */
+var save_options = function() {
+    console.log('Save Options');
+    chrome.storage.sync.set({
+        eyesBreakEnable: document.getElementById('eyesBreakEnable').checked,
+        eyesNotifEnable: document.getElementById('eyesNotifEnable').checked,
+        eyesInactivityTime: $('#eyesInactivityTime').val(),
+        standupBreakEnable: document.getElementById('standupBreakEnable').checked,
+        standupNotifEnable: document.getElementById('standupNotifEnable').checked,
+        standupInactivityTime: $('#standupInactivityTime').val(),
+        redShiftEnable: document.getElementById('redShiftEnable').checked
+    }, function() {
+        if(!$(".alert-success").is(":visible")) {
+            $(".alert-success").show();
+            setTimeout(function() {
+                $(".alert-success").hide();
+            }, 5000);
+        }
+    });
+}
+var restore_options = function() {
+    chrome.storage.sync.get({
+        eyesBreakEnable,
+        eyesNotifEnable,
+        eyesInactivityTime,
+        standupBreakEnable,
+        standupNotifEnable,
+        standupInactivityTime,
+        redShiftEnable
+    }, function(items) {
+        console.log('Settings: ' + items);
+        $("#eyesBreakEnable").prop('checked', items.eyesBreakEnable);
+        $("#eyesNotifEnable").prop('checked', items.eyesNotifEnable);
+        $("#eyesInactivityTime").val(items.eyesInactivityTime);
+        $("#standupBreakEnable").prop('checked', items.standupBreakEnable);
+        $("#standupNotifEnable").prop('checked', items.standupNotifEnable);
+        $("#standupInactivityTime").val(items.standupInactivityTime);
+        $("#redShiftEnable").prop('checked', items.redShiftEnable);
+
+        enableEyesBreak(items.eyesBreakEnable);
+        enableStandupBreak(items.standupBreakEnable);
+    });
+}
+
+document.addEventListener('DOMContentLoaded', restore_options);
+document.getElementById('eyesBreakEnable').addEventListener('change',save_options);
+document.getElementById('eyesNotifEnable').addEventListener('change',save_options);
+document.getElementById('eyesInactivityTime').addEventListener('change',save_options);
+document.getElementById('standupBreakEnable').addEventListener('change',save_options);
+document.getElementById('standupNotifEnable').addEventListener('change',save_options);
+document.getElementById('standupInactivityTime').addEventListener('change',save_options);
+document.getElementById('redShiftEnable').addEventListener('change',save_options);

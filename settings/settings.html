@@ -36,6 +36,7 @@
     </nav>
 
     <div class="container">
+        <div class="alert alert-success collapse" role="alert">Your settings have successfully been saved !</div>
         <div class="page-header">
             <h1 id="title">Options</h1>
         </div>
@@ -60,11 +61,11 @@
             <div class="jumbotron well well-lg">
                 <h3>Eyes Break</h3>
                 <div class="checkbox checkbox-primary">
-                    <input type="checkbox" value="" checked="checked" id="eyesBreakEnable">
+                    <input id="eyesBreakEnable" type="checkbox" />
                     <label>Enable feature</label>
                 </div>
                 <div class="checkbox checkbox-primary">
-                    <input type="checkbox" value="" checked="checked" id="eyesNotifEnable">
+                    <input id="eyesNotifEnable" type="checkbox" />
                     <label>Allow push notifications</label>
                 </div>
                 <div class="form-inline">
@@ -77,7 +78,7 @@
             <div class="jumbotron well well-lg">
                 <h3>Red Shift</h3>
                 <div class="checkbox checkbox-primary">
-                    <input type="checkbox" value="" checked="checked" id="">
+                    <input id="redShiftEnable" type="checkbox" />
                     <label>Enable feature</label>
                 </div>
             </div>
@@ -93,7 +94,7 @@
                 <span><i>Have you found a bug? Do you want to give us some feedback? Send us an email :</i></span>
             </div>
             <div class="form-group">
-                <div class="input-group" style="width:350px;">
+                <div class="input-group">
                     <span class="input-group-addon">Subject</span>
                     <input id='subject' type="text" class="form-control" placeholder="">
                 </div>
@@ -111,6 +112,5 @@
     <script src="../bower_components/jquery/dist/jquery.min.js"></script>
     <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="settings.js"></script>
-
   </body>
 </html>
