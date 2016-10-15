@@ -1,19 +1,23 @@
 
-/*
-var countdowns = {
-  "heart": {true: 55*aMinute, false: 5*aMinute},
-  "eye": {true: 20*aMinute, false: 20*aSecond}
+/***** HTML Methods *****/
+Time.prototype.createElement = function() {
+  var trackers = document.querySelector("#trackers");
+  var tracker = document.querySelector("#tracker");
+  tracker.content.querySelectorAll(".type")[0].setAttribute("id", this.id);
+  tracker.content.getElementById("symbol").className = "fa fa-" + this.id;
+  tracker.content.querySelectorAll(".timer")[0].innerHtml = this.counting;
+  var clone = document.importNode(tracker.content, true);
+  trackers.appendChild(clone);
 };
 
-for (var type in countdowns) {
-  new Countdown(type, countdowns[type]);
-}
-*/
+Time.prototype.display = function() {
+  var element = $("#" + this.id + ">.timer");
+  var text = this.hours + ":" + this.minutes +":" + this.seconds;
+  element.html(text);
+};
 
 
 
-
-/* Will be moved somewhere else */
 document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('settings').addEventListener('click', function() {
         openSettingsTab();
@@ -22,5 +26,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 var openSettingsTab = function() {
     chrome.tabs.create({url: "settings/settings.html"});
-}
-/* ------------------------- */
+};
+
+
+
