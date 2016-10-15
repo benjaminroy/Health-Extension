@@ -1,28 +1,41 @@
 <div class="jumbotron well well-lg">
     <h3>Stand Up Break</h3>
-    <div class="checkbox">
-        <label><input type="checkbox" value="" checked="checked" id="standupBreakEnable">Enable feature</label>
+    <div class="checkbox checkbox-primary">
+        <input type="checkbox" value="" checked="checked" id="standupBreakEnable">
+        <label>Enable feature</label>
     </div>
-    <div class="checkbox">
-        <input type="checkbox" value="" checked="checked" id="standupNotifEnable"><label>Allow push notifications</label>
+    <div class="checkbox checkbox-primary">
+        <input type="checkbox" value="" checked="checked" id="standupNotifEnable">
+        <label>Allow push notifications</label>
     </div>
-    <div class="input-group">
-        <div style="float:left;margin-right:10px;">Time of inactivity before automatically trigger a stand up break: </div>
-        <input type="text" class="form-control input-sm text-center" style="width: 60px;" placeholder="Time" value="5:00">
-    </div>            </div>
+    <div class="form-inline">
+        <div class="form-group">
+            <label>Time of inactivity before automatically triggering a stand up break: </label>
+            <input type="time" min="0:00" class="form-control text-center" placeholder="Time" value="05:00"/>
+        </div>
+    </div>
+</div>
 <div class="jumbotron well well-lg">
     <h3>Eyes Break</h3>
-    <div class="checkbox">
-        <label><input type="checkbox" value="" checked="checked" id="eyesBreakEnable">Enable feature</label>
+    <div class="checkbox checkbox-primary">
+        <input type="checkbox" value="" checked="checked" id="eyesBreakEnable">
+        <label>Enable feature</label>
     </div>
-    <div class="checkbox">
-        <label><input type="checkbox" value="" checked="checked" id="eyesNotifEnable">Allow push notifications</label>
+    <div class="checkbox checkbox-primary">
+        <input type="checkbox" value="" checked="checked" id="eyesNotifEnable">
+        <label>Allow push notifications</label>
     </div>
-    <div class="input-group">
-        <div style="float:left;margin-right:10px;">Time of inactivity before automatically trigger an eyes break: </div>
-        <input type="text" class="form-control input-sm text-center" style="width: 60px;" placeholder="Time" value="5:00">
+    <div class="form-inline">
+        <div class="form-group">
+            <label>Time of inactivity before automatically triggering an eyes break: </label>
+            <input type="time" min="0:00" class="form-control text-center" placeholder="Time" value="05:00"/>
+        </div>
     </div>
 </div>
 <div class="jumbotron well well-lg">
     <h3>Red Shift</h3>
+    <div class="checkbox checkbox-primary">
+        <input type="checkbox" value="" checked="checked" id="">
+        <label>Enable feature</label>
+    </div>
 </div>
