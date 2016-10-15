@@ -8,6 +8,10 @@ label {
     font-weight: normal !important;
 }
 
-.navbar .navbar-collapse{
+#message {
+    font-size: 16px !important;
+    min-height: 200px;
+}
+.navbar .navbar-collapse {
   text-align: center;
 }

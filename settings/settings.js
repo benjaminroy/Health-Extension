@@ -13,42 +13,45 @@ var showActiveContent = function(activeTab) {
 
 $( document ).ready(function() {
     showActiveContent($(".nav").find(".active").text());
-    $("#options").load("options.html");
-    $("#support").load("support.html");
 });
 $(document).on('click','.navbar-collapse',function(e) {
     if($(e.target).is('a') ) {
         $(this).collapse('hide');
     }
 });
-$(".nav a").on("click", function(){
+$(".nav a").on("click", function() {
     $(".nav").find(".active").removeClass("active");
     $(this).parent().addClass("active");
     $("#title").text($(this).text());
     showActiveContent($(this).text());
 });
+$('#submit').on('click', function() {
+    console.log('submit');
+
+})
+
 
 
 /* Manage Settings Checkboxes */
-/*$('#eyesBreakEnable').change(function () {
+$('#eyesBreakEnable').change(function () {
     if ($(this).is(':checked')) {
-        console.log("disabled");
-        $(this).attr("disabled", false);
+        $('#eyesNotifEnable').attr("disabled", false);
+        $('#eyesInactivityTime').attr("disabled", false);
     } else {
-        $(this).attr("disabled", true);
-        console.log("enabled");
+        $('#eyesNotifEnable').attr("disabled", true);
+        $('#eyesInactivityTime').attr("disabled", true);
+    }
+});
+$('#standupBreakEnable').change(function () {
+    if ($('#standupBreakEnable').is(':checked')) {
+        $("#standupNotifEnable").attr("disabled", false);
+        $("#standupInactivityTime").attr("disabled", false);
+    } else {
+        $("#standupNotifEnable").attr("disabled", true);
+        $("#standupInactivityTime").attr("disabled", true);
     }
 });
 
-$('#standupBreakEnable').change(function () {
-    console.log("fds");
-    if ($('#standupBreakEnable').is(':checked')) {
-        $("#standupBreakNotif").attr("disabled", false);
-    } else {
-        $("#standupBreakNotif").attr("disabled", true);
-    }
-});
-*/
 /*
 var isStandupBreakEnabled = function() {
     return $('input#standupBreakEnable').is(':checked');
