@@ -13,21 +13,6 @@ for (var type in countdowns) {
 
 
 
-function store(e) {
-    writeItem();
-}
-
-function writeItem() {
-    localStorage[1] = countdown_number;
-}
-
-function returnItem() {
-  var stored = localStorage[1];
-  document.getElementById('item').innerHTML=countdown_number;
-}
-
-
-
 /* Will be moved somewhere else */
 document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('settings').addEventListener('click', function() {

@@ -1,19 +1,47 @@
 {
-  "manifest_version": 2,
-
+  "manifest_version": 3,
   "name": "Health Extension",
   "description": "An extension to remind healthy habits at the computer",
-  "version": "1.1",
+  "version": "1.2",
 
   "browser_action": {
     "default_icon": "heartbeat.png",
     "default_popup": "popup.html",
     "default_title": "Health Extension"
   },
+  
   "permissions": [
-    "tabs"
+    "tabs",
+    "storage",
+		"geolocation",
+		"<all_urls>"
   ],
+  
   "background": {
-    "scripts": ["background.js"]
-  }
+		"scripts": [
+			"lib/sun.js",
+			"common/constants.js",
+			"redshift/redshift.background.js",
+			"background.js"
+		]
+  },
+  
+	"content_scripts": [
+		{
+			"matches": [
+				"http://*/*",
+				"https://*/*"
+			],
+			"css": [
+				"redshift/redshift.css"
+			],
+			"js": [
+				"lib/jquery-3.1.1.min.js",
+				"common/constants.js",
+				"redshift/redshift.content.js"
+			],
+			"run_at": "document_end"
+		}
+	]
+	
 }
