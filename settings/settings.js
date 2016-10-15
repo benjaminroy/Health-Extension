@@ -13,6 +13,10 @@ var showActiveContent = function(activeTab) {
 
 $( document ).ready(function() {
     showActiveContent($(".nav").find(".active").text());
+    $("#options").load("options.html");
+    $("#data").load("data.html");
+    $("#documentation").load("documentation.html");
+    $("#support").load("support.html");
 });
 $(document).on('click','.navbar-collapse',function(e) {
     if($(e.target).is('a') ) {
@@ -45,6 +49,12 @@ $('input#standupBreakEnable').change(function () {
 var isStandupBreakEnabled = function() {
     return $('input#standupBreakEnable').is(':checked');
 }
+var isStandupNotifEnabled = function() {
+    return $('input#standupNotifEnable').is(':checked');
+}
 var isEyesBreakEnabled = function() {
     return $('input#eyesBreakEnable').is(':checked');
+}
+var isEyesNotifEnabled = function () {
+    return $('input#eyesNotifEnable').is(':checked');
 }
