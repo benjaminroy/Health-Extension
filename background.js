@@ -23,11 +23,10 @@ for (var type in countdowns) {
 
 notifyMe("test");
 	
-/*
 
-var updateBadge = function() {
-  notifyMe("test");
-	//chrome.browserAction.setBadgeText({text: time.toString()});
+
+var updateBadge = function(time) {
+	chrome.browserAction.setBadgeText({text: time.toString()});
 };
 
 
@@ -35,6 +34,8 @@ var interval = 10 * aSecond;
 var time = new Time(55 * aMinute);
 time.countdown(updateBadge);
 
+
+/*
 function store(e) {
     writeItem();
 }

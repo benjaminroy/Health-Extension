@@ -39,7 +39,7 @@ Time.prototype.countdown = function(callback) {
   //}
   //this.display();
   this.minus(aSecond);
-  callback();
+  callback(this.minutes);
   setTimeout(this.countdown.bind(this), aSecond);
 };
 
