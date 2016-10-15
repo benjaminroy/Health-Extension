@@ -1,30 +1,25 @@
+/***** Global Variables *****/
 var aMillisecond = 1,
     aSecond = 1000*aMillisecond,
     aMinute = 60*aSecond,
     anHour = 60*aMinute,
     aDay = 24*anHour;
 
+/***** Constructor *****/
 var Countdown = function (id, count) {
   this.id = id;
   this.count = count;
   this.isPlaying = true;
-  this.counting = this.count[this.isPlaying];
-	this.setTime(count[this.isPlaying]);
-  this.createElement();
+  this.counting = this.count[this.isPlaying]; //
+	this.setTime();
 	this.countdown(this.isPlaying);
+	
+	this.createElement();
+	this.display();
   $("#" + this.id + ">.start").on('click', this.switch.bind(this));
 };
 
-Countdown.prototype.createElement = function() {
-  var trackers = document.querySelector("#trackers");
-  var tracker = document.querySelector("#tracker");
-  tracker.content.querySelectorAll(".type")[0].setAttribute("id", this.id);
-  tracker.content.getElementById("symbol").className = "fa fa-" + this.id;
-  tracker.content.querySelectorAll(".timer")[0].innerHtml = (this.counting);
-  var clone = document.importNode(tracker.content, true);
-  trackers.appendChild(clone);
-};
-
+/***** Background Methods *****/
 Countdown.prototype.switch = function() {
   this.isPlaying = !this.isPlaying;
 };
@@ -43,9 +38,7 @@ Countdown.prototype.minus = function(seconds) {
 };
 
 Countdown.prototype.write = function() {
-  var element = $("#" + this.id + ">.timer");
-  var text = this.hours + ":" + this.minutes +":" + this.seconds;
-  element.html(text);
+  
 };
 
 Countdown.prototype.countdown = function(playing) {
@@ -53,7 +46,24 @@ Countdown.prototype.countdown = function(playing) {
     playing = this.isPlaying;
     this.counting = this.count[this.isPlaying];
   }
-  this.write();
+  this.display();
   this.minus(aSecond);
   setTimeout(this.countdown.bind(this), aSecond, playing);
+};
+
+/***** HTML Methods *****/
+Countdown.prototype.createElement = function() {
+  var trackers = document.querySelector("#trackers");
+  var tracker = document.querySelector("#tracker");
+  tracker.content.querySelectorAll(".type")[0].setAttribute("id", this.id);
+  tracker.content.getElementById("symbol").className = "fa fa-" + this.id;
+  tracker.content.querySelectorAll(".timer")[0].innerHtml = (this.counting);
+  var clone = document.importNode(tracker.content, true);
+  trackers.appendChild(clone);
+};
+
+Countdown.prototype.display = function() {
+  var element = $("#" + this.id + ">.timer");
+  var text = this.hours + ":" + this.minutes +":" + this.seconds;
+  element.html(text);
 };
