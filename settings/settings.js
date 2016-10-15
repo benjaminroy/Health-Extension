@@ -1,4 +1,5 @@
 var showActiveContent = function(activeTab) {
+    console.log('Show Active Content');
     activeTab = activeTab.toLowerCase();
     var tabsId = ["options", "data", "documentation", "support"];
     var index = tabsId.indexOf(activeTab);
@@ -10,10 +11,8 @@ var showActiveContent = function(activeTab) {
         $("#" + tabsId[i]).hide();
     }
 };
+showActiveContent($(".nav").find(".active").text());
 
-$( document ).ready(function() {
-    showActiveContent($(".nav").find(".active").text());
-});
 $(document).on('click','.navbar-collapse',function(e) {
     if($(e.target).is('a') ) {
         $(this).collapse('hide');
@@ -26,11 +25,12 @@ $(".nav a").on("click", function() {
     showActiveContent($(this).text());
 });
 $('#submit').on('click', function() {
-    console.log('submit');
-
+    var message = $("#message").val();
+    var subject = $("#subject").val();
+    window.open("mailto:benji015@hotmail.com?subject="
+        + encodeURIComponent(subject)
+        + "&body=" + encodeURIComponent(message));
 })
-
-
 
 /* Manage Settings Checkboxes */
 $('#eyesBreakEnable').change(function () {
@@ -51,18 +51,3 @@ $('#standupBreakEnable').change(function () {
         $("#standupInactivityTime").attr("disabled", true);
     }
 });
-
-/*
-var isStandupBreakEnabled = function() {
-    return $('input#standupBreakEnable').is(':checked');
-}
-var isStandupNotifEnabled = function() {
-    return $('input#standupNotifEnable').is(':checked');
-}
-var isEyesBreakEnabled = function() {
-    return $('input#eyesBreakEnable').is(':checked');
-}
-var isEyesNotifEnabled = function () {
-    return $('input#eyesNotifEnable').is(':checked');
-}
-*/

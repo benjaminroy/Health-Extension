@@ -92,26 +92,16 @@
             <div class="form-group">
                 <span><i>Have you found a bug? Do you want to give us some feedback? Send us an email :</i></span>
             </div>
-            <form action="mailto:benji015@hotmail.com" method="post" enctype="text/plain" >
-                <div class="row">
-                    <div class="col-md-4 form-group">
-                        <div class="input-group">
-                            <span class="input-group-addon" id="basic-addon3">From</span>
-                            <input type="text" class="form-control" aria-describedby="basic-addon3" placeholder="Email Address" name="mail">
-                        </div>
-                    </div>
-                    <div class="col-md-4 form-group">
-                        <div class="input-group">
-                            <span class="input-group-addon">Subject</span>
-                            <input type="text" class="form-control" placeholder="">
-                        </div>
-                    </div>
+            <div class="form-group">
+                <div class="input-group" style="width:350px;">
+                    <span class="input-group-addon">Subject</span>
+                    <input id='subject' type="text" class="form-control" placeholder="">
                 </div>
-                <div class="form-group">
-                    <textarea id="message" type="text" name="comment" class="form-control" placeholder="Enter your message here"></textarea>
-                </div>
-                <input id='submit' class='btn' type="submit" name="submit" value="Submit">
-            </form>
+            </div>
+            <div class="form-group">
+                <textarea id="message" type="text" name="comment" class="form-control" placeholder="Enter your message here"></textarea>
+            </div>
+            <input id='submit' class='btn' type="submit" name="submit" value="Submit">
             <div style='margin-top: 50px;'>You can see the source code
                 <a href="https://github.com/benjaminroy/Health-Extension" target="_blank">here.</a>
             </div>
