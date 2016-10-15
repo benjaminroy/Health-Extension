@@ -4,7 +4,9 @@
     <title>Getting Started Extension's Popup</title>
     <link rel="stylesheet" type="text/css" href="../bower_components/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="../bower_components/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="../bower_components/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css">
     <link rel="stylesheet" type="text/css" href="settings.css">
+    <link rel="icon" href="../heartbeat.png">
 </head>
 <body>
 
@@ -37,45 +39,15 @@
         <div class="page-header">
             <h1 id="title">Options</h1>
         </div>
-        <!-- ===================== Settings ===================== -->
-        <div id="options">
-
-            <h3>Stand up break</h3>
-            <div class="checkbox">
-                <label><input type="checkbox" value="" checked="checked" id="standupBreakEnable">Enable feature</label>
-            </div>
-            <div class="checkbox">
-                <label><input type="checkbox" value="" checked="checked" id="standupBreakNotif">Allow push notifications</label>
-            </div>
-
-            <h3>Eyes break</h3>
-            <div class="checkbox">
-                <label><input type="checkbox" value="" checked="checked" id="eyesBreakEnable">Enable feature</label>
-            </div>
-            <div class="checkbox">
-                <label><input type="checkbox" value="" checked="checked" id="eyesBreakNotif">Allow push notifications</label>
-            </div>
-        </div>
-
+        <div id="options"></div>
         <div id="data"></div>
         <div id="documentation"></div>
-        <div id="support">
-            Have you found a bug? Do you want to give us some feedback? Send us an email :
-            <div class="input-group">
-                <span class="input-group-addon" id="basic-addon3">From</span>
-                <input type="text" class="form-control" aria-describedby="basic-addon3" placeholder="Email Address">
-            </div>
-
-            <div>You can see the source code
-                <a href="https://github.com/benjaminroy/Health-Extension" target="_blank">here.</a>
-            </div>
-
-        </div>
+        <div id="support"></div>
     </div>
-
 
     <script src="../bower_components/jquery/dist/jquery.min.js"></script>
     <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="settings.js"></script>
+
   </body>
 </html>
