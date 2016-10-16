@@ -1,6 +1,6 @@
 //the redshift should be the first function to be executed in order to minimize the time the screen is white
 redshiftBackground.init();
-notifyMe("The app has started");
+sendNotification("The app has started");
 
 
 /***** Global Variables *****/
