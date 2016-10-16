@@ -12,6 +12,10 @@ label {
     font-size: 16px !important;
     min-height: 200px;
 }
+#standupInactivityTime::-webkit-datetime-edit-ampm-field,
+#eyesInactivityTime::-webkit-datetime-edit-ampm-field {
+   display: none;
+ }
 
 .alert-success {
     width: 40%;

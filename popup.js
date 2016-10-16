@@ -1,5 +1,5 @@
 
-createElement = function(id) {
+/*createElement = function(id) {
   var trackers = document.querySelector("#trackers");
   var tracker = document.querySelector("#tracker");
   tracker.content.querySelectorAll(".type")[0].setAttribute("id", id);
@@ -13,7 +13,7 @@ Time.prototype.display = function() {
   var element = $("#" + this.id + ">.timer");
   var text = this.hours + ":" + this.minutes +":" + this.seconds;
   element.html(text);
-};
+};*/
 
 
 document.getElementById('settings').addEventListener('click', function() {
