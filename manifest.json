@@ -34,7 +34,9 @@
 			"redshift/redshift.background.js",
 			"time.js",
 			"notification/notification.js",
-			"background.js"
+      "tracker.js",
+			"background.js",
+      "lib/jquery-3.1.1.min.js"
 		]
   },
 
