@@ -50,7 +50,7 @@ var popup = (function (window, document, chrome) {
   };
 
   function _formatTime(time) {
-    return time.minutes + ":" + time.seconds;
+		
   };
 
 	return {
