@@ -33,7 +33,6 @@ var popup = (function (window, document, chrome) {
     var tracker = document.querySelector("#tracker");
     tracker.content.querySelectorAll(".type")[0].setAttribute("id", id);
     tracker.content.getElementById("symbol").className = "fa fa-" + id;
-  //  tracker.content.querySelectorAll(".timer")[0].innerHtml = time.count;
     var clone = document.importNode(tracker.content, true);
     trackers.appendChild(clone);
   };
@@ -48,13 +47,6 @@ var popup = (function (window, document, chrome) {
   function _askTime(port) {
     port.postMessage(port.name);
     setTimeout(_askTime, 1000, port);
-  };
-
-  function _tracker(total, pausing) {
-  };
-
-  function _formatTime(time) {
-    return time.minutes + ":" + time.seconds;
   };
 
 	return {

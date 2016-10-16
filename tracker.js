@@ -1,4 +1,3 @@
-
 var trackers = (function (chrome, TIME) {
 	"use strict";
 
@@ -30,7 +29,10 @@ var trackers = (function (chrome, TIME) {
   };
 
   function _formatTime(time) {
-    return time.minutes + ":" + time.seconds;
+		var sign = Math.sign(time.count) === -1 ? "-" : "";
+		var time = pad0(Math.abs(time.minutes)) + ":" + pad0(Math.abs(time.seconds));
+		if (time.hours > 0) time = time.hours + ":" + time;
+		return time;
   };
 
   var getValues = function() {

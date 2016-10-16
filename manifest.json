@@ -29,6 +29,7 @@
 
   "background": {
 		"scripts": [
+      "helper.js",
 			"lib/sun.js",
 			"common/constants.js",
 			"redshift/redshift.background.js",
