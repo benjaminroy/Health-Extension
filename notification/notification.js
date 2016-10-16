@@ -1,5 +1,7 @@
 var sendNotification = (function(type) {
 
+    var _settings = chrome.extension.getBackgroundPage().settings;
+    console.log(_settings.eyesNotifEnable);
     var _title, _options;
     var _spawnNotification = function() {
         var notification = new Notification(_title, _options);
@@ -7,12 +9,18 @@ var sendNotification = (function(type) {
     };
 
     if (type === "eye") {
+        if (!_settings.eyesNotifEnable) {
+            return;
+        }
         _title = "Eyes Break!";
         _options = {
             body: "Look at 20 meters for 20 seconds.",
             icon: "notification/eye.png"
         };
     } else if (type === "heart"){
+        if(!_settings.standupNotifEnable) {
+            return;
+        }
         _title = "Stand up Break!";
         _options = {
             body: "Move for 5 minutes and come back.",

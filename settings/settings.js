@@ -1,4 +1,8 @@
 var timeout;
+var settings = {};
+var port = chrome.extension.connect({
+     name: "settingsUpdate"
+});
 
 var showActiveContent = function(activeTab) {
     console.log('Show Active Content');
@@ -64,7 +68,7 @@ $('#standupBreakEnable').change(function () {
 
 /* Save And Restore Settings */
 var save_options = function() {
-    chrome.storage.sync.set({
+    var settings = {
         eyesBreakEnable: document.getElementById('eyesBreakEnable').checked,
         eyesNotifEnable: document.getElementById('eyesNotifEnable').checked,
         eyesInactivityEnable: document.getElementById('eyesInactivityEnable').checked,
@@ -74,6 +78,10 @@ var save_options = function() {
         standupInactivityEnable: document.getElementById('standupInactivityEnable').checked,
         standupInactivityTime: $('#standupInactivityTime').val(),
         redShiftEnable: document.getElementById('redShiftEnable').checked
+    }
+    port.postMessage(settings);
+    chrome.storage.sync.set({
+        settings
     }, alert("success"));
 }
 
@@ -89,29 +97,19 @@ var alert = function(type) {
 
 var restore_options = function() {
     chrome.storage.sync.get({
-        eyesBreakEnable,
-        eyesNotifEnable,
-        eyesInactivityEnable,
-        eyesInactivityTime,
-        standupBreakEnable,
-        standupNotifEnable,
-        standupInactivityEnable,
-        standupInactivityTime,
-        redShiftEnable
+        settings
     }, function(items) {
-        console.log(items);
-        $("#eyesBreakEnable").prop('checked', items.eyesBreakEnable);
-        $("#eyesNotifEnable").prop('checked', items.eyesNotifEnable);
-        $("#eyesInactivityEnable").prop('checked', items.eyesInactivityEnable);
-        $("#eyesInactivityTime").val(items.eyesInactivityTime);
-        $("#standupBreakEnable").prop('checked', items.standupBreakEnable);
-        $("#standupNotifEnable").prop('checked', items.standupNotifEnable);
-        $("#standupInactivityEnable").prop('checked', items.standupInactivityEnable);
-        $("#standupInactivityTime").val(items.standupInactivityTime);
-        $("#redShiftEnable").prop('checked', items.redShiftEnable);
-
-        enableEyesBreak(items.eyesBreakEnable);
-        enableStandupBreak(items.standupBreakEnable);
+        $("#eyesBreakEnable").prop('checked', items.settings.eyesBreakEnable);
+        $("#eyesNotifEnable").prop('checked', items.settings.eyesNotifEnable);
+        $("#eyesInactivityEnable").prop('checked', items.settings.eyesInactivityEnable);
+        $("#eyesInactivityTime").val(items.settings.eyesInactivityTime);
+        $("#standupBreakEnable").prop('checked', items.settings.standupBreakEnable);
+        $("#standupNotifEnable").prop('checked', items.settings.standupNotifEnable);
+        $("#standupInactivityEnable").prop('checked', items.settings.standupInactivityEnable);
+        $("#standupInactivityTime").val(items.settings.standupInactivityTime);
+        $("#redShiftEnable").prop('checked', items.settings.redShiftEnable);
+        enableEyesBreak(items.settings.eyesBreakEnable);
+        enableStandupBreak(items.settings.standupBreakEnable);
     });
 }
 
