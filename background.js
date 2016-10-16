@@ -1,10 +1,9 @@
-
 var setBadgeText = function(text) {
   chrome.browserAction.setBadgeText({ text: text });
 };
 
 /***** Initialize *****/
-notifyMe("The app has started");
+sendNotification("The app has started");
 redshiftBackground.init();
 trackers.init();
 

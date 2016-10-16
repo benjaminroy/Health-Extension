@@ -13,11 +13,13 @@ label {
     min-height: 200px;
 }
 #standupInactivityTime::-webkit-datetime-edit-ampm-field,
-#eyesInactivityTime::-webkit-datetime-edit-ampm-field {
+#standupInactivityTime::-webkit-clear-button,
+#eyesInactivityTime::-webkit-datetime-edit-ampm-field,
+#eyesInactivityTime::-webkit-clear-button {
    display: none;
  }
 
-.alert-success {
+#alert {
     width: 40%;
     position: fixed;
     left: 50%;

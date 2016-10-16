@@ -37,8 +37,9 @@
 
     <div class="container">
         <div id="alert">
-            <div class="alert alert-success collapse" role="alert">Your settings have successfully been saved !</div>
-            <div class="alert alert-warning collapse" role="alert">Warning</div>
+            <div class="alert alert-success collapse" role="alert">Your settings have successfully been saved !
+                <button type="button" class="close" data-hide="alert">&times;</button>
+            </div>
         </div>
 
         <div class="page-header">
@@ -48,42 +49,40 @@
             <div class="jumbotron well well-lg">
                 <h3>Stand Up Break</h3>
                 <div class="checkbox checkbox-primary">
-                    <input type="checkbox" value="" checked="checked" id="standupBreakEnable">
-                    <label>Enable feature</label>
+                    <input id="standupBreakEnable" type="checkbox" value="" checked="checked" >
+                    <label>Enable this feature</label>
                 </div>
                 <div class="checkbox checkbox-primary">
-                    <input type="checkbox" value="" checked="checked" id="standupNotifEnable">
+                    <input id="standupNotifEnable" type="checkbox" value="" checked="checked" >
                     <label>Allow push notifications</label>
                 </div>
-                <div class="form-inline">
-                    <div class="form-group">
-                        <label>Time of inactivity before automatically triggering a stand up break: </label>
-                        <input id='standupInactivityTime' type="time" min="00:00" max="00:55" class="form-control text-center" placeholder="Time" value="05:00"/>
-                    </div>
+                <div class="table checkbox checkbox-primary">
+                    <input class="table-cell" id="standupInactivityEnable" type="checkbox" />
+                    <label class="table-cell">Time of inactivity before automatically triggering a stand up break: </label>
+                    <input class="table-cell" id='standupInactivityTime' type="time" min="00:00" max="00:55" class="form-control text-center" placeholder="Time" value="00:55"/>
                 </div>
             </div>
             <div class="jumbotron well well-lg">
                 <h3>Eyes Break</h3>
                 <div class="checkbox checkbox-primary">
-                    <input id="eyesBreakEnable" type="checkbox" />
-                    <label>Enable feature</label>
+                    <input id="eyesBreakEnable" type="checkbox" checked="checked"/>
+                    <label>Enable this feature</label>
                 </div>
                 <div class="checkbox checkbox-primary">
-                    <input id="eyesNotifEnable" type="checkbox" />
+                    <input id="eyesNotifEnable" type="checkbox" checked="checked"/>
                     <label>Allow push notifications</label>
                 </div>
-                <div class="form-inline">
-                    <div class="form-group">
-                        <label>Time of inactivity before automatically triggering an eyes break: </label>
-                        <input id='eyesInactivityTime' type="time" min="00:00" max="00:20" class="form-control text-center" placeholder="Time" value="05:00"/>
-                    </div>
+                <div class="table checkbox checkbox-primary" >
+                    <input class="table-cell" id="eyesInactivityEnable" type="checkbox" />
+                    <label class="table-cell">Time of inactivity before automatically triggering an eyes break: </label>
+                    <input class="table-cell" id='eyesInactivityTime' type="time" min="00:00" max="00:20" class="form-control text-center" placeholder="Time" value="00:20"/>
                 </div>
             </div>
             <div class="jumbotron well well-lg">
                 <h3>Red Shift</h3>
                 <div class="checkbox checkbox-primary">
                     <input id="redShiftEnable" type="checkbox" />
-                    <label>Enable feature</label>
+                    <label>Enable this feature</label>
                 </div>
             </div>
         </div>

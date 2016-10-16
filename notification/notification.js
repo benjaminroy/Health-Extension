@@ -1,38 +1,38 @@
-var spawnNotification = function(title, options) {
-  var notification = new Notification(title, options);
-  setTimeout(notification.close.bind(notification), 5000);
-};
+var sendNotification = (function(type) {
 
-var notifyMe = function(type) {
-  console.log(type);
-  var title, options;
-  if (type === "eye") {
-    title = "Eyes Break!";
-    options = {
-      body: "Look at 20 meters for 20 seconds.",
-      icon: "notification/eye.png"
+    var _title, _options;
+    var _spawnNotification = function() {
+        var notification = new Notification(_title, _options);
+        setTimeout(notification.close.bind(notification), 5000);
     };
-  } else if (type === "heart"){
-    title = "Stand up Break!";
-    options = {
-      body: "Move for 5 minutes and come back.",
-      icon: "notification/heart.png"
-    };
-  } else {
-    title = type;
-    options = {
-      icon: "heartbeat128.png"
-    };
-  }
 
-  if (!("Notification" in window)) {
-    console.log("This browser does not support desktop notification");
-  } else if (Notification.permission === "granted") {
-    spawnNotification(title, options);
-  } else {
-    console.log("The extension requires the 'notifications' permission, so this should never print.");
-  }
-};
+    if (type === "eye") {
+        _title = "Eyes Break!";
+        _options = {
+            body: "Look at 20 meters for 20 seconds.",
+            icon: "notification/eye.png"
+        };
+    } else if (type === "heart"){
+        _title = "Stand up Break!";
+        _options = {
+            body: "Move for 5 minutes and come back.",
+            icon: "notification/heart.png"
+        };
+    } else {
+        _title = type;
+        _options = {
+            icon: "heartbeat128.png"
+        };
+    }
+
+    if (!("Notification" in window)) {
+        console.log("This browser does not support desktop notification");
+    } else if (Notification.permission === "granted") {
+        _spawnNotification();
+    } else {
+        console.log("The extension requires the 'notifications' permission, so this should never print.");
+    }
+});
 
 
 //chrome.notifications.getPermissionLevel
