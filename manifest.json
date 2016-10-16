@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "Health Extension",
   "description": "An extension to remind healthy habits at the computer",
-  "version": "1.2",
+  "version": "1.0",
 
   "icons": { "16": "heartbeat16.png",
              "48": "heartbeat48.png",

@@ -1,14 +1,16 @@
 //the redshift should be the first function to be executed in order to minimize the time the screen is white
 redshiftBackground.init();
+notifyMe("The app has started");
 
 
 /***** Global Variables *****/
+//TODO put in constants.js (?)
 var aMillisecond = 1,
     aSecond = 1000*aMillisecond,
     aMinute = 60*aSecond,
     anHour = 60*aMinute,
     aDay = 24*anHour;
-    
+
 
 /*
 var countdowns = {
@@ -21,12 +23,9 @@ for (var type in countdowns) {
 }
 */
 
-notifyMe("test");
-	
 
-
-var updateBadge = function(time) {
-	chrome.browserAction.setBadgeText({text: time.toString()});
+var updateBadge = function(text) {
+	chrome.browserAction.setBadgeText({ text: text });
 };
 
 
@@ -49,4 +48,3 @@ function returnItem() {
   document.getElementById('item').innerHTML=countdown_number;
 }
 */
-

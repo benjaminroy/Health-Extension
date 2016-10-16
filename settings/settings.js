@@ -19,12 +19,14 @@ $(document).on('click','.navbar-collapse',function(e) {
         $(this).collapse('hide');
     }
 });
+
 $(".nav a").on("click", function() {
     $(".nav").find(".active").removeClass("active");
     $(this).parent().addClass("active");
     $("#title").text($(this).text());
     showActiveContent($(this).text());
 });
+
 $('#submit').on('click', function() {
     var message = $("#message").val();
     var subject = $("#subject").val();
@@ -38,13 +40,16 @@ var enableEyesBreak = function(isChecked) {
     $('#eyesNotifEnable').attr("disabled", !isChecked);
     $('#eyesInactivityTime').attr("disabled", !isChecked);
 }
+
 var enableStandupBreak = function(isChecked) {
     $('#standupNotifEnable').attr("disabled", !isChecked);
     $('#standupInactivityTime').attr("disabled", !isChecked);
 }
+
 $('#eyesBreakEnable').change(function () {
     enableEyesBreak($(this).is(':checked'));
 });
+
 $('#standupBreakEnable').change(function () {
     enableStandupBreak($(this).is(':checked'));
 });
@@ -60,15 +65,18 @@ var save_options = function() {
         standupNotifEnable: document.getElementById('standupNotifEnable').checked,
         standupInactivityTime: $('#standupInactivityTime').val(),
         redShiftEnable: document.getElementById('redShiftEnable').checked
-    }, function() {
-        if(!$(".alert-success").is(":visible")) {
-            $(".alert-success").show();
-            setTimeout(function() {
-                $(".alert-success").hide();
-            }, 5000);
-        }
-    });
+    }, alert("success"));
 }
+
+var alert = function(type) {
+    if(!$(".alert-"+type).is(":visible")) {
+        $(".alert-"+type).show();
+        setTimeout(function() {
+            $(".alert-"+type).hide();
+        }, 5000);
+    }
+};
+
 var restore_options = function() {
     chrome.storage.sync.get({
         eyesBreakEnable,

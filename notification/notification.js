@@ -6,32 +6,31 @@ var spawnNotification = function(title, options) {
 var notifyMe = function(type) {
   console.log(type);
   var title, options;
-  if (type === "eyesBreak") {
+  if (type === "eye") {
     title = "Eyes Break!";
     options = {
       body: "Look at 20 meters for 20 seconds.",
       icon: "notification/eye.png"
     };
-  } else {
+  } else if (type === "heart"){
     title = "Stand up Break!";
     options = {
       body: "Move for 5 minutes and come back.",
       icon: "notification/heart.png"
     };
+  } else {
+    title = type;
+    options = {
+      icon: "heartbeat128.png"
+    };
   }
-  
+
   if (!("Notification" in window)) {
     console.log("This browser does not support desktop notification");
   } else if (Notification.permission === "granted") {
-    console.log("Permission granted");
     spawnNotification(title, options);
-  } else if (Notification.permission !== 'denied') {
-    console.log("Permission default");
-    Notification.requestPermission().then(function (permission) {
-      if (permission === "granted") {
-        spawnNotification(title, options);
-      }
-    });
+  } else {
+    console.log("The extension requires the 'notifications' permission, so this should never print.");
   }
 };
 
