@@ -1,4 +1,3 @@
-
 var trackers = (function (chrome, TIME) {
 	"use strict";
 
