@@ -1,3 +1,5 @@
+var timeout;
+
 var showActiveContent = function(activeTab) {
     console.log('Show Active Content');
     $(".alert-success").hide();
@@ -35,14 +37,20 @@ $('#submit').on('click', function() {
         + "&body=" + encodeURIComponent(message));
 })
 
+$("[data-hide]").on("click", function(){
+    $(this).closest("." + $(this).attr("data-hide")).fadeOut();
+});
+
 /* Manage Settings Checkboxes */
 var enableEyesBreak = function(isChecked) {
     $('#eyesNotifEnable').attr("disabled", !isChecked);
+    $('#eyesInactivityEnable').attr("disabled", !isChecked);
     $('#eyesInactivityTime').attr("disabled", !isChecked);
 }
 
 var enableStandupBreak = function(isChecked) {
     $('#standupNotifEnable').attr("disabled", !isChecked);
+    $('#standupInactivityEnable').attr("disabled", !isChecked);
     $('#standupInactivityTime').attr("disabled", !isChecked);
 }
 
@@ -56,43 +64,49 @@ $('#standupBreakEnable').change(function () {
 
 /* Save And Restore Settings */
 var save_options = function() {
-    console.log('Save Options');
     chrome.storage.sync.set({
         eyesBreakEnable: document.getElementById('eyesBreakEnable').checked,
         eyesNotifEnable: document.getElementById('eyesNotifEnable').checked,
+        eyesInactivityEnable: document.getElementById('eyesInactivityEnable').checked,
         eyesInactivityTime: $('#eyesInactivityTime').val(),
         standupBreakEnable: document.getElementById('standupBreakEnable').checked,
         standupNotifEnable: document.getElementById('standupNotifEnable').checked,
+        standupInactivityEnable: document.getElementById('standupInactivityEnable').checked,
         standupInactivityTime: $('#standupInactivityTime').val(),
         redShiftEnable: document.getElementById('redShiftEnable').checked
     }, alert("success"));
 }
 
 var alert = function(type) {
-    if(!$(".alert-"+type).is(":visible")) {
-        $(".alert-"+type).show();
-        setTimeout(function() {
-            $(".alert-"+type).hide();
-        }, 5000);
+    if (timeout){
+        clearTimeout(timeout);
     }
+    $(".alert-"+type).fadeIn();
+    timeout = setTimeout(function() {
+        $(".alert-"+type).fadeOut();
+    }, 5000);
 };
 
 var restore_options = function() {
     chrome.storage.sync.get({
         eyesBreakEnable,
         eyesNotifEnable,
+        eyesInactivityEnable,
         eyesInactivityTime,
         standupBreakEnable,
         standupNotifEnable,
+        standupInactivityEnable,
         standupInactivityTime,
         redShiftEnable
     }, function(items) {
-        console.log('Settings: ' + items);
+        console.log(items);
         $("#eyesBreakEnable").prop('checked', items.eyesBreakEnable);
         $("#eyesNotifEnable").prop('checked', items.eyesNotifEnable);
+        $("#eyesInactivityEnable").prop('checked', items.eyesInactivityEnable);
         $("#eyesInactivityTime").val(items.eyesInactivityTime);
         $("#standupBreakEnable").prop('checked', items.standupBreakEnable);
         $("#standupNotifEnable").prop('checked', items.standupNotifEnable);
+        $("#standupInactivityEnable").prop('checked', items.standupInactivityEnable);
         $("#standupInactivityTime").val(items.standupInactivityTime);
         $("#redShiftEnable").prop('checked', items.redShiftEnable);
 
@@ -104,8 +118,10 @@ var restore_options = function() {
 document.addEventListener('DOMContentLoaded', restore_options);
 document.getElementById('eyesBreakEnable').addEventListener('change',save_options);
 document.getElementById('eyesNotifEnable').addEventListener('change',save_options);
+document.getElementById('eyesInactivityEnable').addEventListener('change',save_options);
 document.getElementById('eyesInactivityTime').addEventListener('change',save_options);
 document.getElementById('standupBreakEnable').addEventListener('change',save_options);
 document.getElementById('standupNotifEnable').addEventListener('change',save_options);
+document.getElementById('standupInactivityEnable').addEventListener('change',save_options);
 document.getElementById('standupInactivityTime').addEventListener('change',save_options);
 document.getElementById('redShiftEnable').addEventListener('change',save_options);

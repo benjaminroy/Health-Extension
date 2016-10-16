@@ -9,10 +9,19 @@ body {
   width: 175px;
   height: 115px;
 }
+a:hover {
+    cursor: pointer;
+}
 
 .icon {
     width: 45px;
     background-color: white;
+}
+.options {
+    font-size: 12px;
+    position: absolute;
+    bottom: 0;
+    right: 15px;
 }
 
 #eye,
@@ -20,10 +29,4 @@ body {
     font-size: 16px;
     margin-top: 8px;
     margin-bottom: 8px;
-}
-.options {
-    font-size: 12px;
-    position: absolute;
-    bottom: 0;
-    right: 15px;
 }
