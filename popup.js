@@ -49,10 +49,6 @@ var popup = (function (window, document, chrome) {
     setTimeout(_askTime, 1000, port);
   };
 
-  function _formatTime(time) {
-		
-  };
-
 	return {
 		init: init
 	};

@@ -28,46 +28,11 @@ var trackers = (function (chrome, TIME) {
     };
   };
 
-// Function by Mickael Lambert, 13 years old (helped by Mathieu Roy)
   function _formatTime(time) {
-		var hours = time.hours;
-		var min = time.minutes;
-		var sec = time.seconds;
-
-		  var ans;
-
-		  if(hours<=9){
-		    ans="0";
-		  }
-		  else if (hours>=9)
-		    {
-		      ans="";
-		    }
-		  ans=ans+hours;
-		  ans=ans+":";
-
-		  if(min<=9){
-		    ans=ans+"0";
-		  }
-		  else if (min>=9)
-		    {
-		      ans=ans+"";
-		    }
-		  ans=ans+min;
-
-		  ans=ans+":";
-
-		  if(sec<=9){
-		    ans=ans+"0";
-		  }
-		  else if (sec>=9)
-		    {
-		      ans=ans+"";
-		    }
-
-		  ans=ans+sec;
-
-		  return ans;
+		var sign = Math.sign(time.count) === -1 ? "-" : "";
+		var time = pad0(Math.abs(time.minutes)) + ":" + pad0(Math.abs(time.seconds));
+		if (time.hours > 0) time = time.hours + ":" + time;
+		return time;
   };
 
   var getValues = function() {

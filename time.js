@@ -12,10 +12,6 @@ Time.prototype.set = function(count = this.count) {
   //this.milliseconds = round0((milliseconds-this.seconds*A_SECOND)/A_MILLISECOND);
 };
 
-var round0 = function(value) {
-  return value < 0 ? Math.ceil(value) : Math.floor(value);
-}
-
 Time.prototype.minus = function(A_SECOND) {
   this.count -= A_SECOND;
   this.set();
