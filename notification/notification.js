@@ -21,7 +21,7 @@ var sendNotification = (function(type) {
     } else {
         _title = type;
         _options = {
-            icon: "heartbeat128.png"
+            icon: "/icons/heartbeat128.png"
         };
     }
 

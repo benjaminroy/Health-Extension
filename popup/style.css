@@ -1,14 +1,12 @@
-
-/*
-* {
-    border: red 2px solid;
-}
-*/
-
 body {
   width: 175px;
   height: 115px;
 }
+
+.row {
+  padding: 5px;
+}
+
 a:hover {
     cursor: pointer;
 }
@@ -17,6 +15,7 @@ a:hover {
     width: 45px;
     background-color: white;
 }
+
 .options {
     font-size: 12px;
     position: absolute;
@@ -24,9 +23,21 @@ a:hover {
     right: 15px;
 }
 
-#eye,
-#heart {
-    font-size: 16px;
-    margin-top: 8px;
-    margin-bottom: 8px;
+.vcenter {
+    display: inline-block;
+    vertical-align: middle;
+    float: none;
 }
+
+/*.type {
+    font-size: 16px;
+    margin-top: 16px;
+    margin-bottom: 16px;
+    height: 16px;
+}
+
+
+* {
+    border: red 2px solid;
+}
+*/
