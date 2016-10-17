@@ -1,7 +1,5 @@
 var sendNotification = (function(type) {
 
-    var _settings = chrome.extension.getBackgroundPage().settings;
-    console.log(_settings.eyesNotifEnable);
     var _title, _options;
     var _spawnNotification = function() {
         var notification = new Notification(_title, _options);
@@ -9,7 +7,8 @@ var sendNotification = (function(type) {
     };
 
     if (type === "eye") {
-        if (!_settings.eyesNotifEnable) {
+        var isEyesBreakEnabled = settingsBackground.getEyesBreakEnabled();
+        if (isEyesBreakEnabled !== undefined && !isEyesBreakEnabled) {
             return;
         }
         _title = "Eyes Break!";
@@ -18,7 +17,8 @@ var sendNotification = (function(type) {
             icon: "notification/eye.png"
         };
     } else if (type === "heart"){
-        if(!_settings.standupNotifEnable) {
+        var isHeartBreakEnabled = settingsBackground.getHeartBreakEnabled();
+        if(isHeartBreakEnabled !== undefined && !isHeartBreakEnabled) {
             return;
         }
         _title = "Stand up Break!";

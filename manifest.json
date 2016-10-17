@@ -9,8 +9,8 @@
             "128": "heartbeat128.png" },
 
   "browser_action": {
-    "default_popup": "popup.html",
-    "default_title": "Health Extension"
+      "default_popup": "popup.html",
+      "default_title": "Health Extension"
   },
 
   "options_ui": {
@@ -20,25 +20,26 @@
   },
 
   "permissions": [
-    "tabs",
-    "storage",
-		"geolocation",
-		"<all_urls>",
-		"notifications"
+      "tabs",
+      "storage",
+      "geolocation",
+      "<all_urls>",
+      "notifications"
   ],
 
   "background": {
 		"scripts": [
-      "helper.js",
+            "helper.js",
 			"lib/sun.js",
 			"common/constants.js",
 			"redshift/redshift.background.js",
+            "settings/settings.background.js",
 			"time.js",
 			"notification/notification.js",
-      "tracker.js",
+            "tracker.js",
 			"background.js",
-      "lib/jquery-3.1.1.min.js"
-		]
+            "lib/jquery-3.1.1.min.js"
+        ]
   },
 
 	"content_scripts": [

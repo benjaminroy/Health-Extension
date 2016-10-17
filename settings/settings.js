@@ -5,7 +5,6 @@ var port = chrome.extension.connect({
 });
 
 var showActiveContent = function(activeTab) {
-    console.log('Show Active Content');
     $(".alert-success").hide();
     activeTab = activeTab.toLowerCase();
     var tabsId = ["options", "data", "documentation", "support"];
@@ -81,7 +80,7 @@ var save_options = function() {
     }
     port.postMessage(settings);
     chrome.storage.sync.set({
-        settings
+        'settings': settings
     }, alert("success"));
 }
 
@@ -96,9 +95,8 @@ var alert = function(type) {
 };
 
 var restore_options = function() {
-    chrome.storage.sync.get({
-        settings
-    }, function(items) {
+    chrome.storage.sync.get('settings', function(items) {
+        //console.log(items);
         $("#eyesBreakEnable").prop('checked', items.settings.eyesBreakEnable);
         $("#eyesNotifEnable").prop('checked', items.settings.eyesNotifEnable);
         $("#eyesInactivityEnable").prop('checked', items.settings.eyesInactivityEnable);
