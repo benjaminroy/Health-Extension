@@ -5,8 +5,9 @@ var settingsBackground = (function(document, window, chrome) {
 
     function init(_callback) {
         _addSettingsChangedListener();
-        _loadSettings();
-        _callback();
+        _loadSettings(function(){
+            _callback();
+        });
     }
 
     function getSettings() {
@@ -25,9 +26,10 @@ var settingsBackground = (function(document, window, chrome) {
         return _settings.standupBreakEnable;
     }
 
-    function _loadSettings() {
+    function _loadSettings(_callback) {
         chrome.storage.sync.get("settings", function(items) {
             _settings = items.settings;
+            _callback()
         });
     }
 
