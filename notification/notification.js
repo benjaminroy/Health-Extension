@@ -7,12 +7,20 @@ var sendNotification = (function(type) {
     };
 
     if (type === "eye") {
+        var isEyesBreakEnabled = settingsBackground.getEyesBreakEnabled();
+        if (isEyesBreakEnabled !== undefined && !isEyesBreakEnabled) {
+            return;
+        }
         _title = "Eyes Break!";
         _options = {
             body: "Look at 20 meters for 20 seconds.",
             icon: "notification/eye.png"
         };
     } else if (type === "heart"){
+        var isHeartBreakEnabled = settingsBackground.getHeartBreakEnabled();
+        if(isHeartBreakEnabled !== undefined && !isHeartBreakEnabled) {
+            return;
+        }
         _title = "Stand up Break!";
         _options = {
             body: "Move for 5 minutes and come back.",

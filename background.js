@@ -1,7 +1,10 @@
 /***** Initialize *****/
 sendNotification("The app has started");
-redshiftBackground.init();
-trackers.init();
+settingsBackground.init(function(){
+    redshiftBackground.init();
+    trackers.init();
+});
+
 
 // Notes:
 // the redshift should be the first function to be executed

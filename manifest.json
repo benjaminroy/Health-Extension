@@ -39,8 +39,9 @@
 			"tracker/time.js",
             "tracker/tracker.js",
 			"notification/notification.js",
+            "settings/settings.background.js",
 			"background.js"
-		]
+        ]
   },
 
 	"content_scripts": [

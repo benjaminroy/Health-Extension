@@ -1,15 +1,17 @@
+@fontsize: 16px;
+
 body {
-    font-size: 16px;
+    font-size: @fontsize;
 }
 input {
-    font-size: 16px !important;
+    font-size: @fontsize !important;
 }
 label {
     font-weight: normal !important;
 }
 
 #message {
-    font-size: 16px !important;
+    font-size: @fontsize !important;
     min-height: 200px;
 }
 #standupInactivityTime::-webkit-datetime-edit-ampm-field,
@@ -25,6 +27,9 @@ label {
     left: 50%;
     margin-left: -20%;
     text-align: center;
+}
+.jumbotron {
+    background-color: #FEFEFA;
 }
 .navbar .navbar-collapse {
   text-align: center;
