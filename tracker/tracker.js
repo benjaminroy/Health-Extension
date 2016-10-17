@@ -20,6 +20,13 @@ var trackers = (function (chrome, TIME, TRACKER) {
 
 	function _countdown(id, display) {
 		values[id].time.minus(A_SECOND);
+
+		if(values[id].time.count === 0) {
+			if(values[id].mode === "play") {
+				sendNotification(id);
+			}
+		}
+
 		var timeDisplayed = Math.ceil(values[id].time.minutes).toString();
 		display(timeDisplayed);
 		setTimeout(_countdown, A_SECOND, id, display);
