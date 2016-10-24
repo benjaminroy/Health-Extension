@@ -1,6 +1,6 @@
 /***** Initialize *****/
-sendNotification("The app has started");
-settingsBackground.init(function(){
+notification.init();
+settingsBackground.init(function() {
     redshiftBackground.init();
     trackers.init();
 });

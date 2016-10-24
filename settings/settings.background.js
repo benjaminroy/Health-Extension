@@ -5,7 +5,7 @@ var settingsBackground = (function(document, window, chrome) {
 
     function init(_callback) {
         _addSettingsChangedListener();
-        _loadSettings(function(){
+        _loadSettings(function() {
             _callback();
         });
     }

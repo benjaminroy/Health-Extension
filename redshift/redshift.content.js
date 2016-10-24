@@ -42,6 +42,11 @@ var redshiftContent = (function (document, window, chrome, $, EVENTS) {
 
 		$('body').append('<div class="' + REDSHIFT_CLASS_NAME + '"></div>');
 		_pageRedshifted = true;
+
+		var port = chrome.extension.connect(
+			{name: "notification"}
+		);
+		port.postMessage('redshift');
 	}
 
 	function _removeRedshitfFromPage() {
