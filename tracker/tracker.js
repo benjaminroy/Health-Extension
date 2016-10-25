@@ -1,5 +1,7 @@
-var trackers = (function (chrome, TIME, TRACKER) {
+var trackers = (function (chrome, TIME, ID, MODE, COLOR, ICON) {
 	"use strict";
+
+	chrome.browserAction.setBadgeBackgroundColor({"color": COLOR.IS_DEFAULT});
 
  	var values = {
     	"heart": _tracker(AN_HOUR, 5*A_MINUTE),
@@ -7,59 +9,68 @@ var trackers = (function (chrome, TIME, TRACKER) {
 	};
 
 	function init() {
-		_countdown("heart", setBadgeText);
-		_countdown("eye", console.log);
-    	for (var id in values) {
-	      	chrome.extension.onConnect.addListener(function(port) {
-	        	port.onMessage.addListener(function(id) {
-	        		port.postMessage(values[id].time.format());
-		  		});
-	    	});
-    	}
+		_countdown(ID.IS_HEART, setBadgeText);
+		_countdown(ID.IS_EYE, console.log);
+    	// for (var id in values) {
+	    //   	chrome.extension.onConnect.addListener(function(port) {
+	    //     	port.onMessage.addListener(function(id) {
+	    //     		port.postMessage(values[id].time.format());
+		//   		});
+	    // 	});
+    	// }
 	};
 
 	function _countdown(id, display) {
-		values[id].time.minus(A_SECOND);
+		var time = 100*A_MILLISECOND;
+		setTimeout(_countdown, time, id, display);
+
+		values[id].time.minus(time);
 
 		if(values[id].time.count === 0) {
-			if(values[id].mode === "play") {
+			if(values[id].mode === MODE.IS_PLAY) {
 				sendNotification(id);
+			} else if (id === ID.IS_HEART) {
+				sendNotification(id); //TODO: add a notification specific to when the break is over
 			}
+			chrome.browserAction.setBadgeBackgroundColor({"color": COLOR.IS_WARNING});
 		}
 
 		var timeDisplayed = Math.ceil(values[id].time.minutes).toString();
 		display(timeDisplayed);
-		setTimeout(_countdown, A_SECOND, id, display);
 	};
 
 	function _tracker(total, pausing) {
     	return {
       		"pause": pausing,
 	  		"play": total - pausing,
-			mode: "play",
+			mode: MODE.IS_PLAY,
 			time: new Time(total - pausing)
 		};
 	};
 
-	var switchMode = function(event) {
-		var id = event.data.id;
-		values[id].mode = (values[id].mode === "play" ? "pause" : "play");
+	function switchMode() {
+		var id = ID.IS_HEART; //event.data.id;
+
+		if(values[id].mode === MODE.IS_PLAY) {
+			values[id].mode = MODE.IS_PAUSE;
+			chrome.browserAction.setIcon(ICON.PAUSE);
+		} else {
+			values[id].mode = MODE.IS_PLAY;
+			chrome.browserAction.setIcon(ICON.PLAY);
+		}
+		chrome.browserAction.setBadgeBackgroundColor({"color": COLOR.IS_DEFAULT});
+
 		values[id].time.set(values[id][values[id].mode]);
 
-		if(values["eye"].time.count > values["heart"].time.count
-			&& values["heart"].time.mode === "play"
-			&& values["eye"].time.mode === "play") {
-			values["eye"].time.count = values["heart"].time.count;
+		if(values[ID.IS_EYE].time.count > values[ID.IS_HEART].time.count
+			&& values[ID.IS_HEART].time.mode === MODE.IS_PLAY
+			&& values[ID.IS_EYE].time.mode === MODE.IS_PLAY) {
+			values[ID.IS_EYE].time.count = values[ID.IS_HEART].time.count;
 		}
 	};
 
-	var getValues = function() {
-		return values;
- 	};
-
 	return {
-		init: init,
-		switchMode: switchMode,
-    	getValues: getValues
+		init: init
+		,switchMode: switchMode
 	};
-})(chrome, TIME, TRACKER);
+})(chrome, TIME, ID, MODE, COLOR, ICON);

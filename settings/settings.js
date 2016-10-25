@@ -111,6 +111,8 @@ var restore_options = function() {
     });
 }
 
+
+
 document.addEventListener('DOMContentLoaded', restore_options);
 document.getElementById('eyesBreakEnable').addEventListener('change',save_options);
 document.getElementById('eyesNotifEnable').addEventListener('change',save_options);

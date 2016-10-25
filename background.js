@@ -1,11 +1,12 @@
-/***** Initialize *****/
-sendNotification("The app has started");
-settingsBackground.init(function(){
-    redshiftBackground.init();
-    trackers.init();
+/***** Dev Mode Settings *****/
+var isDevMode = chrome.runtime.getManifest().update_url === undefined;
+var acceleration = 1;
+if (isDevMode) acceleration = 20;
+
+/***** Initialisation *****/
+ settingsBackground.init(function(){
+     sendNotification("The app has started");
+     redshiftBackground.init();
+     trackers.init();
+     chrome.browserAction.onClicked.addListener(trackers.switchMode);
 });
-
-
-// Notes:
-// the redshift should be the first function to be executed
-// in order to minimize the time the screen is white
