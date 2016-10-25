@@ -11,5 +11,6 @@ var round0 = function(value) {
 
 function pad0(value) {
   var value = value.toString();
-  return value.substr(0, 2 - value.length) + value;
+  console.log(value);
+  return "00".substr(0, 2 - value.length) + value;
 }

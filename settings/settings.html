@@ -1,12 +1,23 @@
 <!doctype html>
 <html>
 <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <title>Getting Started Extension's Popup</title>
+
     <link rel="stylesheet" type="text/css" href="../bower_components/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="../bower_components/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="../bower_components/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css">
+    <link rel="stylesheet" type="text/css" href="../bower_components/jquery-ui/themes/base/jquery-ui.min.css">
+    <link rel="stylesheet" type="text/css" href="../bower_components/jquery-ui/themes/base/core.css">
+    <link rel="stylesheet" type="text/css" href="../bower_components/jquery-ui/themes/base/slider.css">
+    <link rel="stylesheet" type="text/css" href="../bower_components/jquery-ui/themes/base/theme.css">
+    <link rel="stylesheet" type="text/css" href="slider.css">
+    <script src="../bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="../bower_components/jquery-ui/jquery-ui.min.js"></script>
     <link rel="stylesheet/less" type="text/css" href="settings.less" />
-    <link rel="icon" href="../heartbeat16.png">
+    <link rel="icon" href="/icons/heartbeat16.png">
 </head>
 <body>
 
@@ -20,7 +31,7 @@
                     <span class="icon-bar"></span>
                 </button>
                 <a class="navbar-brand" href="#">
-                    <span><img alt="Brand" src="../heartbeat16.png">  Health Extension</span>
+                    <span><img alt="Brand" src="/icons/heartbeat16.png">  Health Extension</span>
                 </a>
             </div>
 
@@ -92,7 +103,14 @@
                     <input id="redShiftEnable" type="checkbox" />
                     <label>Enable this feature</label>
                 </div>
+                <div id="time-range">
+                    <p>Time Range: <span class="slider-time">9:00 AM</span> - <span class="slider-time2">5:00 PM</span>
 
+                    </p>
+                    <div class="sliders_step1">
+                        <div id="slider-range"></div>
+                    </div>
+                </div>
             </div>
         </div>
         <div id="data">
@@ -121,9 +139,9 @@
         </div>
     </div>
 
-    <script src="../bower_components/jquery/dist/jquery.min.js"></script>
     <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="../bower_components/less/dist/less.min.js"></script>
     <script src="settings.js"></script>
+    <script src="slider.js"></script>
   </body>
 </html>

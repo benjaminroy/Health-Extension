@@ -7,6 +7,7 @@ var notification = (function(document, window, chrome) {
         _addNotificationSentListener();
     }
 
+    // Will be deleted
     function _addNotificationSentListener() {
         chrome.extension.onConnect.addListener(function(port) {
             if (port.name === "notification") {
@@ -47,13 +48,12 @@ var notification = (function(document, window, chrome) {
             _title = type;
             _options = {
                 body: "Redshift have been activated.",
-                icon: "heartbeat128.png"
+                icon: "/icons/heartbeat128.png"
             };
-        }
-        else {
+        } else {
             _title = type;
             _options = {
-                icon: "heartbeat128.png"
+                icon: "/icons/heartbeat128.png"
             };
         }
 
