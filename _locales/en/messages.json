@@ -79,8 +79,8 @@
         "message": "Coming Soon !",
         "description": "Announcing that a feature is coming soon"
     },
-    "tmp": {
-        "message": "",
+    "restoreDefault": {
+        "message": "Restore default values",
         "description": ""
     },
     "tmp": {

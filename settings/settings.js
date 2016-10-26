@@ -18,6 +18,7 @@ var settings = (function(document, window, chrome) {
                 $(this).collapse('hide');
             }
         });
+        $('#restoreSettings').on('click', _restoreSettings);
         $('#eyesBreakEnable').change(function () {
             _enableEyesBreak($(this).is(':checked'));
         });
@@ -46,14 +47,14 @@ var settings = (function(document, window, chrome) {
 
     function _enableEyesBreak(isChecked) {
         $('#eyesNotifEnable').attr("disabled", !isChecked);
-        $('#eyesInactivityEnable').attr("disabled", !isChecked);
-        $('#eyesInactivityTime').attr("disabled", !isChecked);
+        $('#eyesTextMsgEnable').attr("disabled", !isChecked);
+        $('#eyesSessionTime').attr("disabled", !isChecked);
     }
 
     function _enableStandupBreak(isChecked) {
         $('#standupNotifEnable').attr("disabled", !isChecked);
-        $('#standupInactivityEnable').attr("disabled", !isChecked);
-        $('#standupInactivityTime').attr("disabled", !isChecked);
+        $('#standupTextMsgEnable').attr("disabled", !isChecked);
+        $('#standupSessionTime').attr("disabled", !isChecked);
     }
 
     function _showActiveContent(activeTab) {
@@ -84,12 +85,12 @@ var settings = (function(document, window, chrome) {
         _settings = {
             eyesBreakEnable: $('#eyesBreakEnable').is(':checked'),
             eyesNotifEnable: $('#eyesNotifEnable').is(':checked'),
-            eyesInactivityEnable: $('#eyesInactivityEnable').is(':checked'),
-            eyesInactivityTime: $('#eyesInactivityTime').val(),
+            eyesTextMsgEnable: $('#eyesTextMsgEnable').is(':checked'),
+            eyesSessionTime: $('#eyesSessionTime').val(),
             standupBreakEnable: $('#standupBreakEnable').is(':checked'),
             standupNotifEnable: $('#standupNotifEnable').is(':checked'),
-            standupInactivityEnable: $('#standupInactivityEnable').is(':checked'),
-            standupInactivityTime: $('#standupInactivityTime').val(),
+            standupTextMsgEnable: $('#standupTextMsgEnable').is(':checked'),
+            standupSessionTime: $('#standupSessionTime').val(),
             redShiftEnable: $('#redShiftEnable').is(':checked')
         };
         _port.postMessage(_settings);
@@ -102,27 +103,41 @@ var settings = (function(document, window, chrome) {
         chrome.storage.sync.get('settings', function(items) {
             $("#eyesBreakEnable").prop('checked', items.settings.eyesBreakEnable);
             $("#eyesNotifEnable").prop('checked', items.settings.eyesNotifEnable);
-            $("#eyesInactivityEnable").prop('checked', items.settings.eyesInactivityEnable);
-            $("#eyesInactivityTime").val(items.settings.eyesInactivityTime);
+            $("#eyesTextMsgEnable").prop('checked', items.settings.eyesTextMsgEnable);
+            $("#eyesSessionTime").val(items.settings.eyesSessionTime);
             $("#standupBreakEnable").prop('checked', items.settings.standupBreakEnable);
             $("#standupNotifEnable").prop('checked', items.settings.standupNotifEnable);
-            $("#standupInactivityEnable").prop('checked', items.settings.standupInactivityEnable);
-            $("#standupInactivityTime").val(items.settings.standupInactivityTime);
+            $("#standupTextMsgEnable").prop('checked', items.settings.standupTextMsgEnable);
+            $("#standupSessionTime").val(items.settings.standupSessionTime);
             $("#redShiftEnable").prop('checked', items.settings.redShiftEnable);
             _enableEyesBreak(items.settings.eyesBreakEnable);
             _enableStandupBreak(items.settings.standupBreakEnable);
         });
     }
 
+    function _restoreSettings() {
+        // Default values:
+        $('#eyesBreakEnable').prop('checked', true);
+        $('#eyesNotifEnable').prop('checked', true);
+        $('#eyesTextMsgEnable').prop('checked', true);
+        $('#eyesSessionTime').val(20);
+        $('#standupBreakEnable').prop('checked', true);
+        $('#standupNotifEnable').prop('checked', true);
+        $('#standupTextMsgEnable').prop('checked', true);
+        $('#standupSessionTime').val(50);
+        $('#redShiftEnable').prop('checked', true);
+        _saveOptions();
+    }
+
     function _addOptionChangedListener() {
         $('#eyesBreakEnable').change(_saveOptions);
         $('#eyesNotifEnable').change(_saveOptions);
-        $('#eyesInactivityEnable').change(_saveOptions);
-        $('#eyesInactivityTime').change(_saveOptions);
+        $('#eyesTextMsgEnable').change(_saveOptions);
+        $('#eyesSessionTime').change(_saveOptions);
         $('#standupBreakEnable').change(_saveOptions);
         $('#standupNotifEnable').change(_saveOptions);
-        $('#standupInactivityEnable').change(_saveOptions);
-        $('#standupInactivityTime').change(_saveOptions);
+        $('#standupTextMsgEnable').change(_saveOptions);
+        $('#standupSessionTime').change(_saveOptions);
         $('#redShiftEnable').change(_saveOptions);
     }
 

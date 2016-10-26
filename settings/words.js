@@ -17,6 +17,7 @@ var strings = [
     ,"redShift"
     ,"timeRange"
     ,"contactMessage"
+    ,"restoreDefault"
     ,"subject"
     ,"sourceCode"
     ,"here"
