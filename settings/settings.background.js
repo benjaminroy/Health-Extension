@@ -14,16 +14,32 @@ var settingsBackground = (function(document, window, chrome) {
         return _settings;
     }
 
-    function getRedShiftEnabled() {
-        return _settings.redShiftEnable;
-    }
-
     function getEyesBreakEnabled() {
         return _settings.eyesBreakEnable;
     }
 
+    function getEyesNotifEnabled() {
+        return _settings.eyesNotifEnable;
+    }
+
+    function getEyesTextMsgEnabled() {
+        return _settings.EyesTextMsgEnabled;
+    }
+
     function getHeartBreakEnabled() {
         return _settings.standupBreakEnable;
+    }
+
+    function getHeartNotifEnabled() {
+        return _settings.standupNotifEnable;
+    }
+
+    function getHeartTextMsgEnabled() {
+        return _settings.standupTextMsgEnable
+    }
+
+    function getRedShiftEnabled() {
+        return _settings.redShiftEnable;
     }
 
     function _loadSettings(_callback) {
@@ -46,8 +62,12 @@ var settingsBackground = (function(document, window, chrome) {
     return {
         init: init,
         getSettings: getSettings,
-        getRedShiftEnabled: getRedShiftEnabled,
         getEyesBreakEnabled: getEyesBreakEnabled,
-        getHeartBreakEnabled: getHeartBreakEnabled
+        getEyesNotifEnabled: getEyesNotifEnabled,
+        getEyesTextMsgEnabled: getEyesTextMsgEnabled,
+        getHeartBreakEnabled: getHeartBreakEnabled,
+        getHeartNotifEnabled: getHeartNotifEnabled,
+        getHeartTextMsgEnabled: getHeartTextMsgEnabled,
+        getRedShiftEnabled: getRedShiftEnabled
     };
 })(document, window, chrome);
