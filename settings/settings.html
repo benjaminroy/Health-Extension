@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Getting Started Extension's Popup</title>
+    <title class="name_settings"></title>
 
     <link rel="stylesheet" type="text/css" href="../bower_components/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="../bower_components/font-awesome/css/font-awesome.min.css">
@@ -31,16 +31,19 @@
                     <span class="icon-bar"></span>
                 </button>
                 <a class="navbar-brand" href="#">
-                    <span><img alt="Brand" src="/icons/heartbeat16.png">  Health Extension</span>
+                    <span>
+                        <img alt="Brand" src="/icons/heartbeat16.png">
+                        <span class="name_extensionName"></span>
+                    </span>
                 </a>
             </div>
 
             <div class="collapse navbar-collapse" id="navbar-collapse">
                 <ul class="nav navbar-nav navbar-right">
-                    <li class="active"><a href="#">Options</a></li>
-                    <li><a href="#">Data</a></li>
-                    <li><a href="#">Documentation</a></li>
-                    <li><a href="#">Support</a></li>
+                    <li class="active"><a href="#" class="name_options"></a></li>
+                    <li><a href="#" class="name_data"></a></li>
+                    <li><a href="#" class="name_documentation"></a></li>
+                    <li><a href="#" class="name_contact"></a></li>
                 </ul>
             </div>
         </div>
@@ -48,63 +51,64 @@
 
     <div class="container">
         <div id="alert">
-            <div class="alert alert-success collapse" role="alert">Your settings have successfully been saved !
+            <div class="alert alert-success collapse" role="alert">
+                <span class="name_settingsSaved"></span>
                 <button type="button" class="close" data-hide="alert">&times;</button>
             </div>
         </div>
 
         <div class="page-header">
-            <h1 id="title">Options</h1>
+            <h1 id="title" class="name_options"></h1>
         </div>
         <div id="options">
             <div class="jumbotron well well-lg">
-                <h3>Stand Up Break</h3>
+                <h3 class="name_standUpBreak"></h3>
                 <div class="checkbox checkbox-primary">
                     <input id="standupBreakEnable" type="checkbox" value="" checked="checked" >
-                    <label>Enable this feature</label>
+                    <label class="name_enableFeature"></label>
                 </div>
                 <div class="checkbox checkbox-primary">
                     <input id="standupNotifEnable" type="checkbox" value="" checked="checked" >
-                    <label>Allow push notifications</label>
+                    <label class="name_allowPushNotification"></label>
                 </div>
                 <div class="checkbox checkbox-primary">
                     <input type="checkbox" value="" checked="checked" >
-                    <label>Receive a message text when break is over</label>
+                    <label class="name_allowTextMessageNotification"></label>
                 </div>
                 <div class="table checkbox checkbox-primary">
                     <input class="table-cell" id="standupInactivityEnable" type="checkbox" />
-                    <label class="table-cell">Time of inactivity before automatically triggering a stand up break: </label>
+                    <label class="table-cell" class="name_automaticallyTriggerBreak"></label>:
                     <input class="table-cell" id='standupInactivityTime' type="time" min="00:00" max="00:55" class="form-control text-center" placeholder="Time" value="00:55"/>
                 </div>
             </div>
             <div class="jumbotron well well-lg">
-                <h3>Eyes Break</h3>
+                <h3 class="eyesBreak"></h3>
                 <div class="checkbox checkbox-primary">
                     <input id="eyesBreakEnable" type="checkbox" checked="checked"/>
-                    <label>Enable this feature</label>
+                    <label class="name_enableFeature"></label>
                 </div>
                 <div class="checkbox checkbox-primary">
                     <input id="eyesNotifEnable" type="checkbox" checked="checked"/>
-                    <label>Allow push notifications</label>
+                    <label class="name_allowPushNotification"></label>
                 </div>
                 <div class="checkbox checkbox-primary">
                     <input type="checkbox" value="" checked="checked" >
-                    <label>Receive a message text when break is over</label>
+                    <label class="name_allowTextMessageNotification"></label>
                 </div>
                 <div class="table checkbox checkbox-primary" >
                     <input class="table-cell" id="eyesInactivityEnable" type="checkbox" />
-                    <label class="table-cell">Time of inactivity before automatically triggering an eyes break: </label>
+                    <label class="table-cell" class="name_automaticallyTriggerBreak"></label>:
                     <input class="table-cell" id='eyesInactivityTime' type="time" min="00:00" max="00:20" class="form-control text-center" placeholder="Time" value="00:20"/>
                 </div>
             </div>
             <div class="jumbotron well well-lg">
-                <h3>Red Shift</h3>
+                <h3 class="name_redShift"></h3>
                 <div class="checkbox checkbox-primary">
                     <input id="redShiftEnable" type="checkbox" />
-                    <label>Enable this feature</label>
+                    <label class="name_enableFeature"></label>
                 </div>
                 <div id="time-range">
-                    <p>Time Range: <span class="slider-time">9:00 AM</span> - <span class="slider-time2">5:00 PM</span>
+                    <p><span class="name_timeRange"></span>: <span class="slider-time">9:00</span> - <span class="slider-time2">17:00</span>
 
                     </p>
                     <div class="sliders_step1">
@@ -114,18 +118,18 @@
             </div>
         </div>
         <div id="data">
-            <p><i style="color:red;">Coming soon!</i></p>
+            <p><i style="color:red;" class="name_comingSoon"></i></p>
         </div>
         <div id="documentation">
-            <p><i style="color:red;">Coming soon!</i></p>
+            <p><i style="color:red;" class="name_comingSoon"></i></p>
         </div>
         <div id="support">
             <div class="form-group">
-                <span><i>Have you found a bug? Do you want to give us some feedback? Send us an email :</i></span>
+                <em class="name_contactMessage"></em>
             </div>
             <div class="form-group">
                 <div class="input-group">
-                    <span class="input-group-addon">Subject</span>
+                    <span class="input-group-addon" class="name_subject"></span>
                     <input id='subject' type="text" class="form-control" placeholder="">
                 </div>
             </div>
@@ -133,14 +137,16 @@
                 <textarea id="message" type="text" name="comment" class="form-control" placeholder="Enter your message here"></textarea>
             </div>
             <input id='submit' class='btn' type="submit" name="submit" value="Submit">
-            <div style='margin-top: 50px;'>You can see the source code
-                <a href="https://github.com/benjaminroy/Health-Extension" target="_blank">here.</a>
+            <div style='margin-top: 50px;'>
+                <span class="name_sourceCode"></span>
+                <a href="https://github.com/benjaminroy/Health-Extension" target="_blank" class="name_here"></a>.
             </div>
         </div>
     </div>
 
     <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="../bower_components/less/dist/less.min.js"></script>
+    <script src="words.js"></script>
     <script src="settings.js"></script>
     <script src="slider.js"></script>
   </body>

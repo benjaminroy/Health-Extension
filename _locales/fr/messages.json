@@ -1,0 +1,11 @@
+{
+    "extName": {
+        "message": "Health Extension",
+        "description": "Une extension pour se rappeler des bonnes habitudes de vie à l'ordinateur"
+    },
+
+    "Settings": {
+        "message": "Settings",
+        "description": "Settings title"
+    }
+}

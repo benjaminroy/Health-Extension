@@ -128,3 +128,10 @@ DEALINGS IN THE SOFTWARE.
 #time-range {
   width: 400px;
 }
+
+
+/***** ADDED BY HEALTH EXTENSION *****/
+
+span.ui-slider-handle.ui-corner-all.ui-state-default {
+    outline: 0;
+}

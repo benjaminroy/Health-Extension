@@ -1,0 +1,106 @@
+{
+    "extensionName": {
+        "message": "Health Extension",
+        "description": "An extension to remind healthy habits at the computer"
+    },
+    "settings": {
+        "message": "Settings",
+        "description": "Settings title"
+    },
+    "options": {
+        "message": "Options",
+        "description": "Options title"
+    },
+    "data": {
+        "message": "Data",
+        "description": "Data title"
+    },
+    "documentation": {
+        "message": "Documentation",
+        "description": "Documentation title"
+    },
+    "contact": {
+        "message": "Contact",
+        "description": "Contact title"
+    },
+    "settingsSaved": {
+        "message": "Your settings have successfully been saved !",
+        "description": "Message to confirm that the settings have been saved"
+    },
+    "standUpBreak": {
+        "message": "Stand Up Break",
+        "description": "Stand Up Break title"
+    },
+    "enableFeature": {
+        "message": "Enable this feature",
+        "description": "Checkbox option to enable a feature"
+    },
+    "allowPushNotification": {
+        "message": "Allow push notifications",
+        "description": "Checkbox option to allow push notifications for a particular feature"
+    },
+    "allowTextMessageNotification": {
+        "message": "Receive a message text when break is over",
+        "description": "Checkbox option for the user to receive a text message notification when the break is over"
+    },
+    "automaticallyTriggerBreak": {
+        "message": "Time of inactivity before automatically triggering a stand up break",
+        "description": "Checkbox option for the time of inactivity before automatically triggering a break"
+    },
+    "eyesBreak": {
+        "message": "Eyes Break",
+        "description": "Eyes break title"
+    },
+    "redShift": {
+        "message": "Red Shift",
+        "description": "Red shift feature title"
+    },
+    "contactMessage": {
+        "message": "Found a bug? Want to give us feedback? Send us an email: ",
+        "description": "Message shown in the contact tab"
+    },
+    "subject": {
+        "message": "Subject",
+        "description": "Subject of the message"
+    },
+    "sourceCode": {
+        "message": "You can see the source code",
+        "description": "message to indicate when one can see the source code"
+    },
+    "here": {
+        "message": "here",
+        "description": "here"
+    },
+    "timeRange": {
+        "message": "Time Range",
+        "description": "Time Range"
+    },
+    "comingSoon": {
+        "message": "Coming Soon !",
+        "description": "Announcing that a feature is coming soon"
+    },
+    "tmp": {
+        "message": "",
+        "description": ""
+    },
+    "tmp": {
+        "message": "",
+        "description": ""
+    },
+    "tmp": {
+        "message": "",
+        "description": ""
+    },
+    "tmp": {
+        "message": "",
+        "description": ""
+    },
+    "tmp": {
+        "message": "",
+        "description": ""
+    },
+    "tmp": {
+        "message": "",
+        "description": ""
+    }
+}
