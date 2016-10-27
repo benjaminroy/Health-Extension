@@ -3,29 +3,14 @@ var notification = (function(document, window, chrome) {
 
     var _title, _options;
 
-    function init() {
-        _addNotificationSentListener();
-    }
-
-    // Will be deleted
-    function _addNotificationSentListener() {
-        chrome.extension.onConnect.addListener(function(port) {
-            if (port.name === "notification") {
-                port.onMessage.addListener(function(type) {
-                    _sendNotification(type);
-                });
-            }
-        });
-    }
-
     function _spawnNotification() {
         var notification = new Notification(_title, _options);
         setTimeout(notification.close.bind(notification), 5000);
     }
 
-    function _sendNotification(type) {
-        if (type === "eye") {
-            var isEyesBreakEnabled = settingsBackground.getEyesBreakEnabled();
+    function sendNotification(type) {
+        if (type === ID.IS_EYE) {
+            var isEyesBreakEnabled = settingsBackground.isEyesBreakEnabled();
             if (isEyesBreakEnabled !== undefined && !isEyesBreakEnabled) {
                 return;
             }
@@ -34,8 +19,8 @@ var notification = (function(document, window, chrome) {
                 body: "Look at 20 meters for 20 seconds.",
                 icon: "notification/eye.png"
             };
-        } else if (type === "heart") {
-            var isHeartBreakEnabled = settingsBackground.getHeartBreakEnabled();
+        } else if (type === ID.IS_HEART) {
+            var isHeartBreakEnabled = settingsBackground.isHeartBreakEnabled();
             if(isHeartBreakEnabled !== undefined && !isHeartBreakEnabled) {
                 return;
             }
@@ -44,7 +29,7 @@ var notification = (function(document, window, chrome) {
                 body: "Move for 5 minutes and come back.",
                 icon: "notification/heart.png"
             };
-        } else if (type === "redshift") {
+        } else if (type === ID.IS_REDSHIFT) {
             _title = type;
             _options = {
                 body: "Redshift have been activated.",
@@ -67,7 +52,7 @@ var notification = (function(document, window, chrome) {
     }
 
     return {
-        init: init
+        sendNotification: sendNotification
     };
 })(document, window, chrome);
 

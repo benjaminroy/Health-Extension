@@ -28,9 +28,9 @@ var trackers = (function (chrome, TIME, ID, MODE, COLOR, ICON) {
 
 		if(values[id].time.count === 0) {
 			if(values[id].mode === MODE.IS_PLAY) {
-				sendNotification(id);
+				notification.sendNotification(id);
 			} else if (id === ID.IS_HEART) {
-				sendNotification(id); //TODO: add a notification specific to when the break is over
+				notification.sendNotification(id); //TODO: add a notification specific to when the break is over
 			}
 			chrome.browserAction.setBadgeBackgroundColor({"color": COLOR.IS_WARNING});
 		}

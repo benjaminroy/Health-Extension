@@ -14,31 +14,31 @@ var settingsBackground = (function(document, window, chrome) {
         return _settings;
     }
 
-    function getEyesBreakEnabled() {
+    function isEyesBreakEnabled() {
         return _settings.eyesBreakEnable;
     }
 
-    function getEyesNotifEnabled() {
+    function isEyesNotifEnabled() {
         return _settings.eyesNotifEnable;
     }
 
-    function getEyesTextMsgEnabled() {
+    function isEyesTextMsgEnabled() {
         return _settings.EyesTextMsgEnabled;
     }
 
-    function getHeartBreakEnabled() {
+    function isHeartBreakEnabled() {
         return _settings.standupBreakEnable;
     }
 
-    function getHeartNotifEnabled() {
+    function isHeartNotifEnabled() {
         return _settings.standupNotifEnable;
     }
 
-    function getHeartTextMsgEnabled() {
+    function isHeartTextMsgEnabled() {
         return _settings.standupTextMsgEnable
     }
 
-    function getRedShiftEnabled() {
+    function isRedShiftEnabled() {
         return _settings.redShiftEnable;
     }
 
@@ -62,12 +62,12 @@ var settingsBackground = (function(document, window, chrome) {
     return {
         init: init,
         getSettings: getSettings,
-        getEyesBreakEnabled: getEyesBreakEnabled,
-        getEyesNotifEnabled: getEyesNotifEnabled,
-        getEyesTextMsgEnabled: getEyesTextMsgEnabled,
-        getHeartBreakEnabled: getHeartBreakEnabled,
-        getHeartNotifEnabled: getHeartNotifEnabled,
-        getHeartTextMsgEnabled: getHeartTextMsgEnabled,
-        getRedShiftEnabled: getRedShiftEnabled
+        isEyesBreakEnabled: isEyesBreakEnabled,
+        isEyesNotifEnabled: isEyesNotifEnabled,
+        isEyesTextMsgEnabled: isEyesTextMsgEnabled,
+        isHeartBreakEnabled: isHeartBreakEnabled,
+        isHeartNotifEnabled: isHeartNotifEnabled,
+        isHeartTextMsgEnabled: isHeartTextMsgEnabled,
+        isRedShiftEnabled: isRedShiftEnabled
     };
 })(document, window, chrome);
