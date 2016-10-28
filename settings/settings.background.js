@@ -5,6 +5,8 @@ var settingsBackground = (function(document, window, chrome) {
 
     function init(_callback) {
         _addSettingsChangedListener();
+        _isHeartBreakEnabledListener();
+        _isEyesBreakEnabledListener();
         _loadSettings(function() {
             _callback();
         });
@@ -49,9 +51,29 @@ var settingsBackground = (function(document, window, chrome) {
         });
     }
 
+    function _isHeartBreakEnabledListener() {
+        chrome.extension.onConnect.addListener(function(port) {
+            if (port.name === "heartPort") {
+                port.onMessage.addListener(function() {
+                    trackers.initializeHeartCountdown();
+                });
+            }
+        });
+    }
+
+    function _isEyesBreakEnabledListener() {
+        chrome.extension.onConnect.addListener(function(port) {
+            if (port.name === "eyesPort") {
+                port.onMessage.addListener(function() {
+                    trackers.initializeEyesCountdown();
+                });
+            }
+        });
+    }
+
     function _addSettingsChangedListener() {
         chrome.extension.onConnect.addListener(function(port) {
-            if (port.name === "settingsUpdate") {
+            if (port.name === "settingsPort") {
                 port.onMessage.addListener(function(settingsImport) {
                     _settings = settingsImport;
                 });

@@ -80,7 +80,7 @@
         "description": "Announcing that a feature is coming soon"
     },
     "restoreDefault": {
-        "message": "Restore default values",
+        "message": "Restore defaults",
         "description": ""
     },
     "tmp": {

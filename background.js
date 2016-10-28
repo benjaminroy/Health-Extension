@@ -1,10 +1,12 @@
 /***** Dev Mode Settings *****/
 var isDevMode = chrome.runtime.getManifest().update_url === undefined;
 var acceleration = 1;
-if (isDevMode) acceleration = 20;
+if (isDevMode) {
+    acceleration = 50;
+}
 
 /***** Initialisation *****/
-notification.sendNotification("The app has started");
+notification.send("The app has started");
  settingsBackground.init(function(){
      redshiftBackground.init();
      trackers.init();

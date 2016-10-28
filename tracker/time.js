@@ -24,7 +24,9 @@ Time.prototype.minus = function(time) {
 Time.prototype.format = function() {
     var sign = Math.sign(this.count) === -1 ? "-" : "";
     var time = pad0(Math.abs(this.minutes)) + ":" + pad0(Math.abs(this.seconds));
-    if (this.hours !== 0) time = Math.abs(this.hours) + ":" + time;
+    if (this.hours !== 0) {
+        time = Math.abs(this.hours) + ":" + time;
+    }
     return sign + time;
 };
 

@@ -3,12 +3,17 @@ var settings = (function(document, window, chrome) {
 
     var _timeout;
     var _settings = {};
-    var _port = chrome.extension.connect({
-         name: "settingsUpdate"
+    var _settingsPort = chrome.extension.connect({
+         name: "settingsPort"
+    });
+    var _heartPort = chrome.extension.connect({
+         name: "heartPort"
+    });
+    var _eyesPort = chrome.extension.connect({
+         name: "eyesPort"
     });
 
     function init() {
-        console.log('init settings.js');
         _restoreOptions();
         _addOptionChangedListener();
         _showActiveContent($(".nav").find(".active").text());
@@ -49,12 +54,18 @@ var settings = (function(document, window, chrome) {
         $('#eyesNotifEnable').attr("disabled", !isChecked);
         $('#eyesTextMsgEnable').attr("disabled", !isChecked);
         $('#eyesSessionTime').attr("disabled", !isChecked);
+        if (isChecked) {
+            _eyesPort.postMessage(_settings);
+        }
     }
 
     function _enableStandupBreak(isChecked) {
         $('#standupNotifEnable').attr("disabled", !isChecked);
         $('#standupTextMsgEnable').attr("disabled", !isChecked);
         $('#standupSessionTime').attr("disabled", !isChecked);
+        if (isChecked) {
+            _heartPort.postMessage(_settings);
+        }
     }
 
     function _showActiveContent(activeTab) {
@@ -93,7 +104,7 @@ var settings = (function(document, window, chrome) {
             standupSessionTime: $('#standupSessionTime').val(),
             redShiftEnable: $('#redShiftEnable').is(':checked')
         };
-        _port.postMessage(_settings);
+        _settingsPort.postMessage(_settings);
         chrome.storage.sync.set({
             'settings': _settings
         }, _alert("success"));
