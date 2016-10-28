@@ -62,7 +62,7 @@
 				"common/constants.js",
 				"redshift/redshift.content.js"
 			],
-			"run_at": "document_end"
+			"run_at": "document_start"
 		}
 	]
 

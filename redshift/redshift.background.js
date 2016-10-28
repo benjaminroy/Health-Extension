@@ -2,20 +2,15 @@ var redshiftBackground = (function (document, window, chrome, EVENTS) {
 	"use strict";
 
 	var REFRESH_INTERVAL = 5 * 1000;
-	var _location = null;
 	var _sunsetTime = null;
 	var _sunriseTime = null;
 
 	function init() {
-		_initializeLocation(function () {
-			_initializeSunsetAndSunriseTime();
-		});
-
+		_initializeLocation(_initializeSunsetAndSunriseTime);
 		_addIsNightListener();
-
-		window.setInterval(function () {
-			_sendSunsetOrSunriseEventMessage();
-		}, REFRESH_INTERVAL);
+		window.setInterval(
+			_sendSunsetOrSunriseEventMessage,
+			REFRESH_INTERVAL);
 	}
 
 	function _addIsNightListener() {
@@ -48,37 +43,31 @@ var redshiftBackground = (function (document, window, chrome, EVENTS) {
 
 	function _sendMessageToAllTabs(message) {
 		chrome.tabs.query({}, function (tabs) {
-			for (var i = 0; i < tabs.length; i++) {
-				var tab = tabs[i];
-
+			tabs.map((tab) => {
 				chrome.tabs.sendMessage(tab.id, message);
-			}
+			});
 		});
 	}
 
 	function _isCurrentDatetimeDay() {
 		var currentDatetime = new Date();
-
 		return currentDatetime >= _sunriseTime && currentDatetime <= _sunsetTime;
 	}
 
 	function _initializeLocation(callback) {
-		navigator.geolocation.getCurrentPosition(function (position) {
-			_location = position;
-			callback();
-		});
+		navigator.geolocation.getCurrentPosition(callback);
 	}
 
 	function _isSunriseAndSunsetInitialized() {
-		return _sunriseTime !== null && _sunriseTime !== null;
+		return _sunsetTime !== null && _sunriseTime !== null;
 	}
 
-	function _initializeSunsetAndSunriseTime() {
+	function _initializeSunsetAndSunriseTime(position) {
 		var firstTimeOfDay = new Date();
 		firstTimeOfDay.setHours(0, 0, 0);
 
-		_sunriseTime = firstTimeOfDay.sunrise(_location.coords.latitude, _location.coords.longitude);
-		_sunsetTime = firstTimeOfDay.sunset(_location.coords.latitude, _location.coords.longitude);
+		_sunriseTime = firstTimeOfDay.sunrise(position.coords.latitude, position.coords.longitude);
+		_sunsetTime = firstTimeOfDay.sunset(position.coords.latitude, position.coords.longitude);
 	}
 
 	return {
