@@ -9,16 +9,18 @@ var settingsBackground = (function(document, window, chrome, ID) {
         _addSettingsChangedListener();
         _isHeartBreakEnabledListener();
         _isEyesBreakEnabledListener();
+        _heartSessionTimeChanged();
+        _eyesSessionTimeChanged();
     }
 
     function getSettings()              {return _settings;}
     function isHeartBreakEnabled()      {return _settings.heart;}
     function isHeartNotifEnabled()      {return _settings.standupNotifEnable;}
-    function isHeartTextMsgEnabled()    {return _settings.standupTextMsgEnable}
     function isEyesBreakEnabled()       {return _settings.eyes;}
     function isEyesNotifEnabled()       {return _settings.eyesNotifEnable;}
-    function isEyesTextMsgEnabled()     {return _settings.EyesTextMsgEnabled;}
     function isRedShiftEnabled()        {return _settings.redShift;}
+    function getHeartSessionTime()      {return _settings.heartTime;}
+    function getEyesSessionTime()       {return _settings.eyesTime;}
 
     function firstTime() {
         chrome.storage.sync.get("settings", function(items) {
@@ -50,21 +52,13 @@ var settingsBackground = (function(document, window, chrome, ID) {
     }
 
     function _addSettingsChangedListener() {
+        console.log("_addSettingsChangedListener");
         chrome.storage.onChanged.addListener(function(changes, namespace) {
-            for (key in changes) {
-                var storageChange = changes[key];
-                console.log('Storage key "%s" in namespace "%s" changed. '
-                    + 'Old value was "%s", new value is "%s".',
-                    key,
-                    namespace,
-                    storageChange.oldValue,
-                    storageChange.newValue);
-            }
+            _settings = changes.settings.newValue;
         });
     }
 
     function _isHeartBreakEnabledListener() {
-        console.log("OK");
         chrome.extension.onConnect.addListener(function(port) {
             if (port.name === ID.HEART) {
                 port.onMessage.addListener(
@@ -77,9 +71,9 @@ var settingsBackground = (function(document, window, chrome, ID) {
     function _isEyesBreakEnabledListener() {
         chrome.extension.onConnect.addListener(function(port) {
             if (port.name === ID.EYE) {
-                port.onMessage.addListener(
-                    trackers.initializeEyesCountdown
-                );
+                port.onMessage.addListener(function(message) {
+                    trackers.initializeEyesCountdown()
+                });
             }
         });
     }
@@ -94,15 +88,42 @@ var settingsBackground = (function(document, window, chrome, ID) {
     //     });
     // }
 
+    function _heartSessionTimeChanged() {
+        chrome.extension.onConnect.addListener(function(port) {
+            if (port.name === ID.HEART_TIME) {
+                port.onMessage.addListener(function() {
+                    var time = _settings.heartTime;
+					console.log("time");
+					console.log(_settings);
+                    trackers.heartSessionTimeChanged(time);
+                });
+            }
+        })
+    }
+
+    function _eyesSessionTimeChanged() {
+        chrome.extension.onConnect.addListener(function(port) {
+            if (port.name === ID.EYES_TIME) {
+                port.onMessage.addListener(function() {
+                    var time = _settings.eyesTime;
+					console.log("time");
+					console.log(_settings);
+                    trackers.eyesSessionTimeChanged(time);
+                });
+            };
+        })
+    }
+
+
     return {
         init: init
         ,getSettings: getSettings
+        ,getHeartSessionTime: getHeartSessionTime
+        ,getEyesSessionTime: getEyesSessionTime
         ,isEyesBreakEnabled: isEyesBreakEnabled
         ,isEyesNotifEnabled: isEyesNotifEnabled
-        ,isEyesTextMsgEnabled: isEyesTextMsgEnabled
         ,isHeartBreakEnabled: isHeartBreakEnabled
         ,isHeartNotifEnabled: isHeartNotifEnabled
-        ,isHeartTextMsgEnabled: isHeartTextMsgEnabled
         ,isRedShiftEnabled: isRedShiftEnabled
         ,firstTime: firstTime
     };

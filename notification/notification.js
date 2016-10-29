@@ -9,7 +9,7 @@ var notification = (function(document, window, chrome) {
     }
 
     function send(type) {
-        if (type === ID.IS_EYE) {
+        if (type === ID.EYE) {
             var isEyesBreakEnabled = settingsBackground.isEyesBreakEnabled();
             var isEyesNotifEnabled = settingsBackground.isEyesNotifEnabled();
             if (!isEyesBreakEnabled || !isEyesNotifEnabled) {
@@ -20,7 +20,7 @@ var notification = (function(document, window, chrome) {
                 body: "Look at 20 meters for 20 seconds.",
                 icon: "notification/eye.png"
             };
-        } else if (type === ID.IS_HEART) {
+        } else if (type === ID.HEART) {
             var isHeartBreakEnabled = settingsBackground.isHeartBreakEnabled();
             var isHeartNotifEnabled = settingsBackground.isHeartNotifEnabled();
             if(!isHeartBreakEnabled || !isHeartNotifEnabled) {
@@ -31,7 +31,7 @@ var notification = (function(document, window, chrome) {
                 body: "Move for 5 minutes and come back.",
                 icon: "notification/heart.png"
             };
-        } else if (type === ID.IS_REDSHIFT) {
+        } else if (type === ID.REDSHIFT) {
             _title = type;
             _options = {
                 body: "Redshift have been activated.",

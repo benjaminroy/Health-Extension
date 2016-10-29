@@ -1,14 +1,30 @@
-var trackers = (function (chrome, TIME, ID, MODE, COLOR, ICON) {
+var trackers = (function (chrome, TIME, ID, MODE, COLOR, ICON, DEFAULTS) {
 	"use strict";
 
 	chrome.browserAction.setBadgeBackgroundColor({"color": COLOR.DEFAULT});
 
- 	var values = {
-    	"heart": _tracker(AN_HOUR, 5*A_MINUTE),
-		"eye": _tracker(20*A_MINUTE, 20*A_SECOND)
-	};
+	var values = {};
+	function _initSessionsTime() {
+		var initHeartBreakTime = DEFAULTS.HEART_BREAK_TIME * A_MINUTE;
+		var initEyesBreakTime = DEFAULTS.EYES_BREAK_TIME * A_SECOND;
+		var initHeartSessionTime = settingsBackground.getHeartSessionTime() * A_MINUTE + initHeartBreakTime;
+		var initEyesSessionTime = settingsBackground.getEyesSessionTime() * A_MINUTE + initEyesBreakTime;
+		if (isNaN(initHeartSessionTime)) {
+			// Should be modified to never happen:
+			initHeartSessionTime = DEFAULTS.HEART_SESSION_TIME * A_MINUTE;
+		}
+		if (isNaN(initEyesSessionTime)) {
+			// Should be modified to never happen:
+			initEyesSessionTime = DEFAULTS.EYES_SESSION_TIME * A_MINUTE;
+		}
+		values = {
+			"heart": _tracker(initHeartSessionTime, initHeartBreakTime),
+			"eyes": _tracker(initEyesSessionTime, initEyesBreakTime)
+		};
+	}
 
 	function init() {
+		_initSessionsTime();
 		initializeHeartCountdown();
 		initializeEyesCountdown();
 	};
@@ -25,14 +41,44 @@ var trackers = (function (chrome, TIME, ID, MODE, COLOR, ICON) {
 		}
 	}
 
+	function heartSessionTimeChanged(time) {
+		console.log(time);
+		if (!settingsBackground.isHeartBreakEnabled()) {
+			return;
+		}
+		time = parseFloat(time);
+		if (isNaN(time)) {
+			return;
+		}
+		values[ID.HEART][MODE.PLAY] = time * A_MINUTE;
+		if (values[ID.HEART].mode === MODE.PLAY) {
+			values[ID.HEART].time.set(values[ID.HEART][MODE.PLAY]);
+		}
+	}
+
+	function eyesSessionTimeChanged(time) {
+		if (!settingsBackground.isEyesBreakEnabled()) {
+			return;
+		}
+		time = parseFloat(time);
+		if (isNaN(time)) {
+			return;
+		}
+		values[ID.EYE][MODE.PLAY] = time * A_MINUTE;
+		if (values[ID.EYE].mode === MODE.PLAY) {
+			values[ID.EYE].time.set(values[ID.EYE][MODE.PLAY]);
+		}
+	}
+
 	function _countdown(id, display) {
-		var time = 100*A_MILLISECOND;
+		var time = 100 * A_MILLISECOND;
 		if ((id === ID.HEART && settingsBackground.isHeartBreakEnabled()) ||
 			(id === ID.EYE && settingsBackground.isEyesBreakEnabled())) {
 			setTimeout(_countdown, time, id, display);
 		} else {
 			values[id].time.set([values[id].play]);
 			if (id === ID.HEART) {
+				console.log("here");
 				chrome.browserAction.setIcon(ICON.PLAY); // TODO: Show a new icon when feature is disabled
 				display('');
 			}
@@ -49,7 +95,7 @@ var trackers = (function (chrome, TIME, ID, MODE, COLOR, ICON) {
 			}
 			if (id === ID.HEART) {
 				chrome.browserAction.setBadgeBackgroundColor({"color": COLOR.WARNING});
-			} else if (id === ID.IS_EYE) {
+			} else if (id === ID.EYE) {
 				if (values[id].mode === MODE.PLAY) {
 					values[id].mode = MODE.PAUSE;
 				} else {
@@ -98,5 +144,7 @@ var trackers = (function (chrome, TIME, ID, MODE, COLOR, ICON) {
 		,switchMode: switchMode
 		,initializeEyesCountdown: initializeEyesCountdown
 		,initializeHeartCountdown: initializeHeartCountdown
+		,heartSessionTimeChanged: heartSessionTimeChanged
+		,eyesSessionTimeChanged: eyesSessionTimeChanged
 	};
-})(chrome, TIME, ID, MODE, COLOR, ICON);
+})(chrome, TIME, ID, MODE, COLOR, ICON, DEFAULTS);

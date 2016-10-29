@@ -1,8 +1,10 @@
 //can these constants be retrieve from the background?
 const ID = {
-	HEART: "heart",
-	EYE: "eyes",
-	REDSHIFT: "redShift"
+	HEART: "heart"
+	,EYE: "eyes"
+	,REDSHIFT: "redShift"
+	,HEART_TIME: 'heartTime'
+	,EYES_TIME: 'eyesTime'
 };
 
 var settings = (function(document, window, chrome, ID) {
@@ -16,14 +18,14 @@ var settings = (function(document, window, chrome, ID) {
 		,'standupNotifEnable'
 		,'eyes'
 		,'eyesNotifEnable'
-		,'eyesTextMsgEnable'
 		,'redShift'
 	];
 	var _port = {
-		"settings":  chrome.extension.connect({ name: "settings" })
-		,"heart":    chrome.extension.connect({ name: ID.HEART 		 })
+		"heart":    chrome.extension.connect({ name: ID.HEART 		 })
 		,"eyes": 	 chrome.extension.connect({ name: ID.EYE		 })
 		,"redShift": chrome.extension.connect({ name: ID.REDSHIFT	 })
+		,"heartTime": chrome.extension.connect({ name: ID.HEART_TIME	 })
+		,"eyesTime":chrome.extension.connect({ name: ID.EYES_TIME	 })
 	}
 
     function init() {
@@ -42,32 +44,43 @@ var settings = (function(document, window, chrome, ID) {
         });
     }
 
-    function _saveOptions() {
-        _settings = {
-            heart: 					$('#heart').is(':checked')
-            ,standupNotifEnable: 	$('#standupNotifEnable').is(':checked')
-            ,standupSessionTime: 	$('#standupSessionTime').val()
-            ,eyes: 					$('#eyes').is(':checked')
-            ,eyesNotifEnable:		$('#eyesNotifEnable').is(':checked')
-            ,eyesSessionTime: 		$('#eyesSessionTime').val()
-            ,redShift: 				$('#redShift').is(':checked')
-        };
+    function _saveOptions(setting) {
+        // _settings = {
+        //     heart: 					$('#heart').is(':checked')
+        //     ,standupNotifEnable: 	$('#standupNotifEnable').is(':checked')
+        //     ,heartTime: 			$('#heartTime').val()
+        //     ,eyes: 					$('#eyes').is(':checked')
+        //     ,eyesNotifEnable:		$('#eyesNotifEnable').is(':checked')
+        //     ,eyesTime: 				$('#eyesTime').val()
+        //     ,redShift: 				$('#redShift').is(':checked')
+        // };
+
+		var element = $('#' + setting);
+		if (element.val() !== "") {
+			_settings[setting] = element.val();
+			console.log(element.val());
+		} else {
+			_settings[setting] = element.is(':checked');
+			console.log(element.is(':checked'));
+		}
 
         chrome.storage.sync.set({
             'settings': _settings
         }, _updateUIEnabling());
-    }
+	}
 
 	function _createSettingsChangeHandlers() {
 	        $('#restoreSettings').on('click', _restoreDefaultOptions);
 
-			var settings = ["heart", "eyes", "redShift"]; //ID.HEART, ID.EYE, ID.REDSHIFT
+			//ID.HEART, ID.EYE, ID.REDSHIFT
+			var settings = _checkboxesID.concat([ID.HEART_TIME, ID.EYES_TIME]);
 			settings.map((setting) => {
 				$('#' + setting).change(function() {
-					_saveOptions();
-			        if (this.checked) {
-						_port[setting].postMessage()
+					_saveOptions(setting);
+			        if(_port[setting]) {
+						_port[setting].postMessage();
 					}
+					_alert("success");
 				});
 			});
 
@@ -96,23 +109,23 @@ var settings = (function(document, window, chrome, ID) {
 	function _updateUIEnabling() {
 		$('#standupNotifEnable').attr("disabled", !_settings.heart);
 		// $('#standupTextMsgEnable').attr("disabled", !isChecked);
-		$('#standupSessionTime').attr("disabled", !_settings.heart);
+		$('#' + ID.HEART_TIME).attr("disabled", !_settings.heart);
 
 		$('#eyesNotifEnable').attr("disabled", !_settings.eyes);
 		// $('#eyesTextMsgEnable').attr("disabled", !isChecked);
-		$('#eyesSessionTime').attr("disabled", !_settings.eyes);
+		$('#' + ID.EYE_TIME).attr("disabled", !_settings.eyes);
 	}
 
 	function _updateUICheckboxes() {
 		$("#heart").prop('checked', _settings.heart);
 		$("#standupNotifEnable").prop('checked', _settings.standupNotifEnable);
 		// $("#standupTextMsgEnable").prop('checked', _settings.standupTextMsgEnable);
-		$("#standupSessionTime").val(_settings.standupSessionTime);
+		$('#' + ID.HEART_TIME).val(_settings.standupSessionTime);
 
 		$("#eyes").prop('checked', _settings.eyes);
 		$("#eyesNotifEnable").prop('checked', _settings.eyesNotifEnable);
 		// $("#eyesTextMsgEnable").prop('checked', _settings.eyesTextMsgEnable);
-		$("#eyesSessionTime").val(_settings.eyesSessionTime);
+		$('#' + ID.EYES_TIME).val(_settings.eyesSessionTime);
 
 		$("#redShift").prop('checked', _settings.redShift);
 		//items.settings.setRedShiftAutonomy();
@@ -123,9 +136,11 @@ var settings = (function(document, window, chrome, ID) {
         	$('#' + setting).prop('checked', true);
 		});
 
-        $('#standupSessionTime').val(55);
-        $('#eyesSessionTime').val(20);
+        $('#' + ID.HEART_TIME).val(55);
+        $('#' + ID.EYES_TIME).val(20);
         _saveOptions();
+		_heartSessionTimeChanged();
+		_eyesSessionTimeChanged();
     }
 
     function _addOptionChangedListener() {

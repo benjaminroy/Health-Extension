@@ -4,15 +4,24 @@ const EVENTS = {
 	,SUNSET: 'sunset'
 };
 
+const DEFAULTS = {
+	HEART_SESSION_TIME: 60,
+	HEART_BREAK_TIME: 5,
+	EYES_SESSION_TIME: 20,
+	EYES_BREAK_TIME: 20 // Seconds
+};
+
 const COLOR = {
 	DEFAULT: [0, 0, 0, 1]
 	,WARNING: [100, 0, 0, 100]
-}
+};
 
 const ID = {
 	HEART: 'heart'
 	,EYE: 'eyes'
 	,REDSHIFT: 'redShift'
+	,HEART_TIME: 'heartTime'
+	,EYES_TIME: 'eyesTime'
 };
 
 const ICON = {
@@ -37,7 +46,7 @@ const ICON = {
 const MODE = {
 	PLAY: 'play'
 	,PAUSE: 'pause'
-}
+};
 
 const A_MILLISECOND = 1,
 	A_SECOND = 1000*A_MILLISECOND,
