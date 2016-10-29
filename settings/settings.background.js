@@ -4,7 +4,7 @@ var settingsBackground = (function(document, window, chrome, ID) {
     var _settings = {};
 
     function init(_callback) {
-        _firstTime();
+        firstTime();
         _loadSettings(_callback);
         _addSettingsChangedListener();
         _isHeartBreakEnabledListener();
@@ -50,16 +50,21 @@ var settingsBackground = (function(document, window, chrome, ID) {
     }
 
     function _addSettingsChangedListener() {
-        chrome.extension.onConnect.addListener(function(port) {
-            if (port.name === "settings") {
-                port.onMessage.addListener(function() {
-                    _settings = settingsImport;
-                });
+        chrome.storage.onChanged.addListener(function(changes, namespace) {
+            for (key in changes) {
+                var storageChange = changes[key];
+                console.log('Storage key "%s" in namespace "%s" changed. '
+                    + 'Old value was "%s", new value is "%s".',
+                    key,
+                    namespace,
+                    storageChange.oldValue,
+                    storageChange.newValue);
             }
         });
     }
 
     function _isHeartBreakEnabledListener() {
+        console.log("OK");
         chrome.extension.onConnect.addListener(function(port) {
             if (port.name === ID.HEART) {
                 port.onMessage.addListener(
@@ -79,15 +84,15 @@ var settingsBackground = (function(document, window, chrome, ID) {
         });
     }
 
-    function _isRedShiftEnabledListener() {
-        chrome.extension.onConnect.addListener(function(port) {
-            if (port.name === ID.REDSHIFT) {
-                port.onMessage.addListener(
-                    //
-                );
-            }
-        });
-    }
+    // function _isRedShiftEnabledListener() {
+    //     chrome.extension.onConnect.addListener(function(port) {
+    //         if (port.name === ID.REDSHIFT) {
+    //             port.onMessage.addListener(
+    //                 //
+    //             );
+    //         }
+    //     });
+    // }
 
     return {
         init: init

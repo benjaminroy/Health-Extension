@@ -1,8 +1,8 @@
 //can these constants be retrieve from the background?
 const ID = {
-	HEART: 'heart',
-	EYE: 'eye',
-	REDSHIFT: 'redshift'
+	HEART: "heart",
+	EYE: "eyes",
+	REDSHIFT: "redShift"
 };
 
 var settings = (function(document, window, chrome, ID) {
@@ -61,12 +61,15 @@ var settings = (function(document, window, chrome, ID) {
 	function _createSettingsChangeHandlers() {
 	        $('#restoreSettings').on('click', _restoreDefaultOptions);
 
-			var settings = ["heart", "eyes", "redShift"];
-			settings.map(setting => {
+			var settings = ["heart", "eyes", "redShift"]; //ID.HEART, ID.EYE, ID.REDSHIFT
+			settings.map((setting) => {
 				$('#' + setting).change(function() {
 					_saveOptions();
+					console.log(setting);
+					console.log(_port);
+					console.log(_port[setting]);
 			        if (this.checked) {
-						_port[setting].postMessage();
+						_port[setting].postMessage()
 					}
 				});
 			});
@@ -94,8 +97,6 @@ var settings = (function(document, window, chrome, ID) {
 	}
 
 	function _updateUIEnabling() {
-		_port["settings"].postMessage();
-
 		$('#standupNotifEnable').attr("disabled", !_settings.heart);
 		// $('#standupTextMsgEnable').attr("disabled", !isChecked);
 		$('#standupSessionTime').attr("disabled", !_settings.heart);

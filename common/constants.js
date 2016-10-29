@@ -11,8 +11,8 @@ const COLOR = {
 
 const ID = {
 	HEART: 'heart'
-	,EYE: 'eye'
-	,REDSHIFT: 'redshift'
+	,EYE: 'eyes'
+	,REDSHIFT: 'redShift'
 };
 
 const ICON = {
