@@ -4,10 +4,15 @@ const EVENTS = {
 	SUNSET: 'sunset'
 };
 
+const DEFAULTS = {
+	HEART_SESSION_TIME: 55,
+	EYES_SESSION_TIME: 19.66
+};
+
 const COLOR = {
 	DEFAULT: [0, 0, 0, 1],
 	WARNING: [100, 0, 0, 100]
-}
+};
 
 const ID = {
 	HEART: 'heart',
@@ -35,8 +40,8 @@ const ICON = {
 }
 
 const MODE = {
-	IS_PLAY: 'play',
-	IS_PAUSE: 'pause'
+	PLAY: 'play',
+	PAUSE: 'pause'
 }
 
 const A_MILLISECOND = 1,

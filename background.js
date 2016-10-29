@@ -6,7 +6,7 @@ if (isDevMode) {
 }
 
 /***** Initialisation *****/
- settingsBackground.init(function(){
+ settingsBackground.init(function() {
      redshiftBackground.init();
      trackers.init();
      chrome.browserAction.onClicked.addListener(trackers.switchMode);

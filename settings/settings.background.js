@@ -8,6 +8,8 @@ var settingsBackground = (function(document, window, chrome, ID) {
         _addSettingsChangedListener();
         _isHeartBreakEnabledListener();
         _isEyesBreakEnabledListener();
+        _heartSessionTimeChanged();
+        _eyesSessionTimeChanged();
     }
 
     function getSettings()              {return _settings;}
@@ -18,6 +20,8 @@ var settingsBackground = (function(document, window, chrome, ID) {
     function isHeartNotifEnabled()      {return _settings.standupNotifEnable;}
     function isHeartTextMsgEnabled()    {return _settings.standupTextMsgEnable}
     function isRedShiftEnabled()        {return _settings.redShiftEnable;}
+    function getHeartSessionTime()      {return _settings.standupSessionTime;}
+    function getEyesSessionTime()       {return _settings.eyesSessionTime;}
 
     function _loadSettings(_callback) {
         chrome.storage.sync.get("settings", function(items) {
@@ -56,6 +60,26 @@ var settingsBackground = (function(document, window, chrome, ID) {
         });
     }
 
+    function _heartSessionTimeChanged() {
+        chrome.extension.onConnect.addListener(function(port) {
+            if (port.name === 'heartTimePort') {
+                port.onMessage.addListener(function(time) {
+                    trackers.heartSessionTimeChanged(time);
+                });
+            }
+        })
+    }
+
+    function _eyesSessionTimeChanged() {
+        chrome.extension.onConnect.addListener(function(port) {
+            if (port.name === 'eyesTimePort') {
+                port.onMessage.addListener(function(time) {
+                    trackers.eyesSessionTimeChanged(time);
+                });
+            };
+        })
+    }
+
     function _addSettingsChangedListener() {
         chrome.extension.onConnect.addListener(function(port) {
             if (port.name === "settingsPort") {
@@ -69,6 +93,8 @@ var settingsBackground = (function(document, window, chrome, ID) {
     return {
         init: init,
         getSettings: getSettings,
+        getHeartSessionTime: getHeartSessionTime,
+        getEyesSessionTime: getEyesSessionTime,
         isEyesBreakEnabled: isEyesBreakEnabled,
         isEyesNotifEnabled: isEyesNotifEnabled,
         isEyesTextMsgEnabled: isEyesTextMsgEnabled,

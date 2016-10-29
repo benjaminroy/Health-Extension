@@ -17,9 +17,15 @@ var settings = (function(document, window, chrome, ID) {
     var _heartPort = chrome.extension.connect({
          name: ID.HEART
     });
+	var _heartTimePort = chrome.extension.connect({
+		name: "heartTimePort"
+	});
     var _eyesPort = chrome.extension.connect({
          name: ID.EYE
     });
+	var _eyesTimePort = chrome.extension.connect({
+		name: "eyesTimePort"
+	});
     var _redShiftPort = chrome.extension.connect({
          name: ID.REDSHIFT
     });
@@ -52,10 +58,24 @@ var settings = (function(document, window, chrome, ID) {
 	function _createSettingsChangeHandlers() {
 	        $('#restoreSettings').on('click', _restoreSettings);
 	        $('#standupBreakEnable').change(_enableHeartBreak);
+			$('#standupSessionTime').change(_heartSessionTimeChanged);
 	        $('#eyesBreakEnable').change(_enableEyesBreak);
+			$('#eyesSessionTime').change(_eyesSessionTimeChanged);
 	        $('#redShiftEnable').change(_enableRedShift);
 	        $('#timeRange').change(null);
 			$("input[name='setRedShiftAutonomy']").change(_enableManuallySelectRedShift);
+	}
+
+	function _heartSessionTimeChanged() {
+		if ($('#standupBreakEnable').is(':checked')) {
+			_heartTimePort.postMessage($('#standupSessionTime').val());
+		}
+	}
+
+	function _eyesSessionTimeChanged() {
+		if ($('#eyesBreakEnable').is(':checked')) {
+			_eyesTimePort.postMessage($('#eyesSessionTime').val());
+		}
 	}
 
     function _enableHeartBreak() {
@@ -153,6 +173,8 @@ var settings = (function(document, window, chrome, ID) {
         $('#standupSessionTime').val(50);
         $('#redShiftEnable').prop('checked', true);
         _saveOptions();
+		_heartSessionTimeChanged();
+		_eyesSessionTimeChanged();
     }
 
     function _addOptionChangedListener() {

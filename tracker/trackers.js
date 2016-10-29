@@ -3,12 +3,27 @@ var trackers = (function (chrome, TIME, ID, MODE, COLOR, ICON) {
 
 	chrome.browserAction.setBadgeBackgroundColor({"color": COLOR.DEFAULT});
 
- 	var values = {
-    	"heart": _tracker(AN_HOUR, 5*A_MINUTE),
-		"eye": _tracker(20*A_MINUTE, 20*A_SECOND)
-	};
+	var values = {};
+	function _initSessionsTime() {
+		var _initHeartSessionTime = settingsBackground.getHeartSessionTime() * A_MINUTE;
+		var _initEyesSessionTime = settingsBackground.getEyesSessionTime() * A_MINUTE;
+		var _defaultHeartSessionTime = DEFAULTS.HEART_SESSION_TIME * A_MINUTE;
+		var _defaultEyesSessionTime = DEFAULTS.EYES_SESSION_TIME * A_MINUTE;
+		if (isNaN(_initHeartSessionTime)) {
+			_initHeartSessionTime = _defaultHeartSessionTime;
+		}
+		if (isNaN(_initEyesSessionTime)) {
+			_initEyesSessionTime = _defaultEyesSessionTime;
+		}
+
+		values = {
+			"heart": _tracker(_initHeartSessionTime, 5 * A_MINUTE, MODE.PLAY, _initHeartSessionTime),
+			"eye": _tracker(_initEyesSessionTime, 20 * A_SECOND, MODE.PLAY, _initEyesSessionTime)
+		};
+	}
 
 	function init() {
+		_initSessionsTime();
 		initializeHeartCountdown();
 		initializeEyesCountdown();
     	// for (var id in values) {
@@ -29,6 +44,42 @@ var trackers = (function (chrome, TIME, ID, MODE, COLOR, ICON) {
 	function initializeEyesCountdown() {
 		if (settingsBackground.isEyesBreakEnabled()) {
 			_countdown(ID.EYE, console.log);
+		}
+	}
+
+	function heartSessionTimeChanged(time) {
+		if (settingsBackground.isHeartBreakEnabled()) {
+			time = parseFloat(time);
+			if (isNaN(time)) {
+				return;
+			}
+			var id = ID.HEART;
+			var mode = values[id].mode;
+			var playTime = time * A_MINUTE;
+			var pauseTime = 5 * A_MINUTE;
+			if (mode === MODE.PLAY) {
+				values[id] =  _tracker(playTime, pauseTime, mode, playTime);
+			} else {
+				values[id] =  _tracker(playTime, pauseTime, mode, values[id].time.count);
+			}
+		}
+	}
+
+	function eyesSessionTimeChanged(time) {
+		if (settingsBackground.isEyesBreakEnabled()) {
+			time = parseFloat(time);
+			if (isNaN(time)) {
+				return;
+			}
+			var id = ID.EYE;
+			var mode = values[id].mode;
+			var playTime = time * A_MINUTE;
+			var pauseTime = 20 * A_SECOND;
+			if (mode === MODE.PLAY) {
+				values[id] =  _tracker(playTime, pauseTime, mode, playTime);
+			} else {
+				values[id] =  _tracker(playTime, pauseTime, mode, values[id].time.count);
+			}
 		}
 	}
 
@@ -67,12 +118,12 @@ var trackers = (function (chrome, TIME, ID, MODE, COLOR, ICON) {
 		}
 	};
 
-	function _tracker(total, pausing) {
+	function _tracker(play, pausing, mode, time) {
     	return {
       		"pause": pausing,
-	  		"play": total - pausing,
-			mode: MODE.PLAY,
-			time: new Time(total - pausing)
+	  		"play": play,
+			mode: mode,
+			time: new Time(time)
 		};
 	};
 
@@ -105,5 +156,7 @@ var trackers = (function (chrome, TIME, ID, MODE, COLOR, ICON) {
 		,switchMode: switchMode
 		,initializeEyesCountdown: initializeEyesCountdown
 		,initializeHeartCountdown: initializeHeartCountdown
+		,heartSessionTimeChanged: heartSessionTimeChanged
+		,eyesSessionTimeChanged: eyesSessionTimeChanged
 	};
 })(chrome, TIME, ID, MODE, COLOR, ICON);
