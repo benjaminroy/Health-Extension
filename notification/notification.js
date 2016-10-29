@@ -3,15 +3,16 @@ var notification = (function(document, window, chrome) {
 
     var _title, _options;
 
-    function _spawnNotification() {
+    function _spawn() {
         var notification = new Notification(_title, _options);
         setTimeout(notification.close.bind(notification), 5000);
     }
 
-    function sendNotification(type) {
+    function send(type) {
         if (type === ID.IS_EYE) {
             var isEyesBreakEnabled = settingsBackground.isEyesBreakEnabled();
-            if (isEyesBreakEnabled !== undefined && !isEyesBreakEnabled) {
+            var isEyesNotifEnabled = settingsBackground.isEyesNotifEnabled();
+            if (!isEyesBreakEnabled || !isEyesNotifEnabled) {
                 return;
             }
             _title = "Eyes Break!";
@@ -21,7 +22,8 @@ var notification = (function(document, window, chrome) {
             };
         } else if (type === ID.IS_HEART) {
             var isHeartBreakEnabled = settingsBackground.isHeartBreakEnabled();
-            if(isHeartBreakEnabled !== undefined && !isHeartBreakEnabled) {
+            var isHeartNotifEnabled = settingsBackground.isHeartNotifEnabled();
+            if(!isHeartBreakEnabled || !isHeartNotifEnabled) {
                 return;
             }
             _title = "Stand up Break!";
@@ -45,14 +47,14 @@ var notification = (function(document, window, chrome) {
         if (!("Notification" in window)) {
             console.log("This browser does not support desktop notification");
         } else if (Notification.permission === "granted") {
-            _spawnNotification();
+            _spawn();
         } else {
             console.log("The extension requires the 'notifications' permission, so this should never print.");
         }
     }
 
     return {
-        sendNotification: sendNotification
+        send: send
     };
 })(document, window, chrome);
 

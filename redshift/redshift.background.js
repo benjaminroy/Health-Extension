@@ -16,7 +16,7 @@ var redshiftBackground = (function (document, window, chrome, EVENTS) {
 	function _addIsNightListener() {
 		chrome.runtime.onMessage.addListener(function (requestMessage, sender, sendResponse) {
 			if (requestMessage.type === EVENTS.IS_NIGHT) {
-				var isRedShiftEnabled = settingsBackground.getRedShiftEnabled();
+				var isRedShiftEnabled = settingsBackground.isRedShiftEnabled();
 				var isNight = _isSunriseAndSunsetInitialized() && !_isCurrentDatetimeDay() && isRedShiftEnabled;
 
 				sendResponse({
@@ -27,7 +27,7 @@ var redshiftBackground = (function (document, window, chrome, EVENTS) {
 	}
 
 	function _sendSunsetOrSunriseEventMessage() {
-		var isRedShiftEnabled = settingsBackground.getRedShiftEnabled();
+		var isRedShiftEnabled = settingsBackground.isRedShiftEnabled();
 		var message = {
 			type: null
 		};

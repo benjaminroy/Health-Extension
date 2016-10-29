@@ -41,7 +41,7 @@
             "helper.js",
 			"redshift/redshift.background.js",
 			"tracker/time.js",
-            "tracker/tracker.js",
+            "tracker/trackers.js",
 			"notification/notification.js",
             "settings/settings.background.js",
 			"background.js"
