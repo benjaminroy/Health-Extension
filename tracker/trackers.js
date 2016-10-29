@@ -5,20 +5,21 @@ var trackers = (function (chrome, TIME, ID, MODE, COLOR, ICON) {
 
 	var values = {};
 	function _initSessionsTime() {
-		var _initHeartSessionTime = settingsBackground.getHeartSessionTime() * A_MINUTE;
-		var _initEyesSessionTime = settingsBackground.getEyesSessionTime() * A_MINUTE;
-		var _defaultHeartSessionTime = DEFAULTS.HEART_SESSION_TIME * A_MINUTE;
-		var _defaultEyesSessionTime = DEFAULTS.EYES_SESSION_TIME * A_MINUTE;
-		if (isNaN(_initHeartSessionTime)) {
-			_initHeartSessionTime = _defaultHeartSessionTime;
+		var initHeartBreakTime = DEFAULTS.HEART_BREAK_TIME * A_MINUTE;
+		var initEyesBreakTime = DEFAULTS.EYES_BREAK_TIME * A_SECOND;
+		var initHeartSessionTime = settingsBackground.getHeartSessionTime() * A_MINUTE + initHeartBreakTime;
+		var initEyesSessionTime = settingsBackground.getEyesSessionTime() * A_MINUTE + initEyesBreakTime;
+		if (isNaN(initHeartSessionTime)) {
+			// Should be modified to never happen:
+			initHeartSessionTime = DEFAULTS.HEART_SESSION_TIME * A_MINUTE;
 		}
-		if (isNaN(_initEyesSessionTime)) {
-			_initEyesSessionTime = _defaultEyesSessionTime;
+		if (isNaN(initEyesSessionTime)) {
+			// Should be modified to never happen:
+			initEyesSessionTime = DEFAULTS.EYES_SESSION_TIME * A_MINUTE;
 		}
-
 		values = {
-			"heart": _tracker(_initHeartSessionTime, 5 * A_MINUTE, MODE.PLAY, _initHeartSessionTime),
-			"eye": _tracker(_initEyesSessionTime, 20 * A_SECOND, MODE.PLAY, _initEyesSessionTime)
+			"heart": _tracker(initHeartSessionTime, initHeartBreakTime),
+			"eye": _tracker(initEyesSessionTime, initEyesBreakTime)
 		};
 	}
 
@@ -48,43 +49,35 @@ var trackers = (function (chrome, TIME, ID, MODE, COLOR, ICON) {
 	}
 
 	function heartSessionTimeChanged(time) {
-		if (settingsBackground.isHeartBreakEnabled()) {
-			time = parseFloat(time);
-			if (isNaN(time)) {
-				return;
-			}
-			var id = ID.HEART;
-			var mode = values[id].mode;
-			var playTime = time * A_MINUTE;
-			var pauseTime = 5 * A_MINUTE;
-			if (mode === MODE.PLAY) {
-				values[id] =  _tracker(playTime, pauseTime, mode, playTime);
-			} else {
-				values[id] =  _tracker(playTime, pauseTime, mode, values[id].time.count);
-			}
+		if (!settingsBackground.isHeartBreakEnabled()) {
+			return;
+		}
+		time = parseFloat(time);
+		if (isNaN(time)) {
+			return;
+		}
+		values[ID.HEART][MODE.PLAY] = time * A_MINUTE;
+		if (values[ID.HEART].mode === MODE.PLAY) {
+			values[ID.HEART].time.set(values[ID.HEART][MODE.PLAY]);
 		}
 	}
 
 	function eyesSessionTimeChanged(time) {
-		if (settingsBackground.isEyesBreakEnabled()) {
-			time = parseFloat(time);
-			if (isNaN(time)) {
-				return;
-			}
-			var id = ID.EYE;
-			var mode = values[id].mode;
-			var playTime = time * A_MINUTE;
-			var pauseTime = 20 * A_SECOND;
-			if (mode === MODE.PLAY) {
-				values[id] =  _tracker(playTime, pauseTime, mode, playTime);
-			} else {
-				values[id] =  _tracker(playTime, pauseTime, mode, values[id].time.count);
-			}
+		if (!settingsBackground.isEyesBreakEnabled()) {
+			return;
+		}
+		time = parseFloat(time);
+		if (isNaN(time)) {
+			return;
+		}
+		values[ID.EYE][MODE.PLAY] = time * A_MINUTE;
+		if (values[ID.EYE].mode === MODE.PLAY) {
+			values[ID.EYE].time.set(values[ID.EYE][MODE.PLAY]);
 		}
 	}
 
 	function _countdown(id, display) {
-		var time = 100*A_MILLISECOND;
+		var time = 100 * A_MILLISECOND;
 		if ((id === ID.HEART && settingsBackground.isHeartBreakEnabled()) ||
 			(id === ID.EYE && settingsBackground.isEyesBreakEnabled())) {
 			setTimeout(_countdown, time, id, display);
@@ -118,12 +111,12 @@ var trackers = (function (chrome, TIME, ID, MODE, COLOR, ICON) {
 		}
 	};
 
-	function _tracker(play, pausing, mode, time) {
+	function _tracker(total, pausing) {
     	return {
       		"pause": pausing,
-	  		"play": play,
-			mode: mode,
-			time: new Time(time)
+	  		"play": total - pausing,
+			mode: MODE.PLAY,
+			time: new Time(total - pausing)
 		};
 	};
 
