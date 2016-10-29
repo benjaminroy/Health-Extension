@@ -1,18 +1,18 @@
 const EVENTS = {
-	IS_NIGHT: 'isNight',
+	IS_REDSHIFT: 'isRedshift',
 	SUNRISE: 'sunrise',
 	SUNSET: 'sunset'
 };
 
 const COLOR = {
-	IS_DEFAULT: [0, 0, 0, 1],
-	IS_WARNING: [100, 0, 0, 100]
+	DEFAULT: [0, 0, 0, 1],
+	WARNING: [100, 0, 0, 100]
 }
 
 const ID = {
-	IS_HEART: 'heart',
-	IS_EYE: 'eye',
-	IS_REDSHIFT: 'redshift'
+	HEART: 'heart',
+	EYE: 'eye',
+	REDSHIFT: 'redshift'
 };
 
 const ICON = {

@@ -6,39 +6,28 @@ var redshiftBackground = (function (document, window, chrome, EVENTS) {
 	var _sunriseTime = null;
 
 	function init() {
-		_initializeLocation(_initializeSunsetAndSunriseTime);
-		_addIsNightListener();
+		navigator.geolocation.getCurrentPosition(_initializeSunsetAndSunriseTime);
+		_addIsRedShiftListener();
 		window.setInterval(
-			_sendSunsetOrSunriseEventMessage,
-			REFRESH_INTERVAL);
+			_prepareIsRedShiftMessageTo,
+			REFRESH_INTERVAL,
+			_sendMessageToAllTabs);
 	}
 
-	function _addIsNightListener() {
+	function _addIsRedShiftListener() {
 		chrome.runtime.onMessage.addListener(function (requestMessage, sender, sendResponse) {
-			if (requestMessage.type === EVENTS.IS_NIGHT) {
-				var isRedShiftEnabled = settingsBackground.isRedShiftEnabled();
-				var isNight = _isSunriseAndSunsetInitialized() && !_isCurrentDatetimeDay() && isRedShiftEnabled;
-
-				sendResponse({
-					isNight: isNight
-				});
+			if (requestMessage.type === EVENTS.IS_REDSHIFT) {
+				//_makeSureSunrizeAndSunsetAreInitialized();
+				_prepareIsRedShiftMessageTo(sendResponse);
 			}
 		});
 	}
 
-	function _sendSunsetOrSunriseEventMessage() {
+	function _prepareIsRedShiftMessageTo(callback) {
 		var isRedShiftEnabled = settingsBackground.isRedShiftEnabled();
-		var message = {
-			type: null
-		};
-
-		if (_isCurrentDatetimeDay() || !isRedShiftEnabled) {
-			message.type = EVENTS.SUNRISE;
-		} else {
-			message.type = EVENTS.SUNSET;
-		}
-
-		_sendMessageToAllTabs(message);
+		var isRedShift = !_isCurrentDatetimeDay() && isRedShiftEnabled;
+		var message = {isRedShift: isRedShift};
+		callback(message);
 	}
 
 	function _sendMessageToAllTabs(message) {
@@ -54,14 +43,6 @@ var redshiftBackground = (function (document, window, chrome, EVENTS) {
 		return currentDatetime >= _sunriseTime && currentDatetime <= _sunsetTime;
 	}
 
-	function _initializeLocation(callback) {
-		navigator.geolocation.getCurrentPosition(callback);
-	}
-
-	function _isSunriseAndSunsetInitialized() {
-		return _sunsetTime !== null && _sunriseTime !== null;
-	}
-
 	function _initializeSunsetAndSunriseTime(position) {
 		var firstTimeOfDay = new Date();
 		firstTimeOfDay.setHours(0, 0, 0);
@@ -69,6 +50,12 @@ var redshiftBackground = (function (document, window, chrome, EVENTS) {
 		_sunriseTime = firstTimeOfDay.sunrise(position.coords.latitude, position.coords.longitude);
 		_sunsetTime = firstTimeOfDay.sunset(position.coords.latitude, position.coords.longitude);
 	}
+
+	// function _makeSureSunrizeAndSunsetAreInitialized() {
+	// 	var isSunriseAndSunsetInitialized = _sunsetTime !== null && _sunriseTime !== null;
+	// 	if(!_isSunriseAndSunsetInitialized)
+	// 		_initializeLocation(_initializeSunsetAndSunriseTime);
+	// }
 
 	return {
 		init: init

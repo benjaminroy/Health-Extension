@@ -1,48 +1,23 @@
-var settingsBackground = (function(document, window, chrome) {
+var settingsBackground = (function(document, window, chrome, ID) {
     "use strict";
 
     var _settings = {};
 
     function init(_callback) {
+        _loadSettings(_callback);
         _addSettingsChangedListener();
         _isHeartBreakEnabledListener();
         _isEyesBreakEnabledListener();
-        _loadSettings(function() {
-            _callback();
-        });
     }
 
-    function getSettings() {
-        return _settings;
-    }
-
-    function isEyesBreakEnabled() {
-        return _settings.eyesBreakEnable;
-    }
-
-    function isEyesNotifEnabled() {
-        return _settings.eyesNotifEnable;
-    }
-
-    function isEyesTextMsgEnabled() {
-        return _settings.EyesTextMsgEnabled;
-    }
-
-    function isHeartBreakEnabled() {
-        return _settings.standupBreakEnable;
-    }
-
-    function isHeartNotifEnabled() {
-        return _settings.standupNotifEnable;
-    }
-
-    function isHeartTextMsgEnabled() {
-        return _settings.standupTextMsgEnable
-    }
-
-    function isRedShiftEnabled() {
-        return _settings.redShiftEnable;
-    }
+    function getSettings()              {return _settings;}
+    function isEyesBreakEnabled()       {return _settings.eyesBreakEnable;}
+    function isEyesNotifEnabled()       {return _settings.eyesNotifEnable;}
+    function isEyesTextMsgEnabled()     {return _settings.EyesTextMsgEnabled;}
+    function isHeartBreakEnabled()      {return _settings.standupBreakEnable;}
+    function isHeartNotifEnabled()      {return _settings.standupNotifEnable;}
+    function isHeartTextMsgEnabled()    {return _settings.standupTextMsgEnable}
+    function isRedShiftEnabled()        {return _settings.redShiftEnable;}
 
     function _loadSettings(_callback) {
         chrome.storage.sync.get("settings", function(items) {
@@ -53,20 +28,30 @@ var settingsBackground = (function(document, window, chrome) {
 
     function _isHeartBreakEnabledListener() {
         chrome.extension.onConnect.addListener(function(port) {
-            if (port.name === "heartPort") {
-                port.onMessage.addListener(function() {
-                    trackers.initializeHeartCountdown();
-                });
+            if (port.name === ID.HEART) {
+                port.onMessage.addListener(
+                    trackers.initializeHeartCountdown
+                );
             }
         });
     }
 
     function _isEyesBreakEnabledListener() {
         chrome.extension.onConnect.addListener(function(port) {
-            if (port.name === "eyesPort") {
-                port.onMessage.addListener(function() {
-                    trackers.initializeEyesCountdown();
-                });
+            if (port.name === ID.EYE) {
+                port.onMessage.addListener(
+                    trackers.initializeEyesCountdown
+                );
+            }
+        });
+    }
+
+    function _isRedShiftEnabledListener() {
+        chrome.extension.onConnect.addListener(function(port) {
+            if (port.name === ID.REDSHIFT) {
+                port.onMessage.addListener(
+                    //
+                );
             }
         });
     }
@@ -92,4 +77,4 @@ var settingsBackground = (function(document, window, chrome) {
         isHeartTextMsgEnabled: isHeartTextMsgEnabled,
         isRedShiftEnabled: isRedShiftEnabled
     };
-})(document, window, chrome);
+})(document, window, chrome, ID);

@@ -1,34 +1,42 @@
-var settings = (function(document, window, chrome) {
+//can these constants be retrieve from the background?
+const ID = {
+	HEART: 'heart',
+	EYE: 'eye',
+	REDSHIFT: 'redshift'
+};
+
+var settings = (function(document, window, chrome, ID) {
     'use strict';
 
+	const MANUAL = "manual";
     var _timeout;
     var _settings = {};
     var _settingsPort = chrome.extension.connect({
          name: "settingsPort"
     });
     var _heartPort = chrome.extension.connect({
-         name: "heartPort"
+         name: ID.HEART
     });
     var _eyesPort = chrome.extension.connect({
-         name: "eyesPort"
+         name: ID.EYE
+    });
+    var _redShiftPort = chrome.extension.connect({
+         name: ID.REDSHIFT
     });
 
     function init() {
         _restoreOptions();
         _addOptionChangedListener();
         _showActiveContent($(".nav").find(".active").text());
+        _createGeneralHandlers();
+		_createSettingsChangeHandlers();
+    }
 
+    function _createGeneralHandlers() {
         $(document).on('click','.navbar-collapse',function(e) {
             if($(e.target).is('a') ) {
                 $(this).collapse('hide');
             }
-        });
-        $('#restoreSettings').on('click', _restoreSettings);
-        $('#eyesBreakEnable').change(function () {
-            _enableEyesBreak($(this).is(':checked'));
-        });
-        $('#standupBreakEnable').change(function () {
-            _enableStandupBreak($(this).is(':checked'));
         });
         $(".nav a").on("click", function() {
             $(".nav").find(".active").removeClass("active");
@@ -39,34 +47,41 @@ var settings = (function(document, window, chrome) {
         $("[data-hide]").on("click", function(){
             $(this).closest("." + $(this).attr("data-hide")).fadeOut();
         });
-
-        // SUPPORT (will be moved somewhere else);
-        $('#submit').on('click', function() {
-            var message = $("#message").val();
-            var subject = $("#subject").val();
-            window.open("mailto:benji015@hotmail.com?subject="
-                + encodeURIComponent(subject)
-                + "&body=" + encodeURIComponent(message));
-        })
     }
 
-    function _enableEyesBreak(isChecked) {
-        $('#eyesNotifEnable').attr("disabled", !isChecked);
-        $('#eyesTextMsgEnable').attr("disabled", !isChecked);
-        $('#eyesSessionTime').attr("disabled", !isChecked);
-        if (isChecked) {
-            _eyesPort.postMessage(_settings);
-        }
+	function _createSettingsChangeHandlers() {
+	        $('#restoreSettings').on('click', _restoreSettings);
+	        $('#standupBreakEnable').change(_enableHeartBreak);
+	        $('#eyesBreakEnable').change(_enableEyesBreak);
+	        $('#redShiftEnable').change(_enableRedShift);
+	        $('#timeRange').change(null);
+			$("input[name='setRedShiftAutonomy']").change(_enableManuallySelectRedShift);
+	}
+
+    function _enableHeartBreak() {
+        $('#standupNotifEnable').attr("disabled", !this.checked);
+        // $('#standupTextMsgEnable').attr("disabled", !isChecked);
+        $('#standupSessionTime').attr("disabled", !this.checked);
+        if (this.checked) _heartPort.postMessage(_settings);
     }
 
-    function _enableStandupBreak(isChecked) {
-        $('#standupNotifEnable').attr("disabled", !isChecked);
-        $('#standupTextMsgEnable').attr("disabled", !isChecked);
-        $('#standupSessionTime').attr("disabled", !isChecked);
-        if (isChecked) {
-            _heartPort.postMessage(_settings);
-        }
+    function _enableEyesBreak() {
+        $('#eyesNotifEnable').attr("disabled", !this.checked);
+        // $('#eyesTextMsgEnable').attr("disabled", !isChecked);
+        $('#eyesSessionTime').attr("disabled", !this.checked);
+        if (this.checked) _eyesPort.postMessage(_settings);
     }
+
+    function _enableRedShift() {
+		$("input[name='setRedShiftAutonomy']").attr("disabled", !this.checked);
+        if (this.checked) _redShiftPort.postMessage(_settings);
+		if (!this.checked) $("#time-range").attr("hidden", true);
+    }
+
+	function _enableManuallySelectRedShift() {
+		var isManual = this.value === MANUAL;
+        $("#time-range").attr("hidden", !isManual);
+	}
 
     function _showActiveContent(activeTab) {
         $(".alert-success").hide();
@@ -77,9 +92,8 @@ var settings = (function(document, window, chrome) {
             tabsId.splice(index, 1);
         }
         $("#" + activeTab).show();
-        for (var i = 0; i < tabsId.length; i++) {
-            $("#" + tabsId[i]).hide();
-        }
+
+        tabsId.map(tab => $("#" + tab).hide())
     };
 
     function _alert(type) {
@@ -121,8 +135,9 @@ var settings = (function(document, window, chrome) {
             $("#standupTextMsgEnable").prop('checked', items.settings.standupTextMsgEnable);
             $("#standupSessionTime").val(items.settings.standupSessionTime);
             $("#redShiftEnable").prop('checked', items.settings.redShiftEnable);
+            //items.settings.setRedShiftAutonomy();
             _enableEyesBreak(items.settings.eyesBreakEnable);
-            _enableStandupBreak(items.settings.standupBreakEnable);
+            _enableHeartBreak(items.settings.standupBreakEnable);
         });
     }
 
@@ -155,6 +170,6 @@ var settings = (function(document, window, chrome) {
     return {
         init: init
     };
-})(document, window, chrome);
+})(document, window, chrome, ID);
 
 $( document ).ready(settings.init);

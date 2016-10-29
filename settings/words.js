@@ -22,6 +22,8 @@ var strings = [
     ,"sourceCode"
     ,"here"
     ,"comingSoon"
+    ,"automaticallySetRedShift"
+    ,"manuallySetRedShift"
 ]
 
 strings.map((s) => {

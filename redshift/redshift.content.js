@@ -2,55 +2,40 @@ var redshiftContent = (function (document, window, chrome, $, EVENTS) {
 	"use strict";
 
 	var REDSHIFT_CLASS_NAME = 'health-extension-redshift';
-	var _pageRedshifted;
+	var REDSHIFT_LAYER = $(document.createElement('span')).addClass(REDSHIFT_CLASS_NAME)
+	var _pageIsRedshifted;
 
 	function init() {
-		_pageRedshifted = false;
-
 		_initializeRedshift();
-		_addSunsetAndSunriseListener();
+		_addRedShiftListener();
 	}
 
 	function _initializeRedshift() {
+		_pageIsRedshifted = false;
 		var requestMessage = {
-			type: EVENTS.IS_NIGHT
+			type: EVENTS.IS_REDSHIFT
 		};
-
-		chrome.runtime.sendMessage(requestMessage, function (responseMessage) {
-			if (responseMessage.isNight) {
-				_addReshiftToPage();
-			} else {
-				_removeRedshitfFromPage();
-			}
-		});
+		chrome.runtime.sendMessage(requestMessage, _processMessage);
 	}
 
-	function _addSunsetAndSunriseListener() {
-		chrome.runtime.onMessage.addListener(function (requestMessage, sender, sendResponse) {
-			if (requestMessage.type === EVENTS.SUNRISE) {
-				_removeRedshitfFromPage();
-			} else if (requestMessage.type === EVENTS.SUNSET) {
-				_addReshiftToPage();
-			}
-		});
+	function _addRedShiftListener() {
+		chrome.runtime.onMessage.addListener(_processMessage);
+	}
+
+	function _processMessage(message, sender = null, sendResponse = null) {
+		message.isRedShift ? _addReshiftToPage() : _removeRedshitfFromPage();
 	}
 
 	function _addReshiftToPage() {
-		if (_pageRedshifted) {
-			return;
-		}
-
-		$('body').append('<div class="' + REDSHIFT_CLASS_NAME + '"></div>');
+		if (_pageIsRedshifted) return;
+		$('html').append(REDSHIFT_LAYER);
 		_pageRedshifted = true;
 	}
 
 	function _removeRedshitfFromPage() {
-		if (!_pageRedshifted) {
-			return;
-		}
-
+		if (!_pageIsRedshifted) return;
 		$('.' + REDSHIFT_CLASS_NAME).remove();
-		_pageRedshifted = false;
+		_pageIsRedshifted = false;
 	}
 
 	return {

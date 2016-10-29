@@ -81,15 +81,15 @@
     },
     "restoreDefault": {
         "message": "Restore defaults",
-        "description": ""
+        "description": "Restore defaults"
     },
-    "tmp": {
-        "message": "",
-        "description": ""
+    "automaticallySetRedShift": {
+        "message": "Automatically set period based on sunset and sunrise",
+        "description": "Automatically set the redshift feature period based on sunset and sunrise"
     },
-    "tmp": {
-        "message": "",
-        "description": ""
+    "manuallySetRedShift": {
+        "message": "Manually set the period",
+        "description": "Manually set the redshift feature period based on sunset and sunrise"
     },
     "tmp": {
         "message": "",
