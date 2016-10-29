@@ -11,13 +11,6 @@ var trackers = (function (chrome, TIME, ID, MODE, COLOR, ICON) {
 	function init() {
 		initializeHeartCountdown();
 		initializeEyesCountdown();
-    	// for (var id in values) {
-	    //   	chrome.extension.onConnect.addListener(function(port) {
-	    //     	port.onMessage.addListener(function(id) {
-	    //     		port.postMessage(values[id].time.format());
-		//   		});
-	    // 	});
-    	// }
 	};
 
 	function initializeHeartCountdown() {

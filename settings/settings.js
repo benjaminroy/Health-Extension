@@ -11,6 +11,14 @@ var settings = (function(document, window, chrome, ID) {
 	const MANUAL = "manual";
     var _timeout;
     var _settings = {};
+	var _checkboxesID = [
+		'heart'
+		,'standupNotifEnable'
+		,'eyes'
+		,'eyesNotifEnable'
+		,'eyesTextMsgEnable'
+		,'redShift'
+	];
 	var _port = {
 		"settings":  chrome.extension.connect({ name: "settings" })
 		,"heart":    chrome.extension.connect({ name: ID.HEART 		 })
@@ -20,13 +28,7 @@ var settings = (function(document, window, chrome, ID) {
 
     function init() {
         _restoreOptions(_updateUI);
-
         _addOptionChangedListener();
-		var activeContent = $(".nav").find(".active").text();
-        _showContent(activeContent);
-
-        _createMenuHandler();
-		_createHideNotificationHandler();
 		_createSettingsChangeHandlers();
     }
 
@@ -44,11 +46,9 @@ var settings = (function(document, window, chrome, ID) {
         _settings = {
             heart: 					$('#heart').is(':checked')
             ,standupNotifEnable: 	$('#standupNotifEnable').is(':checked')
-            //,standupTextMsgEnable:$('#standupTextMsgEnable').is(':checked')
             ,standupSessionTime: 	$('#standupSessionTime').val()
             ,eyes: 					$('#eyes').is(':checked')
             ,eyesNotifEnable:		$('#eyesNotifEnable').is(':checked')
-            //,eyesTextMsgEnable: 	$('#eyesTextMsgEnable').is(':checked')
             ,eyesSessionTime: 		$('#eyesSessionTime').val()
             ,redShift: 				$('#redShift').is(':checked')
         };
@@ -65,9 +65,6 @@ var settings = (function(document, window, chrome, ID) {
 			settings.map((setting) => {
 				$('#' + setting).change(function() {
 					_saveOptions();
-					console.log(setting);
-					console.log(_port);
-					console.log(_port[setting]);
 			        if (this.checked) {
 						_port[setting].postMessage()
 					}
@@ -122,17 +119,7 @@ var settings = (function(document, window, chrome, ID) {
 	}
 
     function _restoreDefaultOptions() {
-		var settings = [
-			'heart'
-			,'standupNotifEnable'
-			,'standupTextMsgEnable'
-	        ,'eyes'
-	        ,'eyesNotifEnable'
-	        ,'eyesTextMsgEnable'
-	        ,'redShift'
-		];
-
-		settings.map((setting) => {
+		_checkboxesID.map((setting) => {
         	$('#' + setting).prop('checked', true);
 		});
 
@@ -142,28 +129,14 @@ var settings = (function(document, window, chrome, ID) {
     }
 
     function _addOptionChangedListener() {
-		var settings = [
-	        ,'heart'
-	        ,'standupNotifEnable'
-	        ,'standupTextMsgEnable'
-	        ,'standupSessionTime'
-	        ,'eyes'
-	        ,'eyesNotifEnable'
-	        ,'eyesTextMsgEnable'
-	        ,'eyesSessionTime'
-	        ,'redShift'
-		];
+		var settings = _checkboxesID.concat(['standupSessionTime', 'eyesSessionTime']);
 		settings.map((setting) => {
 			$('#' + setting).change(_saveOptions);
 		});
 
     }
 
-
-
-
-
-
+	//TODO: move to options.js ?
 	function _alert(type) {
 		if (_timeout){
 			clearTimeout(_timeout);
@@ -173,39 +146,6 @@ var settings = (function(document, window, chrome, ID) {
 			$(".alert-"+type).fadeOut();
 		}, 5000);
 	};
-
-	//TODO: move general options functions to another file
-    function _createMenuHandler() {
-        $(document).on('click','.navbar-collapse',function(e) {
-            if($(e.target).is('a') ) {
-                $(this).collapse('hide');
-            }
-        });
-        $(".nav a").on("click", function() {
-            $(".nav").find(".active").removeClass("active");
-            $(this).parent().addClass("active");
-            $("#title").text($(this).text());
-            _showActiveContent($(this).text());
-        });
-    }
-
-	function _createHideNotificationHandler() {
-        $("[data-hide]").on("click", function(){
-            $(this).closest("." + $(this).attr("data-hide")).fadeOut();
-        });
-	}
-
-    function _showContent(activeTab) {
-        $(".alert-success").hide();
-        activeTab = activeTab.toLowerCase();
-        var tabsId = ["options", "data", "documentation", "support"];
-        var index = tabsId.indexOf(activeTab);
-        if (index !== -1) {
-            tabsId.splice(index, 1);
-        }
-        $("#" + activeTab).show();
-        tabsId.map(tab => $("#" + tab).hide())
-    };
 
     return {
         init: init
