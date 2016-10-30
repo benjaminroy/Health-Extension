@@ -76,18 +76,18 @@ var settings = (function(document, window, chrome, ID) {
 			$("input[name='setRedShiftAutonomy']").change(_saveOptions);
 	}
 
-    function _enableRedShift() {
-		$("input[name='setRedShiftAutonomy']").attr("disabled", !this.checked);
-		if (!this.checked) $("#time-range").attr("hidden", true);
-
-        if($("name[setRedShiftAutonomy]").is(':checked')) $("#time-range").attr("hidden", !isManual);
-        if (this.checked) _port["redShift"].postMessage(_settings);
-    }
-
-	function _enableManuallySelectRedShift() {
-		var isManual = this.value === MANUAL;
-        $("#time-range").attr("hidden", !isManual);
-	}
+    // function _enableRedShift() {
+	// 	$("input[name='setRedShiftAutonomy']").attr("disabled", !this.checked);
+	// 	if (!this.checked) $("#time-range").attr("hidden", true);
+	//
+    //     if($("name[setRedShiftAutonomy]").is(':checked')) $("#time-range").attr("hidden", !isManual);
+    //     if (this.checked) _port["redShift"].postMessage(_settings);
+    // }
+	//
+	// function _enableManuallySelectRedShift() {
+	// 	var isManual = this.value === MANUAL;
+    //     $("#time-range").attr("hidden", !isManual);
+	// }
 
 	function _updateUI() {
 		_updateUIEnabling();
@@ -118,15 +118,7 @@ var settings = (function(document, window, chrome, ID) {
 	}
 
     function _restoreDefaultOptions() {
-		_checkboxesID.map((setting) => {
-        	$('#' + setting).prop('checked', true);
-		});
-
-        $('#' + ID.HEART_TIME).val(55);
-        $('#' + ID.EYES_TIME).val(20);
-        _saveOptions();
-		_heartSessionTimeChanged();
-		_eyesSessionTimeChanged();
+		chrome.extension.getBackgroundPage().settingsBackground.setDefault(_saveOptions);
     }
 
 	//TODO: move to options.js ?

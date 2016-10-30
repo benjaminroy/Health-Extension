@@ -30,6 +30,7 @@ var trackers = (function (chrome, TIME, ID, MODE, COLOR, ICON, DEFAULTS) {
 	};
 
 	function initializeHeartCountdown() {
+		console.log(settingsBackground.isHeartBreakEnabled());
 		if (settingsBackground.isHeartBreakEnabled()) {
 			_countdown(ID.HEART, setBadgeText);
 		}

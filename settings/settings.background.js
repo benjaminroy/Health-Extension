@@ -1,4 +1,4 @@
-var settingsBackground = (function(document, window, chrome, ID) {
+var settingsBackground = (function(document, window, chrome, ID, DEFAULTS) {
     "use strict";
 
     var _settings = {};
@@ -21,25 +21,16 @@ var settingsBackground = (function(document, window, chrome, ID) {
     function getHeartSessionTime()      {return _settings.heartTime;}
     function getEyesSessionTime()       {return _settings.eyesTime;}
 
-    function _setDefault(_callback) {
-        _settings = {
-            heart: 	                true
-            ,standupNotifEnable: 	true
-            ,heartTime: 	        55
-            ,eyes: 		            true
-            ,eyesNotifEnable:		true
-            ,eyesTime: 		        20
-            ,redShift:       		true
-        };
+    function setDefault(_callback) {
         chrome.storage.sync.set({
-            'settings': _settings
+            'settings': DEFAULTS.SETTINGS
         }, _callback());
     }
 
     function _loadSettings(_callback) {
         chrome.storage.sync.get("settings", function(items) {
             if(items.settings === undefined) {
-                _setDefault(_callback);
+                setDefault(_callback);
             } else {
                 _settings = items.settings;
                 _callback()
@@ -56,9 +47,7 @@ var settingsBackground = (function(document, window, chrome, ID) {
     function _isHeartBreakEnabledListener() {
         chrome.extension.onConnect.addListener(function(port) {
             if (port.name === ID.HEART) {
-                port.onMessage.addListener(
-                    trackers.initializeHeartCountdown
-                );
+                port.onMessage.addListener(trackers.initializeHeartCountdown);
             }
         });
     }
@@ -66,22 +55,10 @@ var settingsBackground = (function(document, window, chrome, ID) {
     function _isEyesBreakEnabledListener() {
         chrome.extension.onConnect.addListener(function(port) {
             if (port.name === ID.EYE) {
-                port.onMessage.addListener(function(message) {
-                    trackers.initializeEyesCountdown()
-                });
+                port.onMessage.addListener(trackers.initializeEyesCountdown);
             }
         });
     }
-
-    // function _isRedShiftEnabledListener() {
-    //     chrome.extension.onConnect.addListener(function(port) {
-    //         if (port.name === ID.REDSHIFT) {
-    //             port.onMessage.addListener(
-    //                 //
-    //             );
-    //         }
-    //     });
-    // }
 
     function _heartSessionTimeChanged() {
         chrome.extension.onConnect.addListener(function(port) {
@@ -116,5 +93,6 @@ var settingsBackground = (function(document, window, chrome, ID) {
         ,isHeartBreakEnabled: isHeartBreakEnabled
         ,isHeartNotifEnabled: isHeartNotifEnabled
         ,isRedShiftEnabled: isRedShiftEnabled
+        ,setDefault: setDefault
     };
-})(document, window, chrome, ID);
+})(document, window, chrome, ID, DEFAULTS);

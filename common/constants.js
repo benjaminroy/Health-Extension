@@ -5,10 +5,19 @@ const EVENTS = {
 };
 
 const DEFAULTS = {
-	HEART_SESSION_TIME: 60,
-	HEART_BREAK_TIME: 5,
-	EYES_SESSION_TIME: 20,
-	EYES_BREAK_TIME: 20 // Seconds
+	HEART_SESSION_TIME: 60
+	,HEART_BREAK_TIME: 5
+	,EYES_SESSION_TIME: 20
+	,EYES_BREAK_TIME: 20 // Seconds
+	,SETTINGS: {
+		heart: 	                true
+		,standupNotifEnable: 	true
+		,heartTime: 	        55
+		,eyes: 		            true
+		,eyesNotifEnable:		true
+		,eyesTime: 		        20
+		,redShift:       		true
+	}
 };
 
 const COLOR = {
