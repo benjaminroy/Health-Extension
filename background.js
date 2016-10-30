@@ -2,7 +2,7 @@
 var isDevMode = chrome.runtime.getManifest().update_url === undefined;
 var acceleration = 1;
 if (isDevMode) {
-    acceleration = 1;
+    acceleration = 20;
 }
 
 /***** Initialisation *****/

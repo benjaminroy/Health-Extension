@@ -11,7 +11,7 @@ Time.prototype.set = function(count = this.count) {
     this.hours = round0((count)/AN_HOUR);
     count -= this.hours*AN_HOUR;
     this.minutes = round0((count)/A_MINUTE);
-    count -=this.minutes*A_MINUTE;
+    count -= this.minutes*A_MINUTE;
     this.seconds = round0((count)/A_SECOND);
     //this.milliseconds = round0((milliseconds-this.seconds*A_SECOND)/A_MILLISECOND);
 };

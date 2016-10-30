@@ -42,15 +42,17 @@ var trackers = (function (chrome, TIME, ID, MODE, COLOR, ICON, DEFAULTS) {
 	}
 
 	function heartSessionTimeChanged(time) {
-		console.log(time);
 		if (!settingsBackground.isHeartBreakEnabled()) {
 			return;
 		}
+
 		time = parseFloat(time);
 		if (isNaN(time)) {
 			return;
 		}
+
 		values[ID.HEART][MODE.PLAY] = time * A_MINUTE;
+		console.log(time);
 		if (values[ID.HEART].mode === MODE.PLAY) {
 			values[ID.HEART].time.set(values[ID.HEART][MODE.PLAY]);
 		}
@@ -86,7 +88,7 @@ var trackers = (function (chrome, TIME, ID, MODE, COLOR, ICON, DEFAULTS) {
 		}
 
 		values[id].time.minus(time);
-		var timeDisplayed = Math.ceil(values[id].time.minutes).toString();
+		var timeDisplayed = (values[id].time.minutes + 1).toString();
 		display(timeDisplayed);
 
 		if (values[id].time.count === 0) {

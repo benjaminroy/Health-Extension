@@ -26,41 +26,41 @@
     },
 
     "permissions": [
-        "tabs",
-        "storage",
-        "geolocation",
-        "<all_urls>",
-        "notifications"
+        "tabs"
+        ,"storage"
+        ,"geolocation"
+        ,"<all_urls>"
+        ,"notifications"
     ],
 
   "background": {
 		"scripts": [
-            "lib/sun.js",
-            "lib/jquery-3.1.1.min.js",
-			"common/constants.js",
-            "helper.js",
-			"redshift/redshift.background.js",
-			"tracker/time.js",
-            "tracker/trackers.js",
-			"notification/notification.js",
-            "settings/settings.background.js",
-			"background.js"
+            "lib/sun.js"
+            ,"lib/jquery-3.1.1.min.js"
+			,"common/constants.js"
+            ,"helper.js"
+            ,"settings/settings.background.js"
+			,"redshift/redshift.background.js"
+			,"tracker/time.js"
+            ,"tracker/trackers.js"
+			,"notification/notification.js"
+			,"background.js"
         ]
   },
 
 	"content_scripts": [
 		{
 			"matches": [
-				"http://*/*",
-				"https://*/*"
+				"http://*/*"
+				,"https://*/*"
 			],
 			"css": [
 				"redshift/redshift.css"
 			],
 			"js": [
-				"lib/jquery-3.1.1.min.js",
-				"common/constants.js",
-				"redshift/redshift.content.js"
+				"lib/jquery-3.1.1.min.js"
+				,"common/constants.js"
+				,"redshift/redshift.content.js"
 			],
 			"run_at": "document_start"
 		}
