@@ -134,9 +134,10 @@ var settings = (function(document, window, chrome, ID, DEFAULTS) {
 	}
 
     function _restoreDefaultOptions() {
+		_settings = DEFAULTS.SETTINGS;
         chrome.storage.sync.set({
-            'settings': DEFAULTS.SETTINGS
-        }, _saveOptions());
+            'settings': _settings
+        }, _updateUI());
     }
 
 	//TODO: move to options.js ?
