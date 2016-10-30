@@ -7,7 +7,23 @@ const ID = {
 	,EYES_TIME: 'eyesTime'
 };
 
-var settings = (function(document, window, chrome, ID) {
+const DEFAULTS = {
+	HEART_SESSION_TIME: 60
+	,HEART_BREAK_TIME: 5
+	,EYES_SESSION_TIME: 20
+	,EYES_BREAK_TIME: 20 // Seconds
+	,SETTINGS: {
+		heart: 	                true
+		,standupNotifEnable: 	true
+		,heartTime: 	        55
+		,eyes: 		            true
+		,eyesNotifEnable:		true
+		,eyesTime: 		        20
+		,redShift:       		true
+	}
+};
+
+var settings = (function(document, window, chrome, ID, DEFAULTS) {
     'use strict';
 
 	const MANUAL = "manual";
@@ -118,7 +134,9 @@ var settings = (function(document, window, chrome, ID) {
 	}
 
     function _restoreDefaultOptions() {
-		chrome.extension.getBackgroundPage().settingsBackground.setDefault(_saveOptions);
+        chrome.storage.sync.set({
+            'settings': DEFAULTS.SETTINGS
+        }, _saveOptions());
     }
 
 	//TODO: move to options.js ?
@@ -135,6 +153,6 @@ var settings = (function(document, window, chrome, ID) {
     return {
         init: init
     };
-})(document, window, chrome, ID);
+})(document, window, chrome, ID, DEFAULTS);
 
 $( document ).ready(settings.init);
