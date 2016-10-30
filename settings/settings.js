@@ -1,4 +1,4 @@
-//can these constants be retrieve from the background?
+//TODO: can these constants be retrieve from the background?
 const ID = {
 	HEART: "heart"
 	,EYE: "eyes"
@@ -47,6 +47,7 @@ var settings = (function(document, window, chrome, ID, DEFAULTS) {
     function init() {
         _loadOptions(_updateUI);
 		_createSettingsChangeHandlers();
+        _createHideNotificationHandler();
     }
 
     function _loadOptions(callback) {
@@ -75,7 +76,7 @@ var settings = (function(document, window, chrome, ID, DEFAULTS) {
 			if(_port[setting]) {
 				_port[setting].postMessage();
 			}
-			_alert("success");
+			alerts.send("success");
 		});
 	}
 
@@ -127,7 +128,7 @@ var settings = (function(document, window, chrome, ID, DEFAULTS) {
 
 		$("#eyes").prop('checked', _settings.eyes);
 		$("#eyesNotifEnable").prop('checked', _settings.eyesNotifEnable);
-		$('#' + ID.EYES_TIME).val(_settings.eyesTime);
+		$('#' + ID.EYES_TIME).val(_settings.eyesNotifEnable);
 
 		$("#redShift").prop('checked', _settings.redShift);
 		//items.settings.setRedShiftAutonomy();
@@ -139,17 +140,6 @@ var settings = (function(document, window, chrome, ID, DEFAULTS) {
             'settings': _settings
         }, _updateUI());
     }
-
-	//TODO: move to options.js ?
-	function _alert(type) {
-		if (_timeout){
-			clearTimeout(_timeout);
-		}
-		$(".alert-"+type).fadeIn();
-		_timeout = setTimeout(function() {
-			$(".alert-"+type).fadeOut();
-		}, 5000);
-	};
 
     return {
         init: init

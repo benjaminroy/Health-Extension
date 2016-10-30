@@ -20,6 +20,7 @@
     <link rel="icon" href="/icons/heartbeat16.png">
 </head>
 <body>
+<div class="health-extension-redshift"></div>
 
     <!-- ===================== NAVBAR ===================== -->
     <nav class="navbar navbar-default">
@@ -40,10 +41,9 @@
 
             <div class="collapse navbar-collapse" id="navbar-collapse">
                 <ul class="nav navbar-nav navbar-right">
-                    <li class="active"><a href="#" class="name_options"></a></li>
-                    <!-- <li><a href="#" class="name_data"></a></li> -->
-                    <li><a href="#" class="name_documentation"></a></li>
-                    <li><a href="#" class="name_contact"></a></li>
+                    <li class="active"><a href="#" class="name_options options"></a></li>
+                    <li><a href="#" class="name_documentation documentation"></a></li>
+                    <li><a href="#" class="name_contact contact"></a></li>
                 </ul>
             </div>
         </div>
@@ -113,8 +113,8 @@
                         <span class="name_timeRange"></span>: <span class="slider-time">9:00</span> - <span class="slider-time2">17:00</span>
                     </div> -->
                 </div>
+                <button id="restoreSettings" class="btn btn-warning name_restoreDefault"></button>
             </div>
-            <button id="restoreSettings" class="btn btn-warning name_restoreDefault"></button>
         </div>
 
         <!-- <div id="data">
@@ -122,7 +122,10 @@
         </div> -->
 
         <div id="documentation">
-            <p><i style="color:red;" class="name_comingSoon"></i></p>
+            <a href="http://ije.oxfordjournals.org/content/early/2015/10/09/ije.dyv191.full"></a>
+            <a href=""></a>
+            <a href=""></a>
+            <a href=""></a>
         </div>
 
         <div id="support">
@@ -150,7 +153,9 @@
     <script src="../bower_components/less/dist/less.min.js"></script>
     <script src="words.js"></script>
     <script src="options.js"></script>
+    <script src="alerts.js"></script>
     <script src="settings.js"></script>
     <script src="slider.js"></script>
+
   </body>
 </html>

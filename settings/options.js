@@ -3,7 +3,6 @@ var options = (function (document, window, chrome) {
 
     function init() {
         _createMenuHandler();
-        _createHideNotificationHandler();
 
 		var activeContent = $(".nav").find(".active").text();
         _showContent(activeContent);
@@ -19,13 +18,7 @@ var options = (function (document, window, chrome) {
             $(".nav").find(".active").removeClass("active");
             $(this).parent().addClass("active");
             $("#title").text($(this).text());
-            _showActiveContent($(this).text());
-        });
-    }
-
-    function _createHideNotificationHandler() {
-        $("[data-hide]").on("click", function(){
-            $(this).closest("." + $(this).attr("data-hide")).fadeOut();
+            _showContent($(this).text());
         });
     }
 
@@ -47,4 +40,4 @@ var options = (function (document, window, chrome) {
 
 })(document, window, chrome);
 
-options.init();
+$( document ).ready(options.init);
