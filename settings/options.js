@@ -1,11 +1,13 @@
 var options = (function (document, window, chrome) {
 	"use strict";
 
+	const _TABS_ID = ["options", "documentation", "contact"];
+
     function init() {
         _createMenuHandler();
 
-		var activeContent = $(".nav").find(".active").text();
-        _showContent(activeContent);
+		var activeId = $(".nav").find(".active").text().toLowerCase();
+        _loadContent(activeId);
     }
 
     function _createMenuHandler() {
@@ -14,25 +16,37 @@ var options = (function (document, window, chrome) {
                 $(this).collapse('hide');
             }
         });
-        $(".nav a").on("click", function() {
-            $(".nav").find(".active").removeClass("active");
-            $(this).parent().addClass("active");
-            $("#title").text($(this).text());
-            _showContent($(this).text());
-        });
+
+        $(".nav a").on("click", _changeTab);
     }
 
-    function _showContent(activeTab) {
+    function _changeTab(event) {
+		var activeId = event.target.id.substring(4).toLowerCase();
+		_setTitle(activeId);
+		_loadContent(activeId);
         $(".alert-success").hide();
-        activeTab = activeTab.toLowerCase();
-        var tabsId = ["options", "data", "documentation", "support"];
-        var index = tabsId.indexOf(activeTab);
+    };
+
+	function _setTitle(activeId) {
+		$(".nav").find(".active").removeClass("active");
+		$(event.target).parent().addClass("active");
+		var title = chrome.i18n.getMessage(activeId);
+		$("#title").text(title);
+	}
+
+	function _loadContent(activeId) {
+		var tabsId = new Array();
+		tabsId = tabsId.concat(_TABS_ID);
+        var index = tabsId.indexOf(activeId);
+		console.log(tabsId);
+		console.log(activeId);
+		console.log(index);
         if (index !== -1) {
             tabsId.splice(index, 1);
         }
-        $("#" + activeTab).show();
-        tabsId.map(tab => $("#" + tab).hide())
-    };
+        $("#" + activeId).show();
+        tabsId.map(tab => $("#" + tab).hide());
+	}
 
     return {
         init: init

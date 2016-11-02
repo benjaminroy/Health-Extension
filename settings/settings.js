@@ -1,28 +1,3 @@
-//TODO: can these constants be retrieve from the background?
-const ID = {
-	HEART: "heart"
-	,EYE: "eyes"
-	,REDSHIFT: "redShift"
-	,HEART_TIME: 'heartTime'
-	,EYES_TIME: 'eyesTime'
-};
-
-const DEFAULTS = {
-	HEART_SESSION_TIME: 60
-	,HEART_BREAK_TIME: 5
-	,EYES_SESSION_TIME: 20
-	,EYES_BREAK_TIME: 20 // Seconds
-	,SETTINGS: {
-		heart: 	                true
-		,standupNotifEnable: 	true
-		,heartTime: 	        55
-		,eyes: 		            true
-		,eyesNotifEnable:		true
-		,eyesTime: 		        20
-		,redShift:       		true
-	}
-};
-
 var settings = (function(document, window, chrome, ID, DEFAULTS) {
     'use strict';
 
@@ -47,7 +22,6 @@ var settings = (function(document, window, chrome, ID, DEFAULTS) {
     function init() {
         _loadOptions(_updateUI);
 		_createSettingsChangeHandlers();
-        _createHideNotificationHandler();
     }
 
     function _loadOptions(callback) {
@@ -76,7 +50,7 @@ var settings = (function(document, window, chrome, ID, DEFAULTS) {
 			if(_port[setting]) {
 				_port[setting].postMessage();
 			}
-			alerts.send("success");
+			alert.send("success");
 		});
 	}
 
@@ -144,6 +118,7 @@ var settings = (function(document, window, chrome, ID, DEFAULTS) {
     return {
         init: init
     };
+
 })(document, window, chrome, ID, DEFAULTS);
 
 $( document ).ready(settings.init);

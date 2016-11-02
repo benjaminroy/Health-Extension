@@ -1,4 +1,4 @@
-var alerts = (function(document, window, chrome, ID, DEFAULTS) {
+var alert = (function(document, window, chrome, ID, DEFAULTS) {
     'use strict';
 
     function init() {
@@ -27,4 +27,4 @@ var alerts = (function(document, window, chrome, ID, DEFAULTS) {
     };
 })(document, window, chrome, ID, DEFAULTS);
 
-$( document ).ready(alerts.init);
+$( document ).ready(alert.init);
