@@ -22,8 +22,9 @@ var settingsBackground = (function(document, window, chrome, ID, DEFAULTS) {
     function getEyesSessionTime()       {return _settings.eyesTime;}
 
     function setDefault(_callback) {
+        _settings = DEFAULTS.SETTINGS;
         chrome.storage.sync.set({
-            'settings': DEFAULTS.SETTINGS
+            'settings': _settings
         }, _callback());
     }
 

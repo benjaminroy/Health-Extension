@@ -90,7 +90,7 @@ var settings = (function(document, window, chrome, ID, DEFAULTS) {
 		$('#' + ID.HEART_TIME).attr("disabled", !_settings.heart);
 
 		$('#eyesNotifEnable').attr("disabled", !_settings.eyes);
-		$('#' + ID.EYE_TIME).attr("disabled", !_settings.eyes);
+		$('#' + ID.EYES_TIME).attr("disabled", !_settings.eyes);
 
 		$('#automaticallySetRedShift').attr("disabled", !_settings.redShift);
 	}
@@ -102,7 +102,7 @@ var settings = (function(document, window, chrome, ID, DEFAULTS) {
 
 		$("#eyes").prop('checked', _settings.eyes);
 		$("#eyesNotifEnable").prop('checked', _settings.eyesNotifEnable);
-		$('#' + ID.EYES_TIME).val(_settings.eyesNotifEnable);
+		$('#' + ID.EYES_TIME).val(_settings.eyesTime);
 
 		$("#redShift").prop('checked', _settings.redShift);
 		//items.settings.setRedShiftAutonomy();

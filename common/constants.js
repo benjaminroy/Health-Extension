@@ -5,11 +5,7 @@ const EVENTS = {
 };
 
 const DEFAULTS = {
-	HEART_SESSION_TIME: 60
-	,HEART_BREAK_TIME: 5
-	,EYES_SESSION_TIME: 20
-	,EYES_BREAK_TIME: 20 // Seconds
-	,SETTINGS: {
+	SETTINGS: {
 		heart: 	                true
 		,standupNotifEnable: 	true
 		,heartTime: 	        55
@@ -18,6 +14,10 @@ const DEFAULTS = {
 		,eyesTime: 		        20
 		,redShift:       		true
 	}
+	,HEART_SESSION_TIME: 60
+	,HEART_BREAK_TIME: 5
+	,EYES_SESSION_TIME: 20
+	,EYES_BREAK_TIME: 20 // Seconds
 };
 
 const COLOR = {
