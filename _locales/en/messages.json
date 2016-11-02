@@ -39,6 +39,14 @@
       "message": "Enable this feature",
       "description": "Checkbox option to enable a feature"
   },
+  "extensionDescription": {
+      "message": "Une extension pour nous rappeler des bonnes habitudes à avoir à l'ordinateur.",
+      "description": "A description of the extension."
+  },
+  "extensionDescription": {
+      "message": "An extension to remind us of healthy habits to have at the computer",
+      "description": "A description of the extension."
+  },
   "extensionName": {
       "message": "Health Extension",
       "description": "An extension to remind healthy habits at the computer"

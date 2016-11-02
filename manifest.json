@@ -2,7 +2,7 @@
     "manifest_version": 4,
     "name": "__MSG_extensionName__",
     "short_name": "__MSG_extensionShortName__",
-    "description": "An extension to remind healthy habits at the computer",
+    "description": "__MSG_extensionDescription__",
     "version": "1.0",
     "default_locale": "en",
     "manifest_version": 2,
