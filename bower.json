@@ -3,11 +3,11 @@
   "description": "An extension to remind healthy habits at the computer",
   "main": "popup.js",
   "authors": [
-    "Benjamin Roy",
-    "Mathieu Roy",
-    "Nicolas Mongrain-Lacombe",
-    "Mickael Lambert",
-    "Catherine Inglis-Groulx"
+    ,"Mathieu Roy"
+    ,"Benjamin Roy"
+    ,"Nicolas Mongrain-Lacombe"
+    ,"Catherine Inglis-Groulx"
+    ,"Mickael Lambert"
   ],
   "license": "ISC",
   "keywords": [
