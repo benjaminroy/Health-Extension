@@ -38,9 +38,6 @@ var options = (function (document, window, chrome) {
 		var tabsId = new Array();
 		tabsId = tabsId.concat(_TABS_ID);
         var index = tabsId.indexOf(activeId);
-		console.log(tabsId);
-		console.log(activeId);
-		console.log(index);
         if (index !== -1) {
             tabsId.splice(index, 1);
         }
