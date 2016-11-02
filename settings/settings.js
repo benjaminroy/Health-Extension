@@ -2,7 +2,6 @@ var settings = (function(document, window, chrome, ID, DEFAULTS) {
     'use strict';
 
 	const MANUAL = "manual";
-    var _timeout;
     var _settings = {};
 	var _checkboxesID = [
 		'heart'

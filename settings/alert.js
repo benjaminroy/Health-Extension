@@ -1,6 +1,8 @@
 var alert = (function(document, window, chrome, ID, DEFAULTS) {
     'use strict';
 
+    var _timeout = null;
+
     function init() {
         _createHideNotificationHandler();
     }

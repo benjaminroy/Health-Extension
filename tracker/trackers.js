@@ -30,7 +30,6 @@ var trackers = (function (chrome, TIME, ID, MODE, COLOR, ICON, DEFAULTS) {
 	};
 
 	function initializeHeartCountdown() {
-		console.log(settingsBackground);
 		if (settingsBackground.isHeartBreakEnabled()) {
 			_countdown(ID.HEART, setBadgeText);
 		}
@@ -53,7 +52,6 @@ var trackers = (function (chrome, TIME, ID, MODE, COLOR, ICON, DEFAULTS) {
 		}
 
 		values[ID.HEART][MODE.PLAY] = time * A_MINUTE;
-		console.log(time);
 		if (values[ID.HEART].mode === MODE.PLAY) {
 			values[ID.HEART].time.set(values[ID.HEART][MODE.PLAY]);
 		}
@@ -81,7 +79,6 @@ var trackers = (function (chrome, TIME, ID, MODE, COLOR, ICON, DEFAULTS) {
 		} else {
 			values[id].time.set([values[id].play]);
 			if (id === ID.HEART) {
-				console.log("here");
 				chrome.browserAction.setIcon(ICON.PLAY); // TODO: Show a new icon when feature is disabled
 				display('');
 			}
@@ -89,7 +86,12 @@ var trackers = (function (chrome, TIME, ID, MODE, COLOR, ICON, DEFAULTS) {
 		}
 
 		values[id].time.minus(time);
-		var timeDisplayed = (values[id].time.minutes + 1).toString();
+		var timeDisplayed
+		if(values[id].time.count > 0) {
+			timeDisplayed = (values[id].time.minutes + 1).toString();
+		} else {
+			timeDisplayed = (values[id].time.minutes).toString();
+		}
 		display(timeDisplayed);
 
 		if (values[id].time.count === 0) {
