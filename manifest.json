@@ -4,6 +4,7 @@
     "description": "An extension to remind healthy habits at the computer",
     "version": "1.0",
     "default_locale": "en",
+    "manifest_version": 2,
 
     "icons": {
         "16": "icons/heartbeat16.png",
