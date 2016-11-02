@@ -39,6 +39,10 @@
       "message": "Activer la fonctionnalité",
       "description": "Case à cocher pour activer une fonctionnalité"
   },
+  "extensionDescription": {
+      "message": "Une extension pour nous rappeler des bonnes habitudes à avoir à l'ordinateur.",
+      "description": "A description of the extension."
+  },
   "extensionName": {
       "message": "Health Extension",
       "description": "Une extension pour se rappeler des bonnes habitudes de vie à l'ordinateur"
