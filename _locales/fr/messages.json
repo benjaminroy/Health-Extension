@@ -43,6 +43,10 @@
       "message": "Health Extension",
       "description": "Une extension pour se rappeler des bonnes habitudes de vie à l'ordinateur"
   },
+   "extensionShortName": {
+       "message": "health-ext.",
+       "description": "The short name of the extension should have 12 characers are less."
+  },
   "eyesBreak": {
       "message": "Pause des yeux",
       "description": "Eyes break title"
