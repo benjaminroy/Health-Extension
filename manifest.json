@@ -1,16 +1,10 @@
 {
-    "manifest_version": 4,
-    "name": "__MSG_extensionName__",
-    "short_name": "__MSG_extensionShortName__",
-    "description": "__MSG_extensionDescription__",
-    "version": "1.0",
-    "default_locale": "en",
     "manifest_version": 2,
+    "name": "__MSG_extensionName__",
+    "version": "1.0",
 
-    "author": ["Mathieu Roy", "Benjamin Roy", "Nicolas Mongrain-Lacombe", "Catherine Inglis-Groulx", "Mickael Lambert"],
-
-
-
+    "default_locale": "en",
+    "description": "__MSG_extensionDescription__",
     "icons": {
         "16": "icons/heartbeat16.png",
         "48": "icons/heartbeat48.png",
@@ -25,36 +19,21 @@
           }
     },
 
-    "options_ui": {
-        "page": "settings/settings.html",
-        "chrome_style": false,
-        "open_in_tab": true
-    },
-
-    "permissions": [
-        "tabs"
-        ,"storage"
-        ,"geolocation"
-        ,"<all_urls>"
-        ,"notifications"
-        ,"contextMenus"
-    ],
-
-  "background": {
-		"scripts": [
+    "author": ["Mathieu Roy", "Benjamin Roy", "Nicolas Mongrain-Lacombe", "Catherine Inglis-Groulx", "Mickael Lambert"],
+    "background": {
+    	"scripts": [
             "lib/sun.js"
             ,"lib/jquery-3.1.1.min.js"
-			,"common/constants.js"
+    		,"common/constants.js"
             ,"helper.js"
             ,"settings/settings.background.js"
-			,"redshift/redshift.background.js"
-			,"tracker/time.js"
+    		,"redshift/redshift.background.js"
+    		,"tracker/time.js"
             ,"tracker/trackers.js"
-			,"notification/notification.js"
-			,"background.js"
+    		,"notification/notification.js"
+    		,"background.js"
         ]
-  },
-
+    },
 	"content_scripts": [
 		{
 			"matches": [
@@ -71,6 +50,22 @@
 			],
 			"run_at": "document_start"
 		}
-	]
+	],
 
+
+    "options_ui": {
+        "page": "settings/settings.html",
+        "chrome_style": false,
+        "open_in_tab": true
+    },
+
+    "permissions": [
+        "tabs"
+        ,"storage"
+        ,"geolocation"
+        ,"<all_urls>"
+        ,"notifications"
+        ,"contextMenus"
+    ],
+    "short_name": "__MSG_extensionShortName__"
 }
