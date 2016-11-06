@@ -5,21 +5,19 @@ var trackers = (function (chrome, TIME, ID, MODE, COLOR, ICON, DEFAULTS) {
 
 	var values = {};
 	function _initSessionsTime() {
-		var initHeartBreakTime = DEFAULTS.HEART_BREAK_TIME * A_MINUTE;
+		var initHeartBreakTime = settingsBackground.getHeartBreakTime() * A_MINUTE;
 		var initEyesBreakTime = DEFAULTS.EYES_BREAK_TIME * A_SECOND;
 		var initHeartSessionTime = settingsBackground.getHeartSessionTime() * A_MINUTE + initHeartBreakTime;
 		var initEyesSessionTime = settingsBackground.getEyesSessionTime() * A_MINUTE + initEyesBreakTime;
 		if (isNaN(initHeartSessionTime)) {
-			// Should be modified to never happen:
 			initHeartSessionTime = DEFAULTS.HEART_SESSION_TIME * A_MINUTE;
 		}
 		if (isNaN(initEyesSessionTime)) {
-			// Should be modified to never happen:
 			initEyesSessionTime = DEFAULTS.EYES_SESSION_TIME * A_MINUTE;
 		}
 		values = {
-			"heart": _tracker(initHeartSessionTime, initHeartBreakTime),
-			"eyes": _tracker(initEyesSessionTime, initEyesBreakTime)
+			"heart": _tracker(initHeartSessionTime, initHeartBreakTime)
+			,"eyes": _tracker(initEyesSessionTime, initEyesBreakTime)
 		};
 	}
 
@@ -54,6 +52,18 @@ var trackers = (function (chrome, TIME, ID, MODE, COLOR, ICON, DEFAULTS) {
 		values[ID.HEART][MODE.PLAY] = time * A_MINUTE;
 		if (values[ID.HEART].mode === MODE.PLAY) {
 			values[ID.HEART].time.set(values[ID.HEART][MODE.PLAY]);
+		}
+	}
+
+	function heartBreakTimeChanged(time) {
+		time = parseFloat(time);
+		if (isNaN(time)) {
+			return;
+		}
+
+		values[ID.HEART][MODE.PAUSE] = time * A_MINUTE;
+		if (values[ID.HEART].mode === MODE.PAUSE) {
+			values[ID.HEART].time.set(values[ID.HEART][MODE.PAUSE]);
 		}
 	}
 
@@ -150,6 +160,7 @@ var trackers = (function (chrome, TIME, ID, MODE, COLOR, ICON, DEFAULTS) {
 		,initializeEyesCountdown: initializeEyesCountdown
 		,initializeHeartCountdown: initializeHeartCountdown
 		,heartSessionTimeChanged: heartSessionTimeChanged
+		,heartBreakTimeChanged: heartBreakTimeChanged
 		,eyesSessionTimeChanged: eyesSessionTimeChanged
 	};
 })(chrome, TIME, ID, MODE, COLOR, ICON, DEFAULTS);

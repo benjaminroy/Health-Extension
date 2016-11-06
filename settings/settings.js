@@ -11,11 +11,12 @@ var settings = (function(document, window, chrome, ID, DEFAULTS) {
 		,'redShift'
 	];
 	var _port = {
-		"heart":      chrome.extension.connect({ name: ID.HEART 		})
-		,"eyes": 	  chrome.extension.connect({ name: ID.EYE		 	})
-		,"redShift":  chrome.extension.connect({ name: ID.REDSHIFT	 	})
-		,"heartTime": chrome.extension.connect({ name: ID.HEART_TIME	})
-		,"eyesTime":  chrome.extension.connect({ name: ID.EYES_TIME	 	})
+		"heart":              chrome.extension.connect({ name: ID.HEART 		})
+		,"eyes": 	          chrome.extension.connect({ name: ID.EYE		 	})
+		,"redShift":          chrome.extension.connect({ name: ID.REDSHIFT	 	})
+		,"heartTime":         chrome.extension.connect({ name: ID.HEART_TIME	})
+        ,"heartBreakTime":    chrome.extension.connect({ name : ID.HEART_BREAK_TIME })
+		,"eyesTime":          chrome.extension.connect({ name: ID.EYES_TIME	 	})
 	}
 
     function init() {
@@ -56,7 +57,7 @@ var settings = (function(document, window, chrome, ID, DEFAULTS) {
 	function _createSettingsChangeHandlers() {
 	        $('#restoreSettings').on('click', _restoreDefaultOptions);
 
-			var settings = _checkboxesID.concat([ID.HEART_TIME, ID.EYES_TIME]);
+			var settings = _checkboxesID.concat([ID.HEART_TIME, ID.HEART_BREAK_TIME, ID.EYES_TIME]);
 			settings.map((setting) => {
 				$('#' + setting).change(function(r) {
 					_saveOptions(setting);
@@ -87,6 +88,7 @@ var settings = (function(document, window, chrome, ID, DEFAULTS) {
 	function _updateUIEnabling() {
 		$('#standupNotifEnable').attr("disabled", !_settings.heart);
 		$('#' + ID.HEART_TIME).attr("disabled", !_settings.heart);
+        $('#' + ID.HEART_BREAK_TIME).attr("disabled", !_settings.heart);
 
 		$('#eyesNotifEnable').attr("disabled", !_settings.eyes);
 		$('#' + ID.EYES_TIME).attr("disabled", !_settings.eyes);
@@ -98,6 +100,7 @@ var settings = (function(document, window, chrome, ID, DEFAULTS) {
 		$("#heart").prop('checked', _settings.heart);
 		$("#standupNotifEnable").prop('checked', _settings.standupNotifEnable);
 		$('#' + ID.HEART_TIME).val(_settings.heartTime);
+        $('#' + ID.HEART_BREAK_TIME).val(_settings.heartBreakTime);
 
 		$("#eyes").prop('checked', _settings.eyes);
 		$("#eyesNotifEnable").prop('checked', _settings.eyesNotifEnable);
