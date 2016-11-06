@@ -9,6 +9,7 @@ var settingsBackground = (function(document, window, chrome, ID, DEFAULTS) {
         _isHeartBreakEnabledListener();
         _isEyesBreakEnabledListener();
         _heartSessionTimeChanged();
+        _heartBreakTimeChanged();
         _eyesSessionTimeChanged();
     }
 
@@ -19,6 +20,7 @@ var settingsBackground = (function(document, window, chrome, ID, DEFAULTS) {
     function isEyesNotifEnabled()       {return _settings.eyesNotifEnable;}
     function isRedShiftEnabled()        {return _settings.redShift;}
     function getHeartSessionTime()      {return _settings.heartTime;}
+    function getHeartBreakTime()        {return _settings.heartBreakTime;}
     function getEyesSessionTime()       {return _settings.eyesTime;}
 
     function setDefault(_callback) {
@@ -72,6 +74,16 @@ var settingsBackground = (function(document, window, chrome, ID, DEFAULTS) {
         })
     }
 
+    function _heartBreakTimeChanged() {
+        chrome.extension.onConnect.addListener(function(port) {
+            if (port.name === ID.HEART_BREAK_TIME) {
+                port.onMessage.addListener(function() {
+                    trackers.heartBreakTimeChanged(_settings.heartBreakTime);
+                });
+            };
+        })
+    }
+
     function _eyesSessionTimeChanged() {
         chrome.extension.onConnect.addListener(function(port) {
             if (port.name === ID.EYES_TIME) {
@@ -88,6 +100,7 @@ var settingsBackground = (function(document, window, chrome, ID, DEFAULTS) {
         init: init
         ,getSettings: getSettings
         ,getHeartSessionTime: getHeartSessionTime
+        ,getHeartBreakTime: getHeartBreakTime
         ,getEyesSessionTime: getEyesSessionTime
         ,isEyesBreakEnabled: isEyesBreakEnabled
         ,isEyesNotifEnabled: isEyesNotifEnabled

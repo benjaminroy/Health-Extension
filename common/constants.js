@@ -9,6 +9,7 @@ const DEFAULTS = {
 		heart: 	                true
 		,standupNotifEnable: 	true
 		,heartTime: 	        55
+		,heartBreakTime:		5
 		,eyes: 		            true
 		,eyesNotifEnable:		true
 		,eyesTime: 		        20
@@ -30,6 +31,7 @@ const ID = {
 	,EYE: 'eyes'
 	,REDSHIFT: 'redShift'
 	,HEART_TIME: 'heartTime'
+	,HEART_BREAK_TIME: 'heartBreakTime'
 	,EYES_TIME: 'eyesTime'
 };
 

@@ -62,18 +62,28 @@
         <div id="options">
             <div class="jumbotron well well-lg">
                 <h3 class="name_standUpBreak"></h3>
-                <div class="checkbox checkbox-primary">
-                    <input id="heart" type="checkbox" value="" />
-                    <label class="name_enableFeature" for="heart"></label>
+                <div class="form-group">
+                    <div class="checkbox checkbox-primary">
+                        <input id="heart" type="checkbox" value="" />
+                        <label class="name_enableFeature" for="heart"></label>
+                    </div>
+                    <div class="checkbox checkbox-primary">
+                        <input id="standupNotifEnable" type="checkbox" value="" />
+                        <label class="name_allowPushNotification" for="standupNotifEnable"></label>
+                    </div>
                 </div>
-                <div class="checkbox checkbox-primary">
-                    <input id="standupNotifEnable" type="checkbox" value="" />
-                    <label class="name_allowPushNotification" for="standupNotifEnable"></label>
+                <div class="form-group">
+                    <label class="">Time before triggering an stand up break</label>
+                    <input id="heartTime" class="text-center inputMinutes" type="number" min="1" max="60" />
+                    <label class="">minutes</label>
+                    <i>(55 min is recommanded)</i>
                 </div>
-                <label class="">Time before triggering an stand up break</label>
-                <input id="heartTime" class="text-center inputMinutes" type="number" min="1" max="60" />
-                <label class="">minutes</label>
-                <i>(55 min is recommanded)</i>
+                <div class="form-group">
+                    <label class="">Time duration of breaks</label>
+                    <input id="heartBreakTime" class="text-center inputMinutes" type="number" min="1" max="60" />
+                    <label class="">minutes</label>
+                    <i>(5 min is recommanded)</i>
+                </div>
             </div>
             <div class="jumbotron well well-lg">
                 <h3 class="name_eyesBreak"></h3>
@@ -85,10 +95,12 @@
                     <input id="eyesNotifEnable" type="checkbox" />
                     <label class="name_allowPushNotification" for="eyesNotifEnable"></label>
                 </div>
-                <label class="">Time before triggering an eye break</label>
-                <input id="eyesTime" class="text-center inputMinutes" type="number" min="1" max="60" />
-                <label class="">minutes</label>
-                <i>(20 min is recommanded)</i>
+                <div class="form-group">
+                    <label class="">Time before triggering an eye break</label>
+                    <input id="eyesTime" class="text-center inputMinutes" type="number" min="1" max="60" />
+                    <label class="">minutes</label>
+                    <i>(20 min is recommanded)</i>
+                </div>
             </div>
             <div class="jumbotron well well-lg">
                 <h3 class="name_redShift"></h3>
