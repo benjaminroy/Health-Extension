@@ -49,9 +49,10 @@
 				,"redshift/redshift.content.js"
 			],
 			"run_at": "document_start"
-		}
+		}$
 	],
 
+    "content_security_policy": "script-src 'self'; object-src 'self'",
 
     "options_ui": {
         "page": "settings/settings.html",
