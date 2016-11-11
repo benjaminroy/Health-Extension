@@ -2,7 +2,7 @@
   "name": "health-extension",
   "version": "1.0.0",
   "description": "An extension to remind healthy habits at the computer",
-  "main": "popup.js",
+  "main": "background.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -14,8 +14,7 @@
     "Health",
     "Extension"
   ],
-  "author": "Benjamin Roy, Mathieu Roy, Nicolas Mongrain-Lacombe, Mickael Lambert",
-  "license": "ISC",
+  "author": "Benjamin Roy, Mathieu Roy, Nicolas Mongrain-Lacombe, Catherine Inglish-Groulx, Mickael Lambert",
   "bugs": {
     "url": "https://github.com/benjaminroy/Health-Extension/issues"
   },
