@@ -8,9 +8,9 @@ var settingsBackground = (function(document, window, chrome, ID, DEFAULTS) {
         _addSettingsChangedListener();
         _isHeartBreakEnabledListener();
         _isEyesBreakEnabledListener();
-        _getHeartSessionTimeChanged();
-        _getHeartBreakTimeChanged();
-        _getEyesSessionTimeChanged();
+        _addHeartSessionTimeTracker();
+        _addHeartBreakTimeTracker();
+        _addEyesSessionTimeTracker();
     }
 
     function getSettings()              {return _settings;}
@@ -63,7 +63,7 @@ var settingsBackground = (function(document, window, chrome, ID, DEFAULTS) {
         });
     }
 
-    function _getHeartSessionTimeChanged() {
+    function _addHeartSessionTimeTracker() {
         chrome.extension.onConnect.addListener(function(port) {
             if (port.name === ID.HEART_TIME) {
                 port.onMessage.addListener(function() {
@@ -74,7 +74,7 @@ var settingsBackground = (function(document, window, chrome, ID, DEFAULTS) {
         })
     }
 
-    function _getHeartBreakTimeChanged() {
+    function _addHeartBreakTimeTracker() {
         chrome.extension.onConnect.addListener(function(port) {
             if (port.name === ID.HEART_BREAK_TIME) {
                 port.onMessage.addListener(function() {
@@ -84,7 +84,7 @@ var settingsBackground = (function(document, window, chrome, ID, DEFAULTS) {
         })
     }
 
-    function _getEyesSessionTimeChanged() {
+    function _addEyesSessionTimeTracker() {
         chrome.extension.onConnect.addListener(function(port) {
             if (port.name === ID.EYES_TIME) {
                 port.onMessage.addListener(function() {

@@ -56,7 +56,7 @@
       "description": "Eyes break title"
   },
   "heartBreakLabel": {
-      "message": "Time duration of breaks",
+      "message": "Time duration of breaks: ",
       "description": "Time duration of heart breaks label"
   },
   "heartBreakRecommandedTime": {
