@@ -3,7 +3,7 @@
   "description": "An extension to remind healthy habits at the computer",
   "main": "popup.js",
   "authors": [
-    ,"Mathieu Roy"
+    "Mathieu Roy"
     ,"Benjamin Roy"
     ,"Nicolas Mongrain-Lacombe"
     ,"Catherine Inglis-Groulx"
