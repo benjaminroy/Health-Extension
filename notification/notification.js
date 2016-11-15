@@ -23,12 +23,13 @@ var notification = (function(document, window, chrome) {
         } else if (type === ID.HEART) {
             var isHeartBreakEnabled = settingsBackground.isHeartBreakEnabled();
             var isHeartNotifEnabled = settingsBackground.isHeartNotifEnabled();
+            var heartBreakTime = settingsBackground.getHeartBreakTime();
             if(!isHeartBreakEnabled || !isHeartNotifEnabled) {
                 return;
             }
             _title = "Stand up Break!";
             _options = {
-                body: "Move for 5 minutes and come back.",
+                body: chrome.i18n.getMessage("heartBreakNotifMessage", String(heartBreakTime)),
                 icon: "notification/heart.png"
             };
         } else if (type === ID.REDSHIFT) {
