@@ -12,7 +12,7 @@
     },
 
     "browser_action": {
-        "default_title": "Health Extension",
+        "default_title": "__MSG_extensionName__",
         "default_icon": {
             "19": "icons/heartbeatRed19.png",
             "38": "icons/heartbeatRed38.png"
@@ -52,6 +52,9 @@
 		}
 	],
 
+    "content_security_policy": "script-src 'self'; object-src 'self'",
+
+    "offline_enabled": true,
 
     "options_ui": {
         "page": "settings/settings.html",
@@ -61,9 +64,9 @@
 
     "permissions": [
         "tabs"
+        ,"<all_urls>"
         ,"storage"
         ,"geolocation"
-        ,"<all_urls>"
         ,"notifications"
         ,"contextMenus"
     ],

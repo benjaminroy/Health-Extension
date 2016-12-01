@@ -11,10 +11,6 @@
       "message": "Automatically set period based on sunset and sunrise",
       "description": "Automatically set the redshift feature period based on sunset and sunrise"
   },
-  "automaticallyTriggerBreak": {
-      "message": "Time of inactivity before automatically triggering a stand up break",
-      "description": "Checkbox option for the time of inactivity before automatically triggering a break"
-  },
   "comingSoon": {
       "message": "Coming Soon !",
       "description": "Announcing that a feature is coming soon"
