@@ -111,7 +111,7 @@ var settings = (function(document, window, chrome, ID, DEFAULTS) {
 	}
 
     function _restoreDefaultOptions() {
-		_settings = DEFAULTS.SETTINGS;
+		_settings = $.extend({}, DEFAULTS.SETTINGS);
         chrome.storage.sync.set({
             'settings': _settings
         }, _updateUI());
