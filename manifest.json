@@ -68,7 +68,6 @@
         ,"storage"
         ,"geolocation"
         ,"notifications"
-        ,"contextMenus"
     ],
     "short_name": "__MSG_extensionShortName__"
 }
