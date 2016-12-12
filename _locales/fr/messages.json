@@ -1,98 +1,114 @@
 {
-  "allowPushNotification": {
-      "message": "Activer notifications push",
-      "description": "Case à cocher qui permet les notifications push pour une fonctionnalité particuliaire"
-  },
-  "allowTextMessageNotification": {
-      "message": "Activer message texte si la pause d'exercices est teminée",
-      "description": "Case à cocher  qui permet de recevoir une notification par message texte lorsque la pause est terminée"
-  },
-  "automaticallySetRedShift": {
-      "message": "Fixer la période en fonction du soleil",
-      "description": "Fixer automatiquement la période de la fonctionnalité décalage vers le rouge en fonction du levé et du couché du soleil"
-  },
-  "comingSoon": {
-      "message": "Disponible bientôt!",
-      "description": "Annonce qu'une nouvelle fonctionnalité s'en vient"
-  },
-  "contact": {
-      "message": "Contact",
-      "description": "Nom du contact"
-  },
-  "contactMessage": {
-      "message": "Vous avez trouvé un bug? Vous voulez nous donner votre avis? Envoyez-nous un courriel: ",
-      "description": "Message affiché dans la case contact"
-  },
-  "data": {
-      "message": "Données",
-      "description": "Noms des données"
-  },
-  "documentation": {
-      "message": "Documentation",
-      "description": "Nom de la documentation"
-  },
-  "enableFeature": {
-      "message": "Activer la fonctionnalité",
-      "description": "Case à cocher pour activer une fonctionnalité"
-  },
-  "extensionDescription": {
-      "message": "Une extension pour nous rappeler des bonnes habitudes à avoir à l'ordinateur.",
-      "description": "A description of the extension."
-  },
-  "extensionName": {
-      "message": "Health Extension",
-      "description": "Une extension pour se rappeler des bonnes habitudes de vie à l'ordinateur"
-  },
-   "extensionShortName": {
-       "message": "health-ext.",
-       "description": "The short name of the extension should have 12 characers are less."
-  },
-  "eyesBreak": {
-      "message": "Pause des yeux",
-      "description": "Eyes break title"
-  },
-  "here": {
-      "message": "Ici",
-      "description": "ici"
-  },
-  "manuallySetRedShift": {
-      "message": "Fixer la période manuellement en fonction du soleil",
-      "description": "Fixer manuellement la période pour le décalage vers le rouge en fonction du levé et du couché du soleil"
-  },
-  "options": {
-      "message": "Options",
-      "description": "Options title"
-  },
-  "redShift": {
-      "message": "Décalage vers le rouge",
-      "description": "Red shift feature title"
-  },
-  "restoreDefault": {
-      "message": "Paramètres par défaut",
-      "description": "Remettre les paramètres par défaut"
-  },
-  "settings": {
-      "message": "Paramètres",
-      "description": "Settings title"
-  },
-  "settingsSaved": {
-      "message": "Vos paramètres ont étés enregistrés!",
-      "description": "Message qui confirme que les paramètres ont étés enregistrés"
-  },
-  "sourceCode": {
-      "message": "Vous pouvez voir le code source",
-      "description": "Message pour indiquer lorsque quelqu'un peut voir le code source"
-  },
-  "standUpBreak": {
-      "message": "Pause d'exercices",
-      "description": "Stand Up Break title"
-  },
-  "subject": {
-      "message": "Objet",
-      "description": "Objet du message"
-  },
-  "timeRange": {
-      "message": "Intervalle de temps",
-      "description": "Intervalle de temps"
-  }
+    "allowPushNotification": {
+        "message": "Activer notifications push",
+        "description": "Case à cocher qui permet les notifications push pour une fonctionnalité particuliaire"
+    },
+    "allowTextMessageNotification": {
+        "message": "Activer message texte si la pause d'exercices est teminée",
+        "description": "Case à cocher  qui permet de recevoir une notification par message texte lorsque la pause est terminée"
+    },
+    "automaticallySetRedShift": {
+        "message": "Fixer la période en fonction du soleil",
+        "description": "Fixer automatiquement la période de la fonctionnalité décalage vers le rouge en fonction du levé et du couché du soleil"
+    },
+    "automaticallyTriggerBreak": {
+        "message": "Temps d'inactivité avant de déclencher une pause d'exercices",
+        "description": "Case à cocher pour le temps d'inactivité avant de déclencher une pause d'exercices automatiquement"
+    },
+    "comingSoon": {
+        "message": "Disponible bientôt!",
+        "description": "Annonce qu'une nouvelle fonctionnalité s'en vient"
+    },
+    "contact": {
+        "message": "Contact",
+        "description": "Nom du contact"
+    },
+    "contactMessage": {
+        "message": "Vous avez trouvé un bug? Vous voulez nous donner votre avis? Envoyez-nous un courriel: ",
+        "description": "Message affiché dans la case contact"
+    },
+    "data": {
+        "message": "Données",
+        "description": "Noms des données"
+    },
+    "documentation": {
+        "message": "Documentation",
+        "description": "Nom de la documentation"
+    },
+    "enableFeature": {
+        "message": "Activer la fonctionnalité",
+        "description": "Case à cocher pour activer une fonctionnalité"
+    },
+    "extensionDescription": {
+        "message": "Une extension pour nous rappeler des bonnes habitudes à avoir à l'ordinateur.",
+        "description": "A description of the extension."
+    },
+    "extensionName": {
+        "message": "Health Extension",
+        "description": "Une extension pour se rappeler des bonnes habitudes de vie à l'ordinateur"
+    },
+    "extensionShortName": {
+        "message": "health-ext.",
+        "description": "The short name of the extension should have 12 characers are less."
+    },
+    "eyesBreak": {
+        "message": "Pause des yeux",
+        "description": "Eyes break title"
+    },
+    "heartBreakLabel": {
+        "message": "Durée de la pause: ",
+        "description": "Heart break duration label"
+    },
+    "heartBreakNotifMessage" : {
+        "message" : "Bougez pendant $1 minutes, puis revenez",
+        "description": "Heart break notification message"
+    },
+    "heartBreakRecommandedTime": {
+        "message": "(5 min est recommandée)",
+        "description": "Recommanded duration of heart breaks"
+    },
+    "here": {
+        "message": "Ici",
+        "description": "ici"
+    },
+    "manuallySetRedShift": {
+        "message": "Fixer la période manuellement en fonction du soleil",
+        "description": "Fixer manuellement la période pour le décalage vers le rouge en fonction du levé et du couché du soleil"
+    },
+    "options": {
+        "message": "Options",
+        "description": "Options title"
+    },
+    "redShift": {
+        "message": "Décalage vers le rouge",
+        "description": "Red shift feature title"
+    },
+    "restoreDefault": {
+        "message": "Paramètres par défaut",
+        "description": "Remettre les paramètres par défaut"
+    },
+    "settings": {
+        "message": "Paramètres",
+        "description": "Settings title"
+    },
+    "settingsSaved": {
+        "message": "Vos paramètres ont étés enregistrés!",
+        "description": "Message qui confirme que les paramètres ont étés enregistrés"
+    },
+    "sourceCode": {
+        "message": "Vous pouvez voir le code source",
+        "description": "Message pour indiquer lorsque quelqu'un peut voir le code source"
+    },
+    "standUpBreak": {
+        "message": "Pause d'exercices",
+        "description": "Stand Up Break title"
+    },
+    "subject": {
+        "message": "Objet",
+        "description": "Objet du message"
+    },
+    "timeRange": {
+        "message": "Intervalle de temps",
+        "description": "Intervalle de temps"
+    }
 }

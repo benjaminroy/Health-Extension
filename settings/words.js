@@ -19,6 +19,8 @@ var strings = [
     ,"restoreDefault"
     ,"subject"
     ,"sourceCode"
+    ,"heartBreakLabel"
+    ,"heartBreakRecommandedTime"
     ,"here"
     ,"comingSoon"
     ,"automaticallySetRedShift"
