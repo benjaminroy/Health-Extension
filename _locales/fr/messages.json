@@ -11,10 +11,6 @@
       "message": "Fixer la période en fonction du soleil",
       "description": "Fixer automatiquement la période de la fonctionnalité décalage vers le rouge en fonction du levé et du couché du soleil"
   },
-  "automaticallyTriggerBreak": {
-      "message": "Temps d'inactivité avant de déclencher une pause d'exercices",
-      "description": "Case à cocher pour le temps d'inactivité avant de déclencher une pause d'exercices automatiquement"
-  },
   "comingSoon": {
       "message": "Disponible bientôt!",
       "description": "Annonce qu'une nouvelle fonctionnalité s'en vient"

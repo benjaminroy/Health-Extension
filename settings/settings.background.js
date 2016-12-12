@@ -24,7 +24,7 @@ var settingsBackground = (function(document, window, chrome, ID, DEFAULTS) {
     function getEyesSessionTime()       {return _settings.eyesTime;}
 
     function setDefault(_callback) {
-        _settings = DEFAULTS.SETTINGS;
+        _settings = $.extend({}, DEFAULTS.SETTINGS);
         chrome.storage.sync.set({
             'settings': _settings
         }, _callback());
@@ -32,7 +32,7 @@ var settingsBackground = (function(document, window, chrome, ID, DEFAULTS) {
 
     function _loadSettings(_callback) {
         chrome.storage.sync.get("settings", function(items) {
-            if(items.settings === undefined) {
+            if (items.settings === undefined) {
                 setDefault(_callback);
             } else {
                 _settings = items.settings;
@@ -94,7 +94,6 @@ var settingsBackground = (function(document, window, chrome, ID, DEFAULTS) {
             };
         })
     }
-
 
     return {
         init: init
